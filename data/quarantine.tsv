@@ -1,63 +1,63 @@
-Country 	Place 	Start date 	End date 	Level
-Argentina 	2020-03-19 	2020-03-31 	National
-Australia 	2020-03-23 	2020-09-22 	National
-Austria 	2020-03-16 	2020-04-13 	National
-Belgium 	2020-03-18 	2020-04-18 	National
-Brazil - Santa Catarina 	2020-03-17 	2020-03-31 	State
-Brazil - São Paulo 	2020-03-24 	2020-04-07
-Chile 	2020-03-19 		National
-Colombia 	2020-03-25 	2020-04-13 	National
-Czech Republic 	2020-03-16 	2020-04-01 	National
-Denmark 	2020-03-11 	2020-04-13 	National
-Dominican Republic 	2020-03-19 	2020-04-03 	National
-El Salvador 	2020-03-12 	2020-04-01 	National
-Fiji - Lautoka 	2020-03-20 		City
-Finland - Uusimaa 	2020-03-27 		Region
-France 	2020-03-17 	2020-04-15 	National
-Germany - Bavaria 	2020-03-20 	2020-04-03 	State
-Germany - Freiburg, BW 	2020-03-21 	2020-04-03 	City
-Greece 	2020-03-23 	2020-04-06 	National
-Honduras 	2020-03-17 	2020-03-29 	National
-Hungary 	2020-03-28 	2020-04-11 	National
-India 	2020-03-25 	2020-04-15 	National
-Indonesia - Tegal 	2020-03-26 	2020-07-25 	City
-Ireland 	2020-03-12 	2020-03-29 	National
-Italy 	2020-03-09 	2020-04-03 	National
-Jordan 	2020-03-21 		National
-Lebanon 	2020-03-15 	2020-03-29 	National
-Lithuania 	2020-03-16 	2020-04-13 	National
-Malaysia 	2020-03-18 	2020-04-14 	National
-Montenegro - Tuzi 	2020-03-24 		Municipality
-Morocco 	2020-03-19 	2020-04-20 	National
-Nepal 	2020-03-24 	2020-03-30 	National
-New Zealand 	2020-03-26 		National
-Norway 	2020-03-12 	2020-04-13 	National
-Pakistan - Punjab 	2020-03-24 	2020-04-06 	Province
-Sindh 	2020-03-24 	2020-04-07 	Province
-Balochistan 	2020-03-24 	2020-04-07 	Province
-Gilgit-Baltistan 	2020-03-22 		Administrative
-Azad Kashmir 	2020-03-24 	2020-04-07 	Administrative
-Panama 	2020-03-25 		National
-Peru 	2020-03-16 		National
-Philippines - Davao Region 	2020-03-19 		Region
-Luzon 	2020-03-15 	2020-04-14 	Island group
-Soccsksargen 	2020-03-23 		Region
-Poland 	2020-03-13 		National
-Portugal 	2020-03-19 	2020-04-02 	National
-Romania 	2020-03-25 		National
-Samoa 	2020-03-26 	2020-04-09 	National
-South Africa 	2020-03-26 	2020-04-16 	National
-Spain 	2020-03-14 	2020-04-14 	National
-Tunisia 	2020-03-22 		National
-United Kingdom 	2020-03-23 	2020-04-13 	National
-United States - California 	2020-03-19 	2020-03-29 	State
-United States - Clark County, NV 	2020-03-20 	2020-04-20 	County
-United States - Connecticut 	2020-03-23 	2020-03-29 	State
-United States - Illinois 	2020-03-21 	2020-04-07 	State
-United States - Kansas City, KS 	2020-03-24 	2020-04-23 	City
-United States - Massachusetts 	2020-03-24 	2020-04-07 	State
-United States - Michigan 	2020-03-24 	2020-04-14 	State
-United States - New York 	2020-03-20 	2020-03-29 	State
-United States - Oregon 	2020-03-24 		State
-United States - Wisconsin 	2020-03-24 	2020-04-24 	State
-Venezuela 	2020-03-17 		National
+Country	Place	Start date	End date	Level
+Argentina		2020-03-19	2020-03-31	National
+Australia		2020-03-23	2020-09-22	National
+Austria		2020-03-16	2020-04-13	National
+Belgium		2020-03-18	2020-04-18	National
+Brazil	Santa Catarina	2020-03-17	2020-03-31	State
+Brazil	São Paulo	2020-03-24	2020-04-07
+Chile		2020-03-19		National
+Colombia		2020-03-25	2020-04-13	National
+Czech Republic		2020-03-16	2020-04-01	National
+Denmark		2020-03-11	2020-04-13	National
+Dominican Republic		2020-03-19	2020-04-03	National
+El Salvador		2020-03-12	2020-04-01	National
+Fiji	Lautoka	2020-03-20		City
+Finland	Uusimaa	2020-03-27		Region
+France		2020-03-17	2020-04-15	National
+Germany	Bavaria	2020-03-20	2020-04-03	State
+Germany	Freiburg, BW	2020-03-21	2020-04-03	City
+Greece		2020-03-23	2020-04-06	National
+Honduras		2020-03-17	2020-03-29	National
+Hungary		2020-03-28	2020-04-11	National
+India		2020-03-25	2020-04-15	National
+Indonesia	Tegal	2020-03-26	2020-07-25	City
+Ireland		2020-03-12	2020-03-29	National
+Italy		2020-03-09	2020-04-03	National
+Jordan		2020-03-21		National
+Lebanon		2020-03-15	2020-03-29	National
+Lithuania		2020-03-16	2020-04-13	National
+Malaysia		2020-03-18	2020-04-14	National
+Montenegro	Tuzi	2020-03-24		Municipality
+Morocco		2020-03-19	2020-04-20	National
+Nepal		2020-03-24	2020-03-30	National
+New Zealand		2020-03-26		National
+Norway		2020-03-12	2020-04-13	National
+Pakistan	Punjab	2020-03-24	2020-04-06	Province
+Sindh		2020-03-24	2020-04-07	Province
+Balochistan		2020-03-24	2020-04-07	Province
+Gilgit-Baltistan		2020-03-22		Administrative
+Azad Kashmir		2020-03-24	2020-04-07	Administrative
+Panama		2020-03-25		National
+Peru		2020-03-16		National
+Philippines	Davao Region	2020-03-19		Region
+Luzon		2020-03-15	2020-04-14	Island group
+Soccsksargen		2020-03-23		Region
+Poland		2020-03-13		National
+Portugal		2020-03-19	2020-04-02	National
+Romania		2020-03-25		National
+Samoa		2020-03-26	2020-04-09	National
+South Africa		2020-03-26	2020-04-16	National
+Spain		2020-03-14	2020-04-14	National
+Tunisia		2020-03-22		National
+United Kingdom		2020-03-23	2020-04-13	National
+United States	California	2020-03-19	2020-03-29	State
+United States	Clark County, NV	2020-03-20	2020-04-20	County
+United States	Connecticut	2020-03-23	2020-03-29	State
+United States	Illinois	2020-03-21	2020-04-07	State
+United States	Kansas City, KS	2020-03-24	2020-04-23	City
+United States	Massachusetts	2020-03-24	2020-04-07	State
+United States	Michigan	2020-03-24	2020-04-14	State
+United States	New York	2020-03-20	2020-03-29	State
+United States	Oregon	2020-03-24		State
+United States	Wisconsin	2020-03-24	2020-04-24	State
+Venezuela		2020-03-17		National
