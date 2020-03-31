@@ -29,7 +29,7 @@ def tab(section, title=None):
     return wrapper
 
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def raw_information():
     with open(Path(__file__).parent.parent / "data" / "timeseries.json") as fp:
         raw_data = json.load(fp)
@@ -176,6 +176,67 @@ def main():
                     """,
                 )
             )
+
+    @tab(section, tr("Global epidemic evolution", "Evolución global de la epidemia"))
+    def all_countries_curve():
+        st.subheader(tr("Global epidemic evolution", "Evolución global de la epidemia"))
+
+        st.write(tr(
+            """
+            The following graph shows a log/log plot of the average weekly number of new cases
+            vs. the total number of confirmed cases.
+            In this type of graph, most of the countries will follow a straight diagonal path
+            during the pandemic stage, since the growth is exponential, hence the number of new cases
+            is a factor of the total number of cases.
+            It is very easy to see which countries are leaving the pandemic stage, since those
+            will be shown as deviating from the diagonal and falling down pretty quickly.
+            """,
+            """
+            La siguiente gráfica muestra una curva log/log de la cantidad promedio de nuevos casos semanales,
+            contra la cantidad total de casos confirmados.
+            En este tipo de gráfica, la mayoría de los países seguirán una línea diagonal durante todo el
+            período de pandemia, ya que el crecimiento es exponencial, y por lo tanto el número de casos
+            nuevos es siempre un factor multiplicado por el número total de casos.
+            Es muy fácil ver qué países están saliendo del estado de pandemia, dado que esos países
+            se verán desviados de la diagonal con una fuerte tendencia hacia abajo.
+            """
+        ))
+
+        raw_dfs: pd.DataFrame = weekly_information()
+        totals: pd.DataFrame = raw_dfs.groupby('country').agg(total=('confirmed', 'max'))
+
+        select_top = tr("Countries with most cases", "Países con mayor cantidad de casos")
+        select_custom = tr("Custom selection", "Selección personalizada")
+        selection_type = st.sidebar.selectbox(tr("Selection type", "Tipo de selección"), [select_top, select_custom])
+        all_countries = list(totals.index)
+
+        if selection_type == select_top:
+            total_countries = st.slider(tr("Number of countries to show", "Cantidad de países a mostrar"), 1, len(all_countries), 10)
+            selected_countries = totals.sort_values('total', ascending=False)[:total_countries].index
+        else:
+            selected_countries = st.multiselect(tr("Select countries", "Selecciona los países"), all_countries, all_countries)
+
+        # countries = ['US', 'Italy', 'China', 'Spain', 'France', 'United Kingdom', 'Germany', 'Cuba', 'Korea, South', 'Japan']
+        # countries = raw_data.keys()
+        data = raw_dfs[raw_dfs['country'].isin(selected_countries)]
+
+        chart = alt.Chart(data).mark_line().encode(
+            x=alt.X('confirmed', scale=alt.Scale(type='log')),
+            y=alt.Y('new', scale=alt.Scale(type='log')),
+            color='country',
+            tooltip='country',
+        )
+        dots = alt.Chart(data).mark_point().encode(
+            x=alt.X('confirmed', scale=alt.Scale(type='log')),
+            y=alt.Y('new', scale=alt.Scale(type='log')),
+            color='country',
+        )
+
+        text = chart.mark_text(align='left').encode(
+            text='country'    
+        )
+
+        st.write((chart + text + dots).properties(width=700, height=500).interactive())
 
     tab.run(section)
 
