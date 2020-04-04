@@ -4,10 +4,14 @@ import json
 import pandas as pd
 import altair as alt
 import numpy as np
+import graphviz
 
 from altair import datum
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.model_selection import cross_val_score
 from pathlib import Path
 from i18n import translate
 
@@ -36,9 +40,13 @@ def tab(section, title=None):
 
 @st.cache
 def get_responses():
-    responses = pd.read_csv(Path(__file__).parent.parent / "data/responses.tsv", sep="\t").fillna("")
-    responses['Date'] = pd.to_datetime(responses['Date'], format="%d/%m/%Y", errors='coerce')
-    responses = responses[responses['Date'] > '2020-01-01']
+    responses = pd.read_csv(
+        Path(__file__).parent.parent / "data/responses.tsv", sep="\t"
+    ).fillna("")
+    responses["Date"] = pd.to_datetime(
+        responses["Date"], format="%d/%m/%Y", errors="coerce"
+    )
+    responses = responses[responses["Date"] > "2020-01-01"]
     return responses
 
 
@@ -228,7 +236,7 @@ def main():
         )
         data = raw[country]
         data = data.melt(["date"])
-        data = data[data['value'] > 0]
+        data = data[data["value"] > 0]
         # data = data[data['variable'] == 'confirmed']
 
         if st.checkbox(tr("Show raw data", "Mostrar datos")):
@@ -236,7 +244,6 @@ def main():
 
         scale = st.sidebar.selectbox(
             tr("Chart scale", "Tipo de escala"), ["linear", "log"]
-     
         )
 
         chart = (
@@ -245,12 +252,17 @@ def main():
             .encode(
                 x=alt.X("date", title=tr("Date", "Fecha")),
                 y=alt.Y(
-                    "value", scale=alt.Scale(type=scale), title=tr("Cases", "Casos"), stack=False,
+                    "value",
+                    scale=alt.Scale(type=scale),
+                    title=tr("Cases", "Casos"),
+                    stack=False,
                 ),
                 color=alt.Color("variable", title=tr("Type", "Tipo")),
             )
             .properties(
-                width=700, height=400, title=tr("Evolution of cases", "Evolución de los casos"),
+                width=700,
+                height=400,
+                title=tr("Evolution of cases", "Evolución de los casos"),
             )
         )
 
@@ -333,9 +345,9 @@ def main():
                 len(all_countries),
                 20,
             )
-            selected_countries = list(totals.sort_values("total", ascending=False)[
-                :total_countries
-            ].index)
+            selected_countries = list(
+                totals.sort_values("total", ascending=False)[:total_countries].index
+            )
         else:
             selected_countries = st.multiselect(
                 tr("Select countries", "Selecciona los países"),
@@ -343,7 +355,9 @@ def main():
                 all_countries,
             )
 
-        your_country = st.selectbox("Select country", all_countries, all_countries.index("Cuba"))
+        your_country = st.selectbox(
+            "Select country", all_countries, all_countries.index("Cuba")
+        )
         selected_countries.append(your_country)
 
         data = raw_dfs[raw_dfs["country"].isin(selected_countries)]
@@ -382,22 +396,88 @@ def main():
 
         st.write((chart + text + dots).properties(width=700, height=500).interactive())
 
+        max_weekly = data.groupby("country").agg(max_weekly=("new", "max"))
+        last_weekly = data.groupby("country").agg(last_weekly=("new", "last"))
+        merge = max_weekly.join(last_weekly, how="inner")
+        merge["safe"] = (
+            merge["max_weekly"] * (1 - st.slider("Safety threshold", 0.0, 1.0, 0.1))
+            > merge["last_weekly"]
+        )
+
+        safe_countries = set(merge[merge["safe"] == True].index)
+
+        st.write(merge[merge["safe"] == True])
+
+        st.write("### Predicting good responses")
+
+        st.write(
+            """
+            Let's see which measures are correlated with the `safe` status.
+            To limit the effect of confounding variables, we will only look at measures taken
+            with more than `N` weeks prior to the date of the maximum number of new cases,
+            since evidently the countries with the most number of cases will have implemented the
+            most measures.
+            """
+        )
+
         responses = get_responses()
-        responses = responses[responses['Country'].isin(selected_countries)]
+        responses = responses[responses["Country"].isin(selected_countries)]
 
         if st.checkbox("Show data"):
             st.write(responses)
 
-        chart = alt.Chart(responses).mark_line(size=0.25).encode(
-            x='Date',
-            y='Country',
-            color='Country',
-            shape='Category',
-            tooltip='Measure',
-        ).properties(width=800)
+        chart = (
+            alt.Chart(responses)
+            .mark_line(size=0.25)
+            .encode(
+                x="Date",
+                y="Country",
+                color="Country",
+                shape="Category",
+                tooltip="Measure",
+            )
+            .properties(width=800)
+        )
 
         st.write(chart)
 
+        features = (
+            responses[["Country", "Measure"]]
+            .groupby("Country")
+            .agg(lambda s: list(set(s)))
+            .to_dict("index")
+        )
+
+        for country, featureset in features.items():
+            featureset["Target"] = country in safe_countries
+
+        vectorizer = DictVectorizer(sparse=False)
+        X = vectorizer.fit_transform(
+            [
+                {k: True for k in featureset["Measure"]}
+                for country, featureset in features.items()
+            ]
+        )
+        y = [featureset["Target"] for featureset in features.values()]
+
+        classifier = DecisionTreeClassifier()
+        acc_scores = cross_val_score(classifier, X, y, cv=10, scoring="accuracy")
+        f1_scores = cross_val_score(classifier, X, y, cv=10, scoring="f1_macro")
+
+        st.info(
+            "**Accuracy:** %0.2f (+/- %0.2f) - **F1:** %0.2f (+/- %0.2f)"
+            % (
+                acc_scores.mean(),
+                acc_scores.std() * 2,
+                f1_scores.mean(),
+                f1_scores.std() * 2,
+            )
+        )
+
+        classifier.fit(X, y)
+
+        graph = export_graphviz(classifier, feature_names=vectorizer.feature_names_, filled=True, rounded=True)
+        st.graphviz_chart(graph)
 
     @tab(section, tr("Similarity analysis", "Análisis de similaridad"))
     def similarity():
@@ -547,56 +627,78 @@ def main():
         real = []
 
         for i, d in enumerate(serie):
-            real.append(dict(
-                day=1 + i - len(serie),
-                value=d,
-            ))
+            real.append(dict(day=1 + i, value=d,))
 
         real = pd.DataFrame(real)
 
         forecast = []
 
-        for i, (x,s) in enumerate(zip(ymean, ystdv)):
-            forecast.append(dict(
-                day=i,
-                mean=round(x),
-                mean_50_up=round(0.67*s+x),
-                mean_50_down=round(-0.67*s+x),
-                mean_95_up=round(3*s+x),
-                mean_95_down=round(-3*s+x),
-            ))
-            
+        for i, (x, s) in enumerate(zip(ymean, ystdv)):
+            forecast.append(
+                dict(
+                    day=i + len(serie),
+                    mean=round(x),
+                    mean_50_up=round(0.67 * s + x),
+                    mean_50_down=round(-0.67 * s + x),
+                    mean_95_up=round(3 * s + x),
+                    mean_95_down=round(-3 * s + x),
+                )
+            )
+
         forecast = pd.DataFrame(forecast)
         # st.write(forecast)
 
         scale = st.sidebar.selectbox("Scale", ["linear", "log"])
 
-        chart = (alt.Chart(forecast).mark_area(color='red', opacity=0.1).encode(
-            x=alt.X('day', title="Date"),
-            y=alt.Y('mean_95_up', title="", scale=alt.Scale(type=scale)),
-            y2=alt.Y2('mean_95_down', title=""),
-        ) + alt.Chart(forecast).mark_area(color='red', opacity=0.3).encode(
-            x='day',
-            y=alt.Y('mean_50_up', title="", scale=alt.Scale(type=scale)),
-            y2=alt.Y2('mean_50_down', title=""),
-        ) + alt.Chart(forecast).mark_line(color='red').encode(
-            x='day',
-            y=alt.Y('mean', scale=alt.Scale(type=scale)),
-        ) + alt.Chart(real).mark_line(color='blue').encode(
-            x='day',
-            y=alt.Y('value', scale=alt.Scale(type=scale)),
-        ) + alt.Chart(real).mark_bar(color='blue').encode(
-            x='day',
-            y=alt.Y('value', scale=alt.Scale(type=scale)),
-            tooltip='value',
-        )).properties(
-            width=600,
-            height=400,
-        ).interactive()
+        prediction = (
+            alt.Chart(forecast)
+            .mark_line(color="red")
+            .encode(x="day", y=alt.Y("mean", scale=alt.Scale(type=scale)),)
+        )
+        texts = prediction.mark_text(align="left", dx=5).encode(text="mean",)
+
+        chart = (
+            (
+                alt.Chart(forecast)
+                .mark_area(color="red", opacity=0.1)
+                .encode(
+                    x=alt.X("day", title="Date"),
+                    y=alt.Y("mean_95_up", title="", scale=alt.Scale(type=scale)),
+                    y2=alt.Y2("mean_95_down", title=""),
+                )
+                + alt.Chart(forecast)
+                .mark_area(color="red", opacity=0.3)
+                .encode(
+                    x="day",
+                    y=alt.Y("mean_50_up", title="", scale=alt.Scale(type=scale)),
+                    y2=alt.Y2("mean_50_down", title=""),
+                )
+                + alt.Chart(forecast)
+                .mark_circle(color="red")
+                .encode(
+                    x="day",
+                    y=alt.Y("mean", scale=alt.Scale(type=scale)),
+                    tooltip="mean",
+                )
+                + prediction
+                + texts
+                + alt.Chart(real)
+                .mark_line(color="blue")
+                .encode(x="day", y=alt.Y("value", scale=alt.Scale(type=scale)),)
+                + alt.Chart(real)
+                .mark_rule(color="blue")
+                .encode(
+                    x="day",
+                    y=alt.Y("value", scale=alt.Scale(type=scale)),
+                    tooltip="value",
+                )
+            )
+            .properties(width=600, height=400,)
+            .interactive()
+        )
 
         st.write(chart)
 
-        
     tab.run(section)
 
 
