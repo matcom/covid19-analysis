@@ -35,6 +35,14 @@ def tab(section, title=None):
 
 
 @st.cache
+def get_responses():
+    responses = pd.read_csv(Path(__file__).parent.parent / "data/responses.tsv", sep="\t").fillna("")
+    responses['Date'] = pd.to_datetime(responses['Date'], format="%d/%m/%Y", errors='coerce')
+    responses = responses[responses['Date'] > '2020-01-01']
+    return responses
+
+
+@st.cache
 def demographic_data():
     return (
         pd.read_csv(
@@ -228,6 +236,7 @@ def main():
 
         scale = st.sidebar.selectbox(
             tr("Chart scale", "Tipo de escala"), ["linear", "log"]
+     
         )
 
         chart = (
@@ -322,17 +331,20 @@ def main():
                 tr("Number of countries to show", "Cantidad de países a mostrar"),
                 1,
                 len(all_countries),
-                10,
+                20,
             )
-            selected_countries = totals.sort_values("total", ascending=False)[
+            selected_countries = list(totals.sort_values("total", ascending=False)[
                 :total_countries
-            ].index
+            ].index)
         else:
             selected_countries = st.multiselect(
                 tr("Select countries", "Selecciona los países"),
                 all_countries,
                 all_countries,
             )
+
+        your_country = st.selectbox("Select country", all_countries, all_countries.index("Cuba"))
+        selected_countries.append(your_country)
 
         data = raw_dfs[raw_dfs["country"].isin(selected_countries)]
 
@@ -369,6 +381,23 @@ def main():
         text = chart.mark_text(align="left").encode(text="country")
 
         st.write((chart + text + dots).properties(width=700, height=500).interactive())
+
+        responses = get_responses()
+        responses = responses[responses['Country'].isin(selected_countries)]
+
+        if st.checkbox("Show data"):
+            st.write(responses)
+
+        chart = alt.Chart(responses).mark_line(size=0.25).encode(
+            x='Date',
+            y='Country',
+            color='Country',
+            shape='Category',
+            tooltip='Measure',
+        ).properties(width=800)
+
+        st.write(chart)
+
 
     @tab(section, tr("Similarity analysis", "Análisis de similaridad"))
     def similarity():
