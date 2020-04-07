@@ -121,7 +121,7 @@ def raw_information():
         df = pd.DataFrame(v)
         df = df[df["confirmed"] > 0]
         df["date"] = pd.to_datetime(df["date"])
-        df['active'] = df['confirmed'] - df['recovered'] - df['deaths']
+        df["active"] = df["confirmed"] - df["recovered"] - df["deaths"]
         data[k] = df
 
     return data
@@ -190,6 +190,36 @@ def sliding_similarity(source, country, exponent=1, normalize=True, window_size=
                 min_sample = sample
 
     return min_sim, min_sample
+
+
+@st.cache
+def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold):
+    measures_effects = []
+
+    for _, row in responses.iterrows():
+        country = row["Country"]
+        measure = row["Measure"]
+        date = row["Date"]
+
+        selected = data[
+            (data["country"] == country)
+            & (data["date"] >= date)
+            # & (data['growth'] <- -threshold)
+        ]
+
+        # for i in np.arange(0, 1, 0.05):
+        growth = selected[selected['growth'] <= -threshold]
+
+        if len(growth) == 0:
+            continue
+
+        min_date = growth["date"].min()
+
+        measures_effects.append(
+            dict(country=country, measure=measure, category=row['Category'], taken=date, effect=min_date, distance=(min_date - date).days, size=threshold)
+        )
+
+    return pd.DataFrame(measures_effects)
 
 
 def main():
@@ -441,7 +471,7 @@ def main():
         features = []
 
         explanation = st.empty()
-        threshold = st.slider("Safety threshold", 0.0, 1.0, 0.25)
+        threshold = st.sidebar.slider("Safety threshold", 0.0, 1.0, 0.25)
         explanation.markdown(
             f"""
             Filtramos los países que se consideran `safe` como aquellos que tienen un descenso de más de `{threshold * 100} %` 
@@ -455,7 +485,7 @@ def main():
 
         explanation = st.empty()
 
-        days_before_effect = st.slider("Days before measure make effect", 0, 30, 15)
+        days_before_effect = st.sidebar.slider("Days before measure make effect", 0, 30, 15)
 
         explanation.markdown(
             f"""
@@ -475,7 +505,8 @@ def main():
                 continue
 
             country_responses = country_responses[
-                country_responses["Date"] <= date - pd.Timedelta(days=days_before_effect)
+                country_responses["Date"]
+                <= date - pd.Timedelta(days=days_before_effect)
             ]
 
             if len(country_responses) == 0:
@@ -483,7 +514,8 @@ def main():
 
             features.append(
                 dict(
-                    growth=growth, **{measure: True for measure in country_responses["Measure"]}
+                    growth=growth,
+                    **{measure: True for measure in country_responses["Measure"]},
                 )
             )
 
@@ -562,7 +594,33 @@ def main():
 
         st.write("### Estimado del tiempo de efecto de cada medida")
 
-        st.write(responses)
+        st.write(
+            f"""
+            Veamos a cuántos días se nota por primera vez el efecto de una medida.
+            Esta gráfica muestra la cantidad de países que han observado un decrecimiento
+            de al menos `{threshold * 100}`% de los casos en un período de `{window_size}`` días
+            con respecto al período anterior, al cabo de **X** días de haber tomado una medida determinada.
+            """
+        )
+
+        min_days, max_days = st.slider("Range of analysis", 0, 60, (7, 30))
+
+        measures_effects = get_measures_effects(responses, data, threshold)
+        measures_effects = measures_effects[(measures_effects['distance'] >= min_days) & (measures_effects['distance'] <= max_days)]
+
+        if st.checkbox("Show data (measures effects)"):
+            st.write(measures_effects)
+
+        chart = alt.Chart(measures_effects).mark_circle().encode(
+            y='measure',
+            x='distance:N',
+            color='category',
+            shape='category',
+            size='count(country)',
+            tooltip='measure',
+        )
+
+        st.write(chart)
 
 
     @tab(section, tr("Similarity analysis", "Análisis de similaridad"))
@@ -577,7 +635,9 @@ def main():
 
         mode = st.sidebar.selectbox("Compare with", ["Most similar", "Custom"])
 
-        variable_to_look = st.sidebar.selectbox("Variable", ["confirmed", "deaths", "recovered", "active"])
+        variable_to_look = st.sidebar.selectbox(
+            "Variable", ["confirmed", "deaths", "recovered", "active"]
+        )
         evacuated = st.sidebar.number_input("Evacuated cases (total)", 0, 1000, 0)
 
         def get_data(country):
@@ -736,7 +796,7 @@ def main():
 
         for i, (x, s) in enumerate(zip(ymean, ystdv)):
             x -= evacuated
-            
+
             forecast.append(
                 dict(
                     day=i + len(serie),
