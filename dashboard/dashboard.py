@@ -7,7 +7,7 @@ import numpy as np
 import graphviz
 
 from altair import datum
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.feature_extraction import DictVectorizer
@@ -119,32 +119,41 @@ def raw_information():
     data = {}
     for k, v in raw_data.items():
         df = pd.DataFrame(v)
+        df = df[df["confirmed"] > 0]
         df["date"] = pd.to_datetime(df["date"])
+        df['active'] = df['confirmed'] - df['recovered'] - df['deaths']
         data[k] = df
 
     return data
 
 
 @st.cache
-def weekly_information():
+def weekly_information(window_size: int = 7):
     raw_dfs = raw_information()
 
     dfs = []
     for country, df in raw_dfs.items():
         df = df.copy()
-        df["week"] = df["date"].apply(lambda t: t.week)
-        df["week"] = df["week"] - df["week"].min()
+        start_day = df["date"].values[0]
+        df["period"] = df["date"].apply(lambda t: (t - start_day).days // window_size)
+        df["period"] = df["period"] - df["period"].min()
         df["new"] = df["confirmed"].diff().fillna(0)
         df = (
-            df.groupby("week")
-            .agg(confirmed=("confirmed", "max"), new=("new", "mean"))
+            df.groupby("period")
+            .agg(
+                confirmed=("confirmed", "max"),
+                new=("new", "sum"),
+                date=("date", "first"),
+            )
             .reset_index()
         )
+        df["growth"] = df["new"].pct_change().fillna(1.0)
         df["country"] = country
-        df = df[(df["confirmed"] > 10) & (df["new"] > 10)]
+        df = df[(df["confirmed"] > 100) & (df["new"] > 10)]
+        df = df[:-1]
         dfs.append(df)
 
-    return pd.concat(dfs)
+    return pd.concat(dfs).reset_index()
 
 
 def similarity(source, country, exponent=1, normalize=True):
@@ -324,7 +333,9 @@ def main():
             )
         )
 
-        raw_dfs: pd.DataFrame = weekly_information()
+        window_size = st.slider("Window size (days)", 1, 15, 5)
+
+        raw_dfs: pd.DataFrame = weekly_information(window_size)
         totals: pd.DataFrame = raw_dfs.groupby("country").agg(
             total=("confirmed", "max")
         )
@@ -362,6 +373,9 @@ def main():
 
         data = raw_dfs[raw_dfs["country"].isin(selected_countries)]
 
+        if st.checkbox("Show data (all periods)"):
+            st.write(data)
+
         chart = (
             alt.Chart(data)
             .mark_line()
@@ -394,37 +408,17 @@ def main():
 
         text = chart.mark_text(align="left").encode(text="country")
 
-        st.write((chart + text + dots).properties(width=700, height=500).interactive())
+        st.write((chart + text + dots).properties(width=800, height=600).interactive())
 
-        max_weekly = data.groupby("country").agg(max_weekly=("new", "max"))
-        last_weekly = data.groupby("country").agg(last_weekly=("new", "last"))
-        merge = max_weekly.join(last_weekly, how="inner")
-        merge["safe"] = (
-            merge["max_weekly"] * (1 - st.slider("Safety threshold", 0.0, 1.0, 0.1))
-            > merge["last_weekly"]
-        )
-
-        safe_countries = set(merge[merge["safe"] == True].index)
-
-        st.write(merge[merge["safe"] == True])
-
-        st.write("### Predicting good responses")
-
-        st.write(
-            """
-            Let's see which measures are correlated with the `safe` status.
-            To limit the effect of confounding variables, we will only look at measures taken
-            with more than `N` weeks prior to the date of the maximum number of new cases,
-            since evidently the countries with the most number of cases will have implemented the
-            most measures.
-            """
-        )
+        st.write("### Prediciendo el efecto de cada medida")
 
         responses = get_responses()
         responses = responses[responses["Country"].isin(selected_countries)]
 
-        if st.checkbox("Show data"):
+        if st.checkbox("Show data (responses)"):
             st.write(responses)
+
+        st.write("Estas son todas las medidas que se han tomado hasta la fecha.")
 
         chart = (
             alt.Chart(responses)
@@ -436,36 +430,95 @@ def main():
                 shape="Category",
                 tooltip="Measure",
             )
-            .properties(width=800)
+            .properties(width=800, height=500)
         )
 
         st.write(chart)
 
-        features = (
-            responses[["Country", "Measure"]]
-            .groupby("Country")
-            .agg(lambda s: list(set(s)))
-            .to_dict("index")
+        all_possible_responses = set(responses["Measure"])
+        all_responses = responses.groupby("Country")
+
+        features = []
+
+        explanation = st.empty()
+        threshold = st.slider("Safety threshold", 0.0, 1.0, 0.25)
+        explanation.markdown(
+            f"""
+            Filtramos los países que se consideran `safe` como aquellos que tienen un descenso de más de `{threshold * 100} %` 
+            de un período al siguiente."""
         )
 
-        for country, featureset in features.items():
-            featureset["Target"] = country in safe_countries
+        data["safe"] = data["growth"] < -threshold
+        safe_countries = set(data[data["safe"] == True].index)
+
+        st.write(data[data["safe"] == True])
+
+        explanation = st.empty()
+
+        days_before_effect = st.slider("Days before measure make effect", 0, 30, 15)
+
+        explanation.markdown(
+            f"""
+            Considerando como efecto positivo, el producir un descenso mayor de `{threshold * 100} %` en un período,
+            vamos a ver qué medidas tienen una mayor influencia en ese descenso, si son tomadas con 
+            al`{days_before_effect}` días de adelanto al período deseado."""
+        )
+
+        for i, row in data.iterrows():
+            country = row.country
+            date = row.date
+            growth = row.growth
+
+            try:
+                country_responses = all_responses.get_group(country)
+            except KeyError:
+                continue
+
+            country_responses = country_responses[
+                country_responses["Date"] <= date - pd.Timedelta(days=days_before_effect)
+            ]
+
+            if len(country_responses) == 0:
+                continue
+
+            features.append(
+                dict(
+                    growth=growth, **{measure: True for measure in country_responses["Measure"]}
+                )
+            )
+
+        # for c, responses in all_responses.get_group(your_country):
+        #     st.write(c)
+        #     st.write(responses[['Measure', 'Date']].to_dict())
+        #     break
+
+        # st.write(all_responses)
+
+        # features = (
+        #     responses[["Country", "Measure"]]
+        #     .groupby("Country")
+        #     .agg(lambda s: list(set(s)))
+        #     .to_dict("index")
+        # )
 
         vectorizer = DictVectorizer(sparse=False)
         X = vectorizer.fit_transform(
-            [
-                {k: True for k in featureset["Measure"]}
-                for country, featureset in features.items()
-            ]
+            [{k: True for k in featureset if k != "growth"} for featureset in features]
         )
-        y = [featureset["Target"] for featureset in features.values()]
+        y = [featureset["growth"] < -threshold for featureset in features]
 
-        classifier = DecisionTreeClassifier()
+        model = st.sidebar.selectbox("Model", ["Logistic Regression", "Decision Tree"])
+
+        if model == "Decision Tree":
+            classifier = DecisionTreeClassifier()
+        elif model == "Logistic Regression":
+            classifier = LogisticRegression()
+
         acc_scores = cross_val_score(classifier, X, y, cv=10, scoring="accuracy")
         f1_scores = cross_val_score(classifier, X, y, cv=10, scoring="f1_macro")
 
         st.info(
-            "**Accuracy:** %0.2f (+/- %0.2f) - **F1:** %0.2f (+/- %0.2f)"
+            "**Precisión:** %0.2f (+/- %0.2f) - **F1:** %0.2f (+/- %0.2f)"
             % (
                 acc_scores.mean(),
                 acc_scores.std() * 2,
@@ -476,8 +529,41 @@ def main():
 
         classifier.fit(X, y)
 
-        graph = export_graphviz(classifier, feature_names=vectorizer.feature_names_, filled=True, rounded=True)
-        st.graphviz_chart(graph)
+        if model == "Decision Tree":
+            graph = export_graphviz(
+                classifier,
+                feature_names=vectorizer.feature_names_,
+                filled=True,
+                rounded=True,
+            )
+            st.graphviz_chart(graph)
+        elif model == "Logistic Regression":
+            coeficients = vectorizer.inverse_transform(classifier.coef_)[0]
+            coeficients = pd.DataFrame(
+                [dict(Medida=m, Factor=f) for m, f in coeficients.items()]
+            ).sort_values("Factor")
+
+            st.write(coeficients)
+
+            st.write(
+                alt.Chart(coeficients)
+                .mark_bar(size=10)
+                .encode(
+                    x="Factor",
+                    y=alt.Y("Medida"),
+                    color=alt.condition(
+                        alt.datum.Factor > 0,
+                        alt.value("steelblue"),  # The positive color
+                        alt.value("orange"),  # The negative color
+                    ),
+                )
+                .properties(height=600, width=600)
+            )
+
+        st.write("### Estimado del tiempo de efecto de cada medida")
+
+        st.write(responses)
+
 
     @tab(section, tr("Similarity analysis", "Análisis de similaridad"))
     def similarity():
@@ -491,13 +577,28 @@ def main():
 
         mode = st.sidebar.selectbox("Compare with", ["Most similar", "Custom"])
 
+        variable_to_look = st.sidebar.selectbox("Variable", ["confirmed", "deaths", "recovered", "active"])
+        evacuated = st.sidebar.number_input("Evacuated cases (total)", 0, 1000, 0)
+
         def get_data(country):
             df = raw[country]
-            return df[df["confirmed"] > 0]["confirmed"].values
+            return df[df[variable_to_look] > 0][variable_to_look].values
 
         if mode == "Most similar":
             similar_count = st.slider("Most similar countries", 5, len(data), 10)
             similar_countries = most_similar_countries(country, 3 * similar_count, data)
+
+            if st.checkbox("Show partial selection"):
+                st.write(similar_countries)
+                st.write(
+                    pd.DataFrame(
+                        [
+                            dict(country=k, **data[k])
+                            for k in [country] + similar_countries
+                        ]
+                    )
+                )
+
             similar_countries = most_similar_curves(
                 country, similar_countries, similar_count
             )
@@ -521,7 +622,7 @@ def main():
                 df.append(dict(pais=c, dia=i, casos=x))
 
         raw_country = raw[country]
-        raw_country = raw_country[raw_country["confirmed"] > 0]["confirmed"]
+        raw_country = raw_country[raw_country[variable_to_look] > 0][variable_to_look]
 
         for i, x in enumerate(raw_country):
             df.append(dict(pais=country, dia=i, casos=x))
@@ -535,7 +636,7 @@ def main():
         ).encode(
             x="dia", y="casos",
         ).properties(
-            width=700, height=500
+            width=800, height=500
         ).interactive()
 
         st.write("### Forecast")
@@ -634,6 +735,8 @@ def main():
         forecast = []
 
         for i, (x, s) in enumerate(zip(ymean, ystdv)):
+            x -= evacuated
+            
             forecast.append(
                 dict(
                     day=i + len(serie),
@@ -645,8 +748,25 @@ def main():
                 )
             )
 
+        if st.checkbox("Show data"):
+            st.table(
+                pd.DataFrame(
+                    [
+                        {
+                            "Día": "Día %i" % d["day"],
+                            "Predicción": d["mean"],
+                            "50%% error": d["mean_50_up"],
+                            "95%% error": d["mean_95_up"],
+                        }
+                        for d in forecast
+                    ]
+                ).set_index("Día")
+            )
+
+            st.write("#### Model parameters")
+            st.write(lr.coef_)
+
         forecast = pd.DataFrame(forecast)
-        # st.write(forecast)
 
         scale = st.sidebar.selectbox("Scale", ["linear", "log"])
 
@@ -693,7 +813,7 @@ def main():
                     tooltip="value",
                 )
             )
-            .properties(width=600, height=400,)
+            .properties(width=800, height=500,)
             .interactive()
         )
 
