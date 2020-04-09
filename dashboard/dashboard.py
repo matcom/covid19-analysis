@@ -1,3 +1,4 @@
+import textwrap
 import streamlit as st
 import datetime
 import json
@@ -5,6 +6,8 @@ import pandas as pd
 import altair as alt
 import numpy as np
 import graphviz
+import itertools
+import random
 
 from altair import datum
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, LogisticRegression
@@ -208,7 +211,7 @@ def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold)
         ]
 
         # for i in np.arange(0, 1, 0.05):
-        growth = selected[selected['growth'] <= -threshold]
+        growth = selected[selected["growth"] <= -threshold]
 
         if len(growth) == 0:
             continue
@@ -216,7 +219,15 @@ def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold)
         min_date = growth["date"].min()
 
         measures_effects.append(
-            dict(country=country, measure=measure, category=row['Category'], taken=date, effect=min_date, distance=(min_date - date).days, size=threshold)
+            dict(
+                country=country,
+                measure=measure,
+                category=row["Category"],
+                taken=date,
+                effect=min_date,
+                distance=(min_date - date).days,
+                size=threshold,
+            )
         )
 
     return pd.DataFrame(measures_effects)
@@ -336,302 +347,8 @@ def main():
                 )
             )
 
-    @tab(section, tr("Global epidemic evolution", "Evolución global de la epidemia"))
-    def all_countries_curve():
-        st.subheader(tr("Global epidemic evolution", "Evolución global de la epidemia"))
-
-        st.write(
-            tr(
-                """
-                The following graph shows a log/log plot of the average weekly number of new cases
-                vs. the total number of confirmed cases.
-                In this type of graph, most of the countries will follow a straight diagonal path
-                during the pandemic stage, since the growth is exponential, hence the number of new cases
-                is a factor of the total number of cases.
-                It is very easy to see which countries are leaving the pandemic stage, since those
-                will be shown as deviating from the diagonal and falling down pretty quickly.
-                """,
-                """
-                La siguiente gráfica muestra una curva log/log de la cantidad promedio de nuevos casos semanales,
-                contra la cantidad total de casos confirmados.
-                En este tipo de gráfica, la mayoría de los países seguirán una línea diagonal durante todo el
-                período de pandemia, ya que el crecimiento es exponencial, y por lo tanto el número de casos
-                nuevos es siempre un factor multiplicado por el número total de casos.
-                Es muy fácil ver qué países están saliendo del estado de pandemia, dado que esos países
-                se verán desviados de la diagonal con una fuerte tendencia hacia abajo.
-                """,
-            )
-        )
-
-        window_size = st.slider("Window size (days)", 1, 15, 5)
-
-        raw_dfs: pd.DataFrame = weekly_information(window_size)
-        totals: pd.DataFrame = raw_dfs.groupby("country").agg(
-            total=("confirmed", "max")
-        )
-
-        select_top = tr(
-            "Countries with most cases", "Países con mayor cantidad de casos"
-        )
-        select_custom = tr("Custom selection", "Selección personalizada")
-        selection_type = st.sidebar.selectbox(
-            tr("Selection type", "Tipo de selección"), [select_top, select_custom]
-        )
-        all_countries = list(totals.index)
-
-        if selection_type == select_top:
-            total_countries = st.slider(
-                tr("Number of countries to show", "Cantidad de países a mostrar"),
-                1,
-                len(all_countries),
-                20,
-            )
-            selected_countries = list(
-                totals.sort_values("total", ascending=False)[:total_countries].index
-            )
-        else:
-            selected_countries = st.multiselect(
-                tr("Select countries", "Selecciona los países"),
-                all_countries,
-                all_countries,
-            )
-
-        your_country = st.selectbox(
-            "Select country", all_countries, all_countries.index("Cuba")
-        )
-        selected_countries.append(your_country)
-
-        data = raw_dfs[raw_dfs["country"].isin(selected_countries)]
-
-        if st.checkbox("Show data (all periods)"):
-            st.write(data)
-
-        chart = (
-            alt.Chart(data)
-            .mark_line()
-            .encode(
-                x=alt.X(
-                    "confirmed",
-                    scale=alt.Scale(type="log"),
-                    title=tr("Total confirmed cases", "Casos totales confirmados"),
-                ),
-                y=alt.Y(
-                    "new",
-                    scale=alt.Scale(type="log"),
-                    title=tr(
-                        "New cases (weekly average)", "Casos nuevos (promedio semanal)"
-                    ),
-                ),
-                color=alt.Color("country", title=tr("Country", "País")),
-                tooltip="country",
-            )
-        )
-        dots = (
-            alt.Chart(data)
-            .mark_point()
-            .encode(
-                x=alt.X("confirmed", scale=alt.Scale(type="log")),
-                y=alt.Y("new", scale=alt.Scale(type="log")),
-                color="country",
-            )
-        )
-
-        text = chart.mark_text(align="left").encode(text="country")
-
-        st.write((chart + text + dots).properties(width=800, height=600).interactive())
-
-        st.write("### Prediciendo el efecto de cada medida")
-
-        responses = get_responses()
-        responses = responses[responses["Country"].isin(selected_countries)]
-
-        if st.checkbox("Show data (responses)"):
-            st.write(responses)
-
-        st.write("Estas son todas las medidas que se han tomado hasta la fecha.")
-
-        chart = (
-            alt.Chart(responses)
-            .mark_line(size=0.25)
-            .encode(
-                x="Date",
-                y="Country",
-                color="Country",
-                shape="Category",
-                tooltip="Measure",
-            )
-            .properties(width=800, height=500)
-        )
-
-        st.write(chart)
-
-        all_possible_responses = set(responses["Measure"])
-        all_responses = responses.groupby("Country")
-
-        features = []
-
-        explanation = st.empty()
-        threshold = st.sidebar.slider("Safety threshold", 0.0, 1.0, 0.25)
-        explanation.markdown(
-            f"""
-            Filtramos los países que se consideran `safe` como aquellos que tienen un descenso de más de `{threshold * 100} %` 
-            de un período al siguiente."""
-        )
-
-        data["safe"] = data["growth"] < -threshold
-        safe_countries = set(data[data["safe"] == True].index)
-
-        st.write(data[data["safe"] == True])
-
-        explanation = st.empty()
-
-        days_before_effect = st.sidebar.slider("Days before measure make effect", 0, 30, 15)
-
-        explanation.markdown(
-            f"""
-            Considerando como efecto positivo, el producir un descenso mayor de `{threshold * 100} %` en un período,
-            vamos a ver qué medidas tienen una mayor influencia en ese descenso, si son tomadas con 
-            al`{days_before_effect}` días de adelanto al período deseado."""
-        )
-
-        for i, row in data.iterrows():
-            country = row.country
-            date = row.date
-            growth = row.growth
-
-            try:
-                country_responses = all_responses.get_group(country)
-            except KeyError:
-                continue
-
-            country_responses = country_responses[
-                country_responses["Date"]
-                <= date - pd.Timedelta(days=days_before_effect)
-            ]
-
-            if len(country_responses) == 0:
-                continue
-
-            features.append(
-                dict(
-                    growth=growth,
-                    **{measure: True for measure in country_responses["Measure"]},
-                )
-            )
-
-        # for c, responses in all_responses.get_group(your_country):
-        #     st.write(c)
-        #     st.write(responses[['Measure', 'Date']].to_dict())
-        #     break
-
-        # st.write(all_responses)
-
-        # features = (
-        #     responses[["Country", "Measure"]]
-        #     .groupby("Country")
-        #     .agg(lambda s: list(set(s)))
-        #     .to_dict("index")
-        # )
-
-        vectorizer = DictVectorizer(sparse=False)
-        X = vectorizer.fit_transform(
-            [{k: True for k in featureset if k != "growth"} for featureset in features]
-        )
-        y = [featureset["growth"] < -threshold for featureset in features]
-
-        model = st.sidebar.selectbox("Model", ["Logistic Regression", "Decision Tree"])
-
-        if model == "Decision Tree":
-            classifier = DecisionTreeClassifier()
-        elif model == "Logistic Regression":
-            classifier = LogisticRegression()
-
-        acc_scores = cross_val_score(classifier, X, y, cv=10, scoring="accuracy")
-        f1_scores = cross_val_score(classifier, X, y, cv=10, scoring="f1_macro")
-
-        st.info(
-            "**Precisión:** %0.2f (+/- %0.2f) - **F1:** %0.2f (+/- %0.2f)"
-            % (
-                acc_scores.mean(),
-                acc_scores.std() * 2,
-                f1_scores.mean(),
-                f1_scores.std() * 2,
-            )
-        )
-
-        classifier.fit(X, y)
-
-        if model == "Decision Tree":
-            graph = export_graphviz(
-                classifier,
-                feature_names=vectorizer.feature_names_,
-                filled=True,
-                rounded=True,
-            )
-            st.graphviz_chart(graph)
-        elif model == "Logistic Regression":
-            coeficients = vectorizer.inverse_transform(classifier.coef_)[0]
-            coeficients = pd.DataFrame(
-                [dict(Medida=m, Factor=f) for m, f in coeficients.items()]
-            ).sort_values("Factor")
-
-            st.write(coeficients)
-
-            st.write(
-                alt.Chart(coeficients)
-                .mark_bar(size=10)
-                .encode(
-                    x="Factor",
-                    y=alt.Y("Medida"),
-                    color=alt.condition(
-                        alt.datum.Factor > 0,
-                        alt.value("steelblue"),  # The positive color
-                        alt.value("orange"),  # The negative color
-                    ),
-                )
-                .properties(height=600, width=600)
-            )
-
-        st.write("### Estimado del tiempo de efecto de cada medida")
-
-        st.write(
-            f"""
-            Veamos a cuántos días se nota por primera vez el efecto de una medida.
-            Esta gráfica muestra la cantidad de países que han observado un decrecimiento
-            de al menos `{threshold * 100}`% de los casos en un período de `{window_size}`` días
-            con respecto al período anterior, al cabo de **X** días de haber tomado una medida determinada.
-            """
-        )
-
-        min_days, max_days = st.slider("Range of analysis", 0, 60, (7, 30))
-
-        measures_effects = get_measures_effects(responses, data, threshold)
-        measures_effects = measures_effects[(measures_effects['distance'] >= min_days) & (measures_effects['distance'] <= max_days)]
-
-        if st.checkbox("Show data (measures effects)"):
-            st.write(measures_effects)
-
-        chart = alt.Chart(measures_effects).mark_circle().encode(
-            y='measure',
-            x='distance:N',
-            color='category',
-            shape='category',
-            size='count(country)',
-            tooltip='measure',
-        )
-
-        st.write(chart)
-
-
-    @tab(section, tr("Similarity analysis", "Análisis de similaridad"))
-    def similarity():
-        st.write(tr("### Similarity analisis", "### Análisis de similaridad"))
-
         data = demographic_data()
         raw = raw_information()
-        countries = list(data.keys())
-
-        country = st.selectbox("Select a country", countries, countries.index("Cuba"))
 
         mode = st.sidebar.selectbox("Compare with", ["Most similar", "Custom"])
 
@@ -879,7 +596,730 @@ def main():
 
         st.write(chart)
 
+    @tab(section, tr("Global epidemic evolution", "Evolución global de la epidemia"))
+    def all_countries_curve():
+        st.subheader(tr("Global epidemic evolution", "Evolución global de la epidemia"))
+
+        st.write(
+            tr(
+                """
+                The following graph shows a log/log plot of the average weekly number of new cases
+                vs. the total number of confirmed cases.
+                In this type of graph, most of the countries will follow a straight diagonal path
+                during the pandemic stage, since the growth is exponential, hence the number of new cases
+                is a factor of the total number of cases.
+                It is very easy to see which countries are leaving the pandemic stage, since those
+                will be shown as deviating from the diagonal and falling down pretty quickly.
+                """,
+                """
+                La siguiente gráfica muestra una curva log/log de la cantidad promedio de nuevos casos semanales,
+                contra la cantidad total de casos confirmados.
+                En este tipo de gráfica, la mayoría de los países seguirán una línea diagonal durante todo el
+                período de pandemia, ya que el crecimiento es exponencial, y por lo tanto el número de casos
+                nuevos es siempre un factor multiplicado por el número total de casos.
+                Es muy fácil ver qué países están saliendo del estado de pandemia, dado que esos países
+                se verán desviados de la diagonal con una fuerte tendencia hacia abajo.
+                """,
+            )
+        )
+
+        window_size = st.slider("Window size (days)", 1, 15, 5)
+
+        raw_dfs: pd.DataFrame = weekly_information(window_size)
+        totals: pd.DataFrame = raw_dfs.groupby("country").agg(
+            total=("confirmed", "max")
+        )
+
+        select_top = tr(
+            "Countries with most cases", "Países con mayor cantidad de casos"
+        )
+        select_custom = tr("Custom selection", "Selección personalizada")
+        selection_type = st.sidebar.selectbox(
+            tr("Selection type", "Tipo de selección"), [select_top, select_custom]
+        )
+        all_countries = list(totals.index)
+
+        if selection_type == select_top:
+            total_countries = st.slider(
+                tr("Number of countries to show", "Cantidad de países a mostrar"),
+                1,
+                len(all_countries),
+                20,
+            )
+            selected_countries = list(
+                totals.sort_values("total", ascending=False)[:total_countries].index
+            )
+        else:
+            selected_countries = st.multiselect(
+                tr("Select countries", "Selecciona los países"),
+                all_countries,
+                all_countries,
+            )
+
+        your_country = st.selectbox(
+            "Select country", all_countries, all_countries.index("Cuba")
+        )
+        selected_countries.append(your_country)
+
+        data = raw_dfs[raw_dfs["country"].isin(selected_countries)]
+
+        if st.checkbox("Show data (all periods)"):
+            st.write(data)
+
+        chart = (
+            alt.Chart(data)
+            .mark_line()
+            .encode(
+                x=alt.X(
+                    "confirmed",
+                    scale=alt.Scale(type="log"),
+                    title=tr("Total confirmed cases", "Casos totales confirmados"),
+                ),
+                y=alt.Y(
+                    "new",
+                    scale=alt.Scale(type="log"),
+                    title=tr(
+                        "New cases (weekly average)", "Casos nuevos (promedio semanal)"
+                    ),
+                ),
+                color=alt.Color("country", title=tr("Country", "País")),
+                tooltip="country",
+            )
+        )
+        dots = (
+            alt.Chart(data)
+            .mark_point()
+            .encode(
+                x=alt.X("confirmed", scale=alt.Scale(type="log")),
+                y=alt.Y("new", scale=alt.Scale(type="log")),
+                color="country",
+            )
+        )
+
+        text = chart.mark_text(align="left").encode(text="country")
+
+        st.write((chart + text + dots).properties(width=800, height=600).interactive())
+
+        st.write("### Prediciendo el efecto de cada medida")
+
+        responses = get_responses()
+        responses = responses[responses["Country"].isin(selected_countries)]
+        confirmed = []
+        new_cases = []
+
+        for i, row in responses.iterrows():
+            country = row["Country"]
+            date = row["Date"]
+
+            point_data = data[(data["country"] == country) & (data["date"] >= date)]
+
+            if len(point_data) > 0:
+                confirmed.append(point_data["confirmed"].values[0])
+                new_cases.append(point_data["new"].values[0])
+            else:
+                confirmed.append(None)
+                new_cases.append(None)
+
+        responses["Confirmed"] = confirmed
+        responses["New Cases"] = new_cases
+
+        if st.checkbox("Show data (responses)"):
+            st.write(responses)
+
+        st.write("Estas son todas las medidas que se han tomado hasta la fecha.")
+
+        chart = (
+            alt.Chart(responses)
+            .mark_circle(size=0.25)
+            .encode(
+                x=alt.X("Date"),
+                y="Country",
+                size=alt.Size("Confirmed", scale=alt.Scale(type="log", base=2)),
+                color="Measure",
+                tooltip="Measure",
+            )
+            .properties(width=900, height=550)
+            .interactive()
+        )
+
+        st.write(chart)
+
+        # chart = (
+        #     alt.Chart(responses)
+        #     .mark_line()
+        #     .encode(
+        #         x="Date",
+        #         y=alt.Y("New Cases", scale=alt.Scale(type='log', base=10)),
+        #         # size=alt.Size('Confirmed', scale=alt.Scale(type='log', base=2)),
+        #         color="Country",
+        #         tooltip="Country",
+        #     )
+        #     .properties(width=900, height=550).interactive()
+        # )
+
+        # st.write(chart)
+
+        all_possible_responses = set(responses["Measure"])
+        all_responses = responses.groupby("Country")
+
+        explanation = st.empty()
+        threshold = st.sidebar.slider("Safety threshold", 0.0, 1.0, 0.25)
+        explanation.markdown(
+            f"""
+            Filtramos los países que se consideran `safe` como aquellos que tienen un descenso de más de `{threshold * 100} %` 
+            de un período al siguiente."""
+        )
+
+        data["safe"] = data["growth"] < -threshold
+        safe_countries = set(data[data["safe"] == True].index)
+
+        st.write(
+            data[data["safe"] == True]
+            .groupby("country")
+            .agg(crecimiento=("growth", "last"))
+        )
+
+        explanation = st.empty()
+
+        days_before_effect = st.sidebar.slider(
+            "Days before measure make effect", 0, 30, 15
+        )
+
+        explanation.markdown(
+            f"""
+            Considerando como efecto positivo, el producir un descenso mayor de `{threshold * 100} %` en un período,
+            vamos a ver qué medidas tienen una mayor influencia en ese descenso, si son tomadas con 
+            al`{days_before_effect}` días de adelanto al período deseado."""
+        )
+
+        model = st.sidebar.selectbox("Model", ["Logistic Regression", "Decision Tree"])
+
+        classifier, vectorizer = predict_measures_importance(
+            model, threshold, days_before_effect, data, all_responses
+        )
+
+        if model == "Decision Tree":
+            graph = export_graphviz(
+                classifier,
+                feature_names=vectorizer.feature_names_,
+                filled=True,
+                rounded=True,
+            )
+            st.graphviz_chart(graph)
+        elif model == "Logistic Regression":
+            coeficients = vectorizer.inverse_transform(classifier.coef_)[0]
+            coeficients = pd.DataFrame(
+                [dict(Medida=m, Factor=f) for m, f in coeficients.items()]
+            ).sort_values("Factor")
+
+            st.write(coeficients)
+
+            st.write(
+                alt.Chart(coeficients)
+                .mark_bar(size=10)
+                .encode(
+                    x="Factor",
+                    y=alt.Y("Medida"),
+                    color=alt.condition(
+                        alt.datum.Factor > 0,
+                        alt.value("steelblue"),  # The positive color
+                        alt.value("orange"),  # The negative color
+                    ),
+                )
+                .properties(height=600, width=600)
+            )
+
+        st.write("### Otra cosa ahí")
+
+        model_parameters = predict_all_importances(
+            model, threshold, data, all_responses
+        )
+        model_parameters["abs_factor"] = (
+            model_parameters["factor"].abs() / model_parameters["factor"].max()
+        )
+
+        if st.checkbox("Show data (factors per day)"):
+            st.write(model_parameters)
+
+        chart = (
+            alt.Chart(model_parameters)
+            .transform_filter(alt.datum.factor > 0)
+            .mark_circle()
+            .encode(
+                x=alt.X("days:N", title="Dias luego de la medida"),
+                y=alt.Y("measure", title="Medidas a tomar"),
+                size=alt.Size("abs_factor", title="Importancia relativa"),
+                # color=alt.condition(
+                #     alt.datum.factor > 0,
+                #     alt.value("steelblue"),  # The positive color
+                #     alt.value("orange"),  # The negative color
+                # ),
+            )
+            .properties(width=800)
+        )
+
+        st.write(chart)
+
+        st.write("### Estimado del tiempo de efecto de cada medida")
+
+        st.write(
+            f"""
+            Veamos a cuántos días se nota por primera vez el efecto de una medida.
+            Esta gráfica muestra la cantidad de países que han observado un decrecimiento
+            de al menos `{threshold * 100}`% de los casos en un período de `{window_size}` días
+            con respecto al período anterior, al cabo de **X** días de haber tomado una medida determinada.
+            """
+        )
+
+        min_days, max_days = st.slider("Range of analysis", 0, 60, (7, 30))
+
+        measures_effects = get_measures_effects(responses, data, threshold)
+        measures_effects = measures_effects[
+            (measures_effects["distance"] >= min_days)
+            & (measures_effects["distance"] <= max_days)
+        ]
+
+        if st.checkbox("Show data (measures effects)"):
+            st.write(measures_effects)
+
+        chart = (
+            alt.Chart(measures_effects)
+            .mark_circle()
+            .encode(
+                x=alt.X(
+                    "distance:N",
+                    title=f"Días entre la medida y una disminución en un {threshold * 100}% de los casos",
+                ),
+                y=alt.Y("measure", title="Medidas tomadas"),
+                color=alt.Color("category", title="Tipo de medida"),
+                size=alt.Size("count(country)", title="Cantidad de países"),
+                shape="category",
+                tooltip="measure",
+            )
+        )
+
+        st.write(chart)
+
+    @tab(section, "Simulación de la epidemia")
+    def simulation():
+        st.write("### Simulando la epidemia")
+
+        st.write(
+            # """
+            # Debido a irregularidades en las pruebas realizadas, 
+            # la cantidad de casos totales confirmados en un país puede ser un estimado
+            # muy por debajo de la cantidad de casos reales.
+            
+            # Idealmente, cada país debería hacer pruebas a una porción considerable de la 
+            # población, mediante un muestreo aleatorio. Como en la práctica esto es virtualmente
+            # imposible, en muchos lugares solamente se están realizando pruebas a los casos
+            # que muestran síntomas, y más aún, a los casos más graves.
+            """
+            En esta sección construiremos un modelo muy sencillo para estimar, en un país
+            arbitrario, cómo se vería la situación en función de la cantidad y la forma en
+            la que se realicen las pruebas.
+            """
+        )
+
+        st.info(
+            "En el panel de la derecha aparecerán todos los parámetros de este modelo."
+        )
+
+        st.write("### Simulando una epidemia sin control (modelo SIR simple)")
+
+        def simulate(days, simulate_hospital=False):
+            history = []
+
+            infected = 1
+            pop = population * 1000000
+            susceptible = pop - infected
+            dead = 0
+            recovered = 0
+
+            for i in range(days):
+                history.append(
+                    dict(
+                        day=i,
+                        infected=infected,
+                        susceptible=susceptible,
+                        dead=dead,
+                        recovered=recovered,
+                        has_care=0,
+                        needs_care=0,
+                    )
+                )
+
+                if infected < 1:
+                    break
+
+                # cada persona infecciosa puede infectar como promedio a cualquiera 
+                # de los susceptibles
+                new_infected = min(
+                    susceptible, infected * p_infect * n_meet * susceptible / pop
+                )
+
+                if simulate_hospital:
+                    # personas enfermas que necesitan cuidados
+                    need_bed = infected * percent_needs_beds
+                    need_uci = infected * percent_needs_uci
+                    need_vents = infected * percent_needs_vents
+
+                    # personas que tienen los cuidados adecuados
+                    has_bed = min(total_beds, need_bed) 
+                    has_uci = min(total_uci, need_uci) 
+                    has_vents = min(total_vents, need_vents)
+
+                    # ajustamos el rate de fallecidos en función de los cuidados disponibles
+                    has_care = has_bed + has_uci + has_vents
+                    needs_care = need_bed + need_uci + need_vents
+                    has_critical = has_uci + has_vents
+                    is_critical = need_uci + need_vents
+                    uncared = is_critical - has_critical
+                    new_dead = (uncared) * uncare_death + (infected - uncared) * p_dead
+
+                    history[-1]['has_care'] = has_care
+                    history[-1]['needs_care'] = needs_care
+                else:
+                    # simulación simple
+                    new_dead = p_dead * infected
+
+                new_recovered = p_recover * infected
+
+                infected = infected - new_dead - new_recovered + new_infected
+                dead = dead + new_dead
+                recovered = recovered + new_recovered
+                susceptible = susceptible - new_infected
+
+            df = pd.DataFrame(history).fillna(0).astype(int)
+
+            # parámetros a posteriori
+            df['r0'] = df['infected'].pct_change().fillna(0)
+            df['new_dead'] = df['dead'].diff().fillna(0)
+            df['letality'] = (df['new_dead'] / df['infected']).fillna(0)
+            df['healthcare_overflow'] = df['needs_care'] > df['has_care']
+
+            return df
+
+        st.sidebar.markdown("### Datos demográficos")
+        population = st.sidebar.number_input(
+            "Población (millones de habitantes)", 1, 1000, 10
+        )
+
+        st.sidebar.markdown("### Parámetros epidemiológicos")
+        n_meet = st.sidebar.slider("Personas en contacto diario", 1, 100, 20)
+        p_infect = st.sidebar.slider("Probabilidad de infectar", 0.0, 1.0, 0.1)
+        p_dead = st.sidebar.slider("Probabilidad de morir (diaria)", 0.0, 1.0, 0.02)
+        p_recover = st.sidebar.slider("Probabilidad de curarse (diaria)", 0.0, 1.0, 0.10)
+
+        st.write(
+            f"""
+            Asumamos un país que tiene una población de `{population}` millones de habitantes. 
+            La epidemia comienza el día 1, con un 1 paciente infectado.
+            
+            Asumamos que cada persona infectada es capaz de infectar a otra persona
+            susceptible con una probabilidad de `{100 * p_infect:.0f}%`
+            durante toda la duración de la enfermedad, asumiendo que no hay ningún tipo de control.
+
+            Además, cada persona como promedio conocerá diariamente `{n_meet}` personas.
+            De estas personas, cierta porción estará sana, y susceptible de ser infectada,
+            y cierta porción estará infectada o recuperada. Por lo tanto, el crecimiento efectivo será
+            de mayor al inicio, pero luego se frenará naturalmente a medida que toda la población
+            es infectada.
+
+            Asumiremos además que una persona infectada tiene una posibilidad de `{100 * p_dead:.0f}%` de morir
+            o una probabilidad de `{100 * p_recover:.0f}%` de recuperarse cada día.
+            """
+        )
+
+        st.write(
+            """
+            Este es el resultado de nuestra simulación. Dependiendo de los parámetros, o bien toda la población
+            eventualmente será infectada, o la enfermedad ni siquiera logrará despegar. Con estos parámetros, el 
+            resultado es el siguiente.
+            """
+        )
+
+        simulation = simulate(1000)
+
+        if st.checkbox("Show simulation data"):
+            st.write(simulation)
+
+        def summary(simulation):
+            facts = []
+
+            all_infected = simulation[(simulation["susceptible"] == 0)]
+            none_infected = simulation[(simulation["infected"] == 0)]
+            simulation = simulation[simulation["infected"] > 0]
+
+            def ft(day, message, value=""):
+                facts.append(
+                    dict(
+                        day=day,
+                        message=message,
+                        value=value,
+                        # percent=value / (population * 10000) if value else "",
+                    )
+                )
+
+            if len(all_infected) > 0:
+                ft(
+                    day=all_infected["day"].min(),
+                    message="Toda la población ha sido infectada",
+                )
+            else:
+                ft(
+                    day=simulation["day"].max(),
+                    message="Total de personas no infectadas",
+                    value=simulation["susceptible"].min(),
+                )
+            if len(none_infected) > 0:
+                ft(
+                    day=none_infected["day"].min(),
+                    message="La enfermedad ha desaparecido por completo",
+                )
+
+            ft(
+                day=simulation[simulation["infected"] == simulation["infected"].max()][
+                    "day"
+                ].min(),
+                message="Pico máximo de infectados",
+                value=simulation["infected"].max(),
+            )
+
+            ft(
+                day=simulation[simulation['dead'] == simulation["dead"].max()]['day'].min(),
+                message="Cantidad total de fallecidos",
+                value=simulation["dead"].max(),
+            )
+
+            max_r0 = simulation[simulation['infected'] > 100]['r0'].max()
+
+            ft(
+                day=simulation[simulation['r0'] == max_r0]['day'].min(),
+                message="Máximo rate de contagio (> 100 infectados)",
+                value=round(max_r0 + 1, 2),
+            )
+
+            healthcare_overflow = simulation[simulation['healthcare_overflow'] == True]
+
+            if len(healthcare_overflow) > 0:
+                ft(
+                    day=healthcare_overflow['day'].min(),
+                    message="Sistema de salud colapsado",
+                )
+                ft(
+                    day=healthcare_overflow['day'].max(),
+                    message="Sistema de salud vuelve a la normalidad",
+                )
+
+            facts = pd.DataFrame(facts).sort_values('day').set_index('day')
+            return facts 
+
+        st.table(summary(simulation))
+
+        st.write(
+            alt.Chart(simulation.melt("day", value_vars=['infected', 'susceptible', 'dead', 'recovered']))
+            .mark_line()
+            .encode(
+                x="day",
+                y=alt.Y("value", scale=alt.Scale(type="linear")),
+                color="variable",
+            )
+            .properties(width=700, height=400)
+        )
+
+        st.info(
+            """
+            Prueba a mover el parámetro `N` para que veas el efecto
+            que produce la cantidad de personas en contacto, o el parámetro `P(infect)` para que veas
+            el efecto de reducir la probabilidad de contagio.
+            """
+        )
+
+        st.write("### Simulando el estrés en el sistema de salud")
+
+        st.sidebar.markdown("### Sistema de salud")
+
+        total_beds = st.sidebar.number_input("Camas disponibles", 0, population * 1000000, population * 10000)
+        total_uci = st.sidebar.number_input("Camas UCI disponibles", 0, population * 1000000, population *  1000)
+        total_vents = st.sidebar.number_input("Respiradores disponibles", 0, population * 1000000, population *  1000)
+
+        st.sidebar.markdown("### Parámetros epidemiológicos")
+
+        percent_needs_beds = st.sidebar.slider("Necesitan hospitalización", 0.0, 1.0, 0.20)
+        percent_needs_uci = st.sidebar.slider("Necesitan cuidados intensivos", 0.0, 1.0, 0.05)
+        percent_needs_vents = st.sidebar.slider("Necesitan respirador", 0.0, 1.0, 0.05)
+        
+        uncare_death = st.sidebar.slider("Fallecimiento sin cuidado", 0.0, 1.0, 0.25)
+
+        st.write(f"""
+            La simulación anterior es extremadamente simplificada, sin tener en cuenta las
+            características del sistema de salud. Vamos a modelar una situación ligeramente
+            más realista, donde el `{100 * percent_needs_beds:.0f}%` de las personas infectadas
+            necesitan algún tipo de hospitalización, el `{100 * percent_needs_uci:.0f}%`
+            necesitan cuidados intensivos, y el `{100 * percent_needs_vents:.0f}%` necesitan respiradores. 
+            En total, el `{100 * (percent_needs_beds + percent_needs_uci + percent_needs_vents):.0f}%` de
+            los infectados necesitará algún tipo de cuidado. 
+
+            El sistema de salud cuenta con un total de `{total_beds}` camas en los hospitales,
+            un total de `{total_uci}` camas de cuidado intensivo, y un total de `{total_vents}` respiradores.
+
+            Para las personas infectadas que requieren de cuidados especiales (UCI o respiradores), si estos no están 
+            disponibles, la probabilidad de fallecer será entonces de `{100 * uncare_death:.0f}%` en vez de `{100 * p_dead:.0f}%`
+            por cada día que se esté sin cuidados especiales.
+            """)
+
+        simulation = simulate(1000, simulate_hospital=True)
+
+        if st.checkbox("Show simulation data", key=2):
+            st.write(simulation)
+
+        st.table(summary(simulation))
+
+        st.write(
+            alt.Chart(simulation.melt("day", value_vars=['infected', 'susceptible', 'dead', 'recovered']))
+            .mark_line()
+            .encode(
+                x="day",
+                y=alt.Y("value", scale=alt.Scale(type="linear")),
+                color="variable",
+            )
+            .properties(width=700, height=400)
+        )
+
+        healthcare_overflow = simulation[simulation['healthcare_overflow'] == True]
+        healthcare_normal = simulation[(simulation['healthcare_overflow'] == False) & (simulation['infected'] > 100)]
+
+        if len(healthcare_overflow) > 0:
+            st.write(f"""
+                Veamos como se comporta el porciento efectivo de muertes y el número de muertes diarias. 
+                En este modelo los hospitales colapsan el día `{healthcare_overflow['day'].min()}`
+                y vuelven a la normalidad el día `{healthcare_overflow['day'].max()}`.
+                Durante este período, la probabilidad de morir máxima es `{100 * healthcare_overflow['letality'].max():.2f}%`,
+                mientras que fuera de este período (> 100 infectados) la probabilidad promedio es `{100 * healthcare_normal['letality'].mean():.2f}%`.
+                """)
+        else:
+            st.write(f"""
+                Veamos como se comporta el porciento efectivo de muertes y el número de muertes diarias. 
+                En este modelo los hospitales no colapsan.
+                Durante este período, la probabilidad de morir promedio se mantiene en `{healthcare_normal['letality'].mean():.3f}`.
+                """)
+
+
+        st.write(alt.Chart(simulation[simulation['infected'] > 100])
+            .mark_line()
+            .encode(
+                x=alt.X("day", title="Días"),
+                y=alt.Y("letality", title="Letalidad (% muertes / inf.)"),
+            )
+            .properties(width=700, height=200)
+        )
+
+        st.write(alt.Chart(simulation[simulation['infected'] > 100])
+            .mark_bar()
+            .encode(
+                x=alt.X("day", title="Días"),
+                y=alt.Y("new_dead", title="Muertes nuevas por día"),
+            )
+            .properties(width=700, height=200)
+        )
+        
+        st.write("### Código fuente")
+        st.write("Si quieres ver el código fuente de la simulación, haz click aquí.")
+
+        if st.checkbox("Ver código"):
+            import inspect
+            lines = inspect.getsource(simulate)
+            lines = textwrap.dedent(lines)
+            
+            st.code(lines)
+
+
     tab.run(section)
+
+
+@st.cache(suppress_st_warning=True, allow_output_mutation=True)
+def predict_all_importances(model, threshold, data, all_responses):
+    result = []
+    progress = st.progress(0.0)
+
+    # thresholds = list(np.arange(0, 1, step=0.5))
+    thresholds = [threshold]
+    possible_days = list(range(7, 30))
+
+    for i, thr in enumerate(thresholds):
+        for j, days in enumerate(possible_days):
+            clf, vect = predict_measures_importance(
+                model, thr, days, data, all_responses, cv=False
+            )
+            progress.progress(
+                (i * len(possible_days) + j) / (len(thresholds) * len(possible_days))
+            )
+
+            for k, v in vect.inverse_transform(clf.coef_)[0].items():
+                result.append(dict(measure=k, factor=v, threshold=thr, days=days))
+
+    return pd.DataFrame(result)
+
+
+def predict_measures_importance(
+    model, threshold, days_before_effect, data, all_responses, cv=True
+):
+    data = data.copy()
+    data["safe"] = data["growth"] < -threshold
+    features = []
+
+    for i, row in data.iterrows():
+        country = row.country
+        date = row.date
+        growth = row.growth
+
+        try:
+            country_responses = all_responses.get_group(country)
+        except KeyError:
+            continue
+
+        country_responses = country_responses[
+            country_responses["Date"] <= date - pd.Timedelta(days=days_before_effect)
+        ]
+
+        if len(country_responses) == 0:
+            continue
+
+        features.append(
+            dict(
+                growth=growth,
+                **{measure: True for measure in country_responses["Measure"]},
+            )
+        )
+
+    vectorizer = DictVectorizer(sparse=False)
+    X = vectorizer.fit_transform(
+        [{k: True for k in featureset if k != "growth"} for featureset in features]
+    )
+    y = [featureset["growth"] < -threshold for featureset in features]
+
+    if model == "Decision Tree":
+        classifier = DecisionTreeClassifier()
+    elif model == "Logistic Regression":
+        classifier = LogisticRegression()
+
+    if cv:
+        acc_scores = cross_val_score(classifier, X, y, cv=10, scoring="accuracy")
+        f1_scores = cross_val_score(classifier, X, y, cv=10, scoring="f1_macro")
+
+    # st.info(
+    #     "**Precisión:** %0.2f (+/- %0.2f) - **F1:** %0.2f (+/- %0.2f)"
+    #     % (
+    #         acc_scores.mean(),
+    #         acc_scores.std() * 2,
+    #         f1_scores.mean(),
+    #         f1_scores.std() * 2,
+    #     )
+    # )
+
+    classifier.fit(X, y)
+    return classifier, vectorizer
 
 
 if __name__ == "__main__":
