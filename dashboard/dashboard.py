@@ -98,14 +98,16 @@ def most_similar_curves(source, countries_to_analize, total):
 
     source_data = get_data(source)
 
-    exponent = 1
-    normalize = True
-    window = 15
-    k = 7
+    st.sidebar.markdown('### Similaridad de curvas')
+
+    exponent = st.sidebar.slider("Exponente", 1.0, 2.0, 2.0)
+    normalize = st.sidebar.checkbox("Normalizar similaridad", False)
+    window = st.sidebar.slider("Ventana de comparación", 0, 30, 7)
+    tail = st.sidebar.slider("Tamaño de cola a analizar", 0, 30, 7)
 
     similarities = {
         country: sliding_similarity(
-            source_data, get_data(country), exponent, normalize, window
+            source_data, get_data(country), exponent, normalize, window, tail
         )
         for country in countries_to_analize
     }
@@ -159,13 +161,13 @@ def weekly_information(window_size: int = 7):
     return pd.concat(dfs).reset_index()
 
 
-def similarity(source, country, exponent=1, normalize=True):
+def similarity(source, country, exponent=1, normalize=True, tail=7):
     if len(country) < len(source):
         return 1e50
 
     min_len = min(len(source), len(country))
-    cuba = source[0:min_len]
-    country = country[0:min_len]
+    cuba = source[min_len-tail:min_len]
+    country = country[min_len-tail:min_len]
 
     def metric(vi, vj):
         t = abs(vi - vj)
@@ -178,7 +180,7 @@ def similarity(source, country, exponent=1, normalize=True):
     return msqe
 
 
-def sliding_similarity(source, country, exponent=1, normalize=True, window_size=15):
+def sliding_similarity(source, country, exponent=1, normalize=True, window_size=15, tail=7):
     min_sim = 1e50
     min_sample = None
 
@@ -186,7 +188,7 @@ def sliding_similarity(source, country, exponent=1, normalize=True, window_size=
         sample = country[i:]
 
         if len(sample) >= len(source):
-            new_sim = similarity(source, sample, exponent, normalize)
+            new_sim = similarity(source, sample, exponent, normalize, tail)
 
             if new_sim < min_sim:
                 min_sim = new_sim
@@ -421,86 +423,121 @@ def main():
         serie = get_data(country)
 
         st.sidebar.markdown("### Forecast parameters")
-        steps_back = st.sidebar.slider("Steps back", 1, len(serie) - 2, 7)
-        skip_fraction = st.sidebar.slider("Skip fraction", 0.0, 0.25, 0.1)
-        min_reports = st.sidebar.slider("Minimun number of reports", 0, 100, 5)
-        use_values = True
-        use_diferences = False
 
-        def _extract_features(serie, X=None, y=None):
-            X = [] if X is None else X
-            y = [] if y is None else y
-
-            serie = serie[int(skip_fraction * len(serie)) :]
-
-            for i in range(steps_back, len(serie)):
-                features = []
-
-                if serie[i] < min_reports:
-                    continue
-
-                if use_values:
-                    features.extend(serie[i - steps_back : i])
-                if use_diferences:
-                    for j in range(i - steps_back + 1, i):
-                        features.append(serie[j] - serie[j - 1])
-
-                current = serie[i]
-
-                X.append(features)
-                y.append(current)
-
-            return X, y
-
-        def extract_features(series):
-            X = []
-            y = []
-
-            for country, serie in series.items():
-                _extract_features(serie, X, y)
-
-            return np.asarray(X), np.asarray(y)
-
-        X, y = extract_features({k: v[1] for k, v in similar_countries})
-
-        def build_model():
-            Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25)
-
-            lr = Lasso(fit_intercept=False, positive=True, max_iter=10000, tol=0.001)
-            lr.fit(Xtrain, ytrain)
-
-            return lr
-
-        def predict(model, data, n, previous=1):
-            data = list(data)
-            result = []
-
-            for i in range(n):
-                data.append(data[-1])
-                X, y = _extract_features(data)
-                X = X[-previous:]
-
-                ypred = model.predict(X)
-                result.append(ypred[0])
-                data[-1] = ypred[0]
-
-            return result
-
-        previous = 1
+        model = st.sidebar.selectbox("Forecast model", ["Linear Regression", "Sampling"])
         simulations = st.sidebar.slider("Simulations", 3, 30, 7)
 
-        Y = []
+        if model == "Linear Regression":
+            st.sidebar.markdown("#### Linear Regression")
 
-        for i in range(30):
-            lr = build_model()
-            yp = predict(lr, serie, n=simulations, previous=previous)
-            yp.insert(0, serie[-previous])
-            Y.append(yp)
+            steps_back = st.sidebar.slider("Steps back", 1, len(serie) - 2, 7)
+            skip_fraction = st.sidebar.slider("Skip fraction", 0.0, 0.25, 0.1)
+            min_reports = st.sidebar.slider("Minimun number of reports", 0, 100, 5)
+            use_values = True
+            use_diferences = False
 
-        Y = np.asarray(Y)
+            def _extract_features(serie, X=None, y=None):
+                X = [] if X is None else X
+                y = [] if y is None else y
 
-        ymean = Y.mean(axis=0)
-        ystdv = Y.std(axis=0)
+                serie = serie[int(skip_fraction * len(serie)) :]
+
+                for i in range(steps_back, len(serie)):
+                    features = []
+
+                    if serie[i] < min_reports:
+                        continue
+
+                    if use_values:
+                        features.extend(serie[i - steps_back : i])
+                    if use_diferences:
+                        for j in range(i - steps_back + 1, i):
+                            features.append(serie[j] - serie[j - 1])
+
+                    current = serie[i]
+
+                    X.append(features)
+                    y.append(current)
+
+                return X, y
+
+            def extract_features(series):
+                X = []
+                y = []
+
+                for country, serie in series.items():
+                    _extract_features(serie, X, y)
+
+                return np.asarray(X), np.asarray(y)
+
+            X, y = extract_features({k: v[1] for k, v in similar_countries})
+
+            def build_model():
+                Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25)
+
+                lr = Lasso(fit_intercept=False, positive=True, max_iter=10000, tol=0.001)
+                lr.fit(Xtrain, ytrain)
+
+                return lr
+
+            def predict(model, data, n, previous=1):
+                data = list(data)
+                result = []
+
+                for i in range(n):
+                    data.append(data[-1])
+                    X, y = _extract_features(data)
+                    X = X[-previous:]
+
+                    ypred = model.predict(X)
+                    result.append(ypred[0])
+                    data[-1] = ypred[0]
+
+                return result
+
+            previous = 1
+
+            Y = []
+
+            for i in range(30):
+                lr = build_model()
+                yp = predict(lr, serie, n=simulations, previous=previous)
+                yp.insert(0, serie[-previous])
+                Y.append(yp)
+
+            Y = np.asarray(Y)
+
+            ymean = Y.mean(axis=0)
+            ystdv = Y.std(axis=0)
+
+            if st.checkbox('Show linear regression parameters'):
+                st.write(lr.coef_)
+
+        elif model == "Sampling":
+            values = [[serie[-1]]] + [[] for _ in range(simulations)]
+
+            for k, v in similar_countries:
+                country_serie = v[1][len(serie):]
+                for i, x in enumerate(country_serie):
+                    if i >= simulations:
+                        break
+
+                    values[i+1].append(x)
+
+            smooth_factor = st.sidebar.slider("Smoothing factor", 0.0, 1.0, 0.0)
+
+            def smooth(x, alpha):
+                sx = [x[0]]
+                sy = x[0]
+
+                for i in range(1, len(x)):
+                    sy = sy * alpha + (1 - alpha) * x[i]
+                    sx.append(sy)
+
+                return sx        
+
+            ymean = smooth([np.mean(v) for v in values], smooth_factor)
+            ystdv = smooth([np.std(v) for v in values], smooth_factor)
 
         real = []
 
@@ -538,10 +575,7 @@ def main():
                         for d in forecast
                     ]
                 ).set_index("Día")
-            )
-
-            st.write("#### Model parameters")
-            st.write(lr.coef_)
+            )       
 
         forecast = pd.DataFrame(forecast)
 
