@@ -829,7 +829,7 @@ def main():
                 .properties(height=600, width=600)
             )
 
-        st.write("### Otra cosa ahí")
+        st.write("### Estimado para todos los días")
 
         model_parameters = predict_all_importances(
             model, threshold, data, all_responses
@@ -855,7 +855,7 @@ def main():
                 #     alt.value("orange"),  # The negative color
                 # ),
             )
-            .properties(width=800)
+            .properties(width=900)
         )
 
         st.write(chart)
@@ -1041,9 +1041,9 @@ def main():
         st.sidebar.markdown("### Parámetros epidemiológicos")
         n_meet = st.sidebar.slider("Personas en contacto diario", 1, 100, 20)
         p_infect = st.sidebar.slider("Probabilidad de infectar", 0.0, 1.0, 0.1)
-        p_dead = st.sidebar.slider("Probabilidad de morir (diaria)", 0.0, 1.0, 0.02)
+        p_dead = st.sidebar.slider("Probabilidad de morir (diaria)", 0.0, 0.1, 0.02)
         p_recover = st.sidebar.slider(
-            "Probabilidad de curarse (diaria)", 0.0, 1.0, 0.10
+            "Probabilidad de curarse (diaria)", 0.0, 0.5, 0.2
         )
 
         st.write("### Simulando una epidemia sin control (modelo SIR simple)")
@@ -1086,6 +1086,7 @@ def main():
 
             all_infected = simulation[(simulation["susceptible"] == 0)]
             none_infected = simulation[(simulation["virus"] == False)]
+            total_infected = population * 1000000 - simulation["susceptible"].min()
 
             def ft(day, message, value=""):
                 facts.append(
@@ -1105,7 +1106,12 @@ def main():
             else:
                 ft(
                     day=simulation["day"].max(),
-                    message="Total de personas no infectadas",
+                    message="Total de personas infectadas finalmente",
+                    value=total_infected,
+                )
+                ft(
+                    day=simulation["day"].max(),
+                    message="Total de personas nunca infectadas",
                     value=simulation["susceptible"].min(),
                 )
             if len(none_infected) > 0:
@@ -1118,6 +1124,12 @@ def main():
                     day=simulation["day"].max()+1,
                     message="La enfermedad no desaparece por completo",
                 )
+            
+            ft(
+                day=simulation["day"].max()+1,
+                message="Mortalidad promedio final",
+                value=f"{100 * simulation['dead'].max() / total_infected:.1f}%"
+            )
 
             ft(
                 day=simulation[simulation["infected"] == simulation["infected"].max()][
