@@ -18,6 +18,8 @@ from sklearn.model_selection import cross_val_score
 from pathlib import Path
 from i18n import translate
 
+from simulation import Simulation
+
 
 # taken from <https://gist.github.com/jpconsuegra/45b63b68673044bd6074cf918c9a83b1>
 def tab(section, title=None):
@@ -98,7 +100,7 @@ def most_similar_curves(source, countries_to_analize, total):
 
     source_data = get_data(source)
 
-    st.sidebar.markdown('### Similaridad de curvas')
+    st.sidebar.markdown("### Similaridad de curvas")
 
     exponent = st.sidebar.slider("Exponente", 1.0, 2.0, 2.0)
     normalize = st.sidebar.checkbox("Normalizar similaridad", False)
@@ -166,8 +168,8 @@ def similarity(source, country, exponent=1, normalize=True, tail=7):
         return 1e50
 
     min_len = min(len(source), len(country))
-    cuba = source[min_len-tail:min_len]
-    country = country[min_len-tail:min_len]
+    cuba = source[min_len - tail : min_len]
+    country = country[min_len - tail : min_len]
 
     def metric(vi, vj):
         t = abs(vi - vj)
@@ -180,7 +182,9 @@ def similarity(source, country, exponent=1, normalize=True, tail=7):
     return msqe
 
 
-def sliding_similarity(source, country, exponent=1, normalize=True, window_size=15, tail=7):
+def sliding_similarity(
+    source, country, exponent=1, normalize=True, window_size=15, tail=7
+):
     min_sim = 1e50
     min_sample = None
 
@@ -424,7 +428,9 @@ def main():
 
         st.sidebar.markdown("### Forecast parameters")
 
-        model = st.sidebar.selectbox("Forecast model", ["Linear Regression", "Sampling"])
+        model = st.sidebar.selectbox(
+            "Forecast model", ["Linear Regression", "Sampling"]
+        )
         simulations = st.sidebar.slider("Simulations", 3, 30, 7)
 
         if model == "Linear Regression":
@@ -475,7 +481,9 @@ def main():
             def build_model():
                 Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25)
 
-                lr = Lasso(fit_intercept=False, positive=True, max_iter=10000, tol=0.001)
+                lr = Lasso(
+                    fit_intercept=False, positive=True, max_iter=10000, tol=0.001
+                )
                 lr.fit(Xtrain, ytrain)
 
                 return lr
@@ -510,19 +518,19 @@ def main():
             ymean = Y.mean(axis=0)
             ystdv = Y.std(axis=0)
 
-            if st.checkbox('Show linear regression parameters'):
+            if st.checkbox("Show linear regression parameters"):
                 st.write(lr.coef_)
 
         elif model == "Sampling":
             values = [[serie[-1]]] + [[] for _ in range(simulations)]
 
             for k, v in similar_countries:
-                country_serie = v[1][len(serie):]
+                country_serie = v[1][len(serie) :]
                 for i, x in enumerate(country_serie):
                     if i >= simulations:
                         break
 
-                    values[i+1].append(x)
+                    values[i + 1].append(x)
 
             smooth_factor = st.sidebar.slider("Smoothing factor", 0.0, 1.0, 0.0)
 
@@ -534,7 +542,7 @@ def main():
                     sy = sy * alpha + (1 - alpha) * x[i]
                     sx.append(sy)
 
-                return sx        
+                return sx
 
             ymean = smooth([np.mean(v) for v in values], smooth_factor)
             ystdv = smooth([np.std(v) for v in values], smooth_factor)
@@ -575,7 +583,7 @@ def main():
                         for d in forecast
                     ]
                 ).set_index("Día")
-            )       
+            )
 
         forecast = pd.DataFrame(forecast)
 
@@ -1076,9 +1084,7 @@ def main():
         n_meet = st.sidebar.slider("Personas en contacto diario", 1, 100, 20)
         p_infect = st.sidebar.slider("Probabilidad de infectar", 0.0, 1.0, 0.1)
         p_dead = st.sidebar.slider("Probabilidad de morir (diaria)", 0.0, 0.1, 0.02)
-        p_recover = st.sidebar.slider(
-            "Probabilidad de curarse (diaria)", 0.0, 0.5, 0.2
-        )
+        p_recover = st.sidebar.slider("Probabilidad de curarse (diaria)", 0.0, 0.5, 0.2)
 
         st.write("### Simulando una epidemia sin control (modelo SIR simple)")
 
@@ -1155,14 +1161,14 @@ def main():
                 )
             else:
                 ft(
-                    day=simulation["day"].max()+1,
+                    day=simulation["day"].max() + 1,
                     message="La enfermedad no desaparece por completo",
                 )
-            
+
             ft(
-                day=simulation["day"].max()+1,
+                day=simulation["day"].max() + 1,
                 message="Mortalidad promedio final",
-                value=f"{100 * simulation['dead'].max() / total_infected:.1f}%"
+                value=f"{100 * simulation['dead'].max() / total_infected:.1f}%",
             )
 
             ft(
@@ -1202,7 +1208,7 @@ def main():
                 )
             else:
                 ft(
-                    day=simulation["day"].max()+1,
+                    day=simulation["day"].max() + 1,
                     message="El sistema de salud no colapsa",
                 )
 
@@ -1213,9 +1219,7 @@ def main():
 
         st.write(
             alt.Chart(
-                simulation.melt(
-                    "day", value_vars=["infected", "susceptible", "dead", "recovered"]
-                )
+                simulation.melt("day", value_vars=["infected", "dead", "recovered"])
             )
             .mark_line()
             .encode(
@@ -1290,9 +1294,7 @@ def main():
 
         st.write(
             alt.Chart(
-                simulation.melt(
-                    "day", value_vars=["infected", "susceptible", "dead", "recovered"]
-                )
+                simulation.melt("day", value_vars=["infected", "dead", "recovered"])
             )
             .mark_line()
             .encode(
@@ -1355,7 +1357,10 @@ def main():
 
         if apply_quarantine:
             quarantine_start = st.sidebar.number_input(
-                "Comienzo de la cuarentena (cantidad de infectados)", 0, population * 1000000, 10000
+                "Comienzo de la cuarentena (cantidad de infectados)",
+                0,
+                population * 1000000,
+                10000,
             )
             quarantine_people = st.sidebar.slider(
                 "Cantidad de personas en contacto diario", 0, 100, 3
@@ -1424,14 +1429,7 @@ def main():
         st.write(
             alt.Chart(
                 simulation.melt(
-                    "day",
-                    value_vars=[
-                        "infected",
-                        "susceptible",
-                        "dead",
-                        "recovered",
-                        "quarantined",
-                    ],
+                    "day", value_vars=["infected", "dead", "recovered", "quarantined",],
                 )
             )
             .mark_line()
@@ -1453,6 +1451,98 @@ def main():
             lines = textwrap.dedent(lines)
 
             st.code(lines)
+
+    @tab(section, "Probando simulación (modelo nuevo)")
+    def new_simulation():
+        simulation = Simulation()
+
+        simulation.add_state("Susceptible")
+        simulation.add_state("Asymptomatic")
+        simulation.add_state("Symptomatic")
+        simulation.add_state("Recovered")
+        simulation.add_state("Dead")
+
+        def alive(d):
+            return starting_population - d["Dead"]
+
+        starting_population = st.sidebar.number_input(
+            "Population", 0, 100, 10
+        ) * 1000000
+
+        # people getting sick
+        st.sidebar.markdown("### Infection dynamics")
+
+        n_meet = st.sidebar.slider("People meeting", 0, 100, 10)
+        p_infect_asymptomatic = st.sidebar.slider(
+            "Probability of infection from asymptomatic", 0.0, 1.0, 0.1
+        )
+        p_infect_symptomatic = st.sidebar.slider(
+            "Probability of infection from symptomatic", 0.0, 1.0, 0.2
+        )
+
+        simulation.add_transition(
+            "Susceptible",
+            "Asymptomatic",
+            lambda d: (
+                d["Asymptomatic"]
+                * n_meet
+                * p_infect_asymptomatic
+                * d["Susceptible"]
+                / alive(d)
+            ),
+        )
+        simulation.add_transition(
+            "Susceptible",
+            "Asymptomatic",
+            lambda d: (
+                d["Symptomatic"]
+                * n_meet
+                * p_infect_symptomatic
+                * d["Susceptible"]
+                / alive(d)
+            ),
+        )
+
+        # people developing symptoms and disease
+        st.sidebar.markdown("### Disease evolution")
+
+        p_symptoms = st.sidebar.slider(
+            "Chance of developing symptoms (daily)", 0.0, 1.0, 0.1
+        )
+        p_asympt_recover = st.sidebar.slider(
+            "Chance of recovering for asymptomatic patients (daily)", 0.0, 1.0, 0.2
+        )
+        p_sympt_dead = st.sidebar.slider(
+            "Chance of dying for symptomatic patients (daily)", 0.0, 1.0, 0.05
+        )
+        p_sympt_recover = st.sidebar.slider(
+            "Chance of recovering for symptomatic patients (daily)", 0.0, 1.0, 0.1
+        )
+
+        simulation.add_transition("Asymptomatic", "Symptomatic", p_symptoms)
+        simulation.add_transition("Asymptomatic", "Recovered", p_asympt_recover)
+        simulation.add_transition("Symptomatic", "Dead", p_sympt_dead)
+        simulation.add_transition("Symptomatic", "Recovered", p_sympt_recover)
+
+        data = simulation.run(
+            1000, Susceptible=starting_population, Asymptomatic=1
+        ).astype(int)
+
+        data["Sick"] = data["Asymptomatic"] + data["Symptomatic"]
+        data["New dead"] = data["Dead"].diff().fillna(0)
+        data["Letality"] = data["New dead"] / data["Sick"]
+        data["Letality (smooth)"] = data['Letality'].rolling(10).mean()
+        data = data[data["Sick"] > 0]
+
+        visualize = list(data.columns)
+        visualize = st.multiselect("Columns to visualize", visualize, ["Asymptomatic", "Symptomatic", "Dead"])
+
+        st.line_chart(data[visualize])
+
+        st.write("### Visualizing the graphical model")
+
+        graph = simulation.graph()
+        st.write(graph)
 
     tab.run(section)
 
