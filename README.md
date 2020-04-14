@@ -2,6 +2,11 @@
 
 Data science and machine learning tools applied to understanding COVID-19
 
+To run it, clone the project and then:
+
+    pip install -r requirements.txt
+    streamlit run dashboard.py
+
 ## Data
 
 All data used in this repository is available online under a permissive license (CC or otherwise).

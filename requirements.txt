@@ -1,5 +1,5 @@
-numpy==1.18.2
 streamlit==0.57.2
+numpy==1.18.2
 pandas==1.0.3
 altair==4.0.1
 graphviz==0.13.2
