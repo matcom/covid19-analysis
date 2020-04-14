@@ -89,8 +89,8 @@ def most_similar_countries(country, count, stats_dict):
     return sorted(all_similarities, key=all_similarities.get)[:count]
 
 
-def most_similar_curves(source, countries_to_analize, total):
-    raw = raw_information()
+def most_similar_curves(source, countries_to_analize, total, rolling_smooth=1, step_size=1):
+    raw = raw_information(rolling_smooth, step_size)
 
     countries_to_analize = [c for c in countries_to_analize if c in raw]
 
@@ -119,7 +119,7 @@ def most_similar_curves(source, countries_to_analize, total):
 
 
 @st.cache
-def raw_information():
+def raw_information(rolling_window_size=1, step=1):
     with open(Path(__file__).parent.parent / "data" / "timeseries.json") as fp:
         raw_data = json.load(fp)
 
@@ -128,7 +128,14 @@ def raw_information():
         df = pd.DataFrame(v)
         df = df[df["confirmed"] > 0]
         df["date"] = pd.to_datetime(df["date"])
+        df = df.set_index('date')
         df["active"] = df["confirmed"] - df["recovered"] - df["deaths"]
+        df = df.rolling(rolling_window_size).mean()
+        df = df.reset_index()
+
+        if step > 1:
+            df = df.iloc[step-1::step, :]
+
         data[k] = df
 
     return data
@@ -283,7 +290,10 @@ def main():
             )
         )
 
-        raw = raw_information()
+        rolling_smooth = st.sidebar.slider("Smooth rolling window", 1, 15, 1)
+        step_size = st.sidebar.slider("Step size", 1, 15, 3)
+
+        raw = raw_information(rolling_smooth, step_size)
         countries = list(raw.keys())
         country = st.selectbox(
             tr("Select a country", "Selecciona un país"),
@@ -291,7 +301,7 @@ def main():
             countries.index("Cuba"),
         )
         data = raw[country]
-        data = data.melt(["date"])
+        data = data.melt(['date'])
         data = data[data["value"] > 0]
         # data = data[data['variable'] == 'confirmed']
 
@@ -354,8 +364,6 @@ def main():
             )
 
         data = demographic_data()
-        raw = raw_information()
-
         mode = st.sidebar.selectbox("Compare with", ["Most similar", "Custom"])
 
         variable_to_look = st.sidebar.selectbox(
@@ -368,7 +376,7 @@ def main():
             return df[df[variable_to_look] > 0][variable_to_look].values
 
         if mode == "Most similar":
-            similar_count = st.slider("Most similar countries", 5, len(data), 10)
+            similar_count = st.slider("Most similar countries", 5, len(data), 20)
             similar_countries = most_similar_countries(country, 3 * similar_count, data)
 
             if st.checkbox("Show partial selection"):
@@ -383,7 +391,7 @@ def main():
                 )
 
             similar_countries = most_similar_curves(
-                country, similar_countries, similar_count
+                country, similar_countries, similar_count, rolling_smooth, step_size
             )
         else:
             countries_to_compare = st.multiselect(
@@ -402,13 +410,13 @@ def main():
 
         for c, (_, data) in similar_countries:
             for i, x in enumerate(data):
-                df.append(dict(pais=c, dia=i, casos=x))
+                df.append(dict(pais=c, dia=(i*step_size) + step_size-1, casos=x))
 
         raw_country = raw[country]
         raw_country = raw_country[raw_country[variable_to_look] > 0][variable_to_look]
 
         for i, x in enumerate(raw_country):
-            df.append(dict(pais=country, dia=i, casos=x))
+            df.append(dict(pais=country, dia=(i * step_size) + step_size - 1, casos=x))
 
         df = pd.DataFrame(df)
 
@@ -550,9 +558,10 @@ def main():
         real = []
 
         for i, d in enumerate(serie):
-            real.append(dict(day=1 + i, value=d,))
+            real.append(dict(day=1 + i * step_size, value=d,))
 
         real = pd.DataFrame(real)
+        last_day = real['day'].max()
 
         forecast = []
 
@@ -561,7 +570,7 @@ def main():
 
             forecast.append(
                 dict(
-                    day=i + len(serie),
+                    day=i * step_size + last_day,
                     mean=round(x),
                     mean_50_up=round(0.67 * s + x),
                     mean_50_down=round(-0.67 * s + x),
