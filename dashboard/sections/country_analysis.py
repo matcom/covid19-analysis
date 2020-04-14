@@ -34,16 +34,14 @@ def run(tr):
         countries.index("Cuba"),
     )
     data = raw[country]
-    data = data.melt(['date'])
+    data = data.melt(["date"])
     data = data[data["value"] > 0]
     # data = data[data['variable'] == 'confirmed']
 
     if st.checkbox(tr("Show raw data", "Mostrar datos")):
         st.write(data)
 
-    scale = st.sidebar.selectbox(
-        tr("Chart scale", "Tipo de escala"), ["linear", "log"]
-    )
+    scale = st.sidebar.selectbox(tr("Chart scale", "Tipo de escala"), ["linear", "log"])
 
     chart = (
         alt.Chart(data)
@@ -116,15 +114,17 @@ def run(tr):
             st.write(similar_countries)
             st.write(
                 pd.DataFrame(
-                    [
-                        dict(country=k, **data[k])
-                        for k in [country] + similar_countries
-                    ]
+                    [dict(country=k, **data[k]) for k in [country] + similar_countries]
                 )
             )
 
         similar_countries = most_similar_curves(
-            country, similar_countries, similar_count, variable_to_look, rolling_smooth, step_size
+            country,
+            similar_countries,
+            similar_count,
+            variable_to_look,
+            rolling_smooth,
+            step_size,
         )
     else:
         countries_to_compare = st.multiselect(
@@ -143,7 +143,7 @@ def run(tr):
 
     for c, (_, data) in similar_countries:
         for i, x in enumerate(data):
-            df.append(dict(pais=c, dia=(i*step_size) + step_size-1, casos=x))
+            df.append(dict(pais=c, dia=(i * step_size) + step_size - 1, casos=x))
 
     raw_country = raw[country]
     raw_country = raw_country[raw_country[variable_to_look] > 0][variable_to_look]
@@ -153,15 +153,16 @@ def run(tr):
 
     df = pd.DataFrame(df)
 
-    alt.Chart(df).mark_line().encode(
-        x="dia", y="casos", color="pais", tooltip="pais",
-    ) + alt.Chart(df[df["pais"] == country]).mark_circle(
-        size=100, fill="red"
-    ).encode(
-        x="dia", y="casos",
-    ).properties(
-        width=800, height=500
-    ).interactive()
+    st.write(
+        alt.Chart(df)
+        .mark_line()
+        .encode(x="dia", y="casos", color="pais", tooltip="pais",)
+        + alt.Chart(df[df["pais"] == country])
+        .mark_circle(size=100, fill="red")
+        .encode(x="dia", y="casos",)
+        .properties(width=800, height=500)
+        .interactive()
+    )
 
     st.write("### Forecast")
 
@@ -169,9 +170,7 @@ def run(tr):
 
     st.sidebar.markdown("### Forecast parameters")
 
-    model = st.sidebar.selectbox(
-        "Forecast model", ["Linear Regression", "Sampling"]
-    )
+    model = st.sidebar.selectbox("Forecast model", ["Linear Regression", "Sampling"])
     simulations = st.sidebar.slider("Simulations", 3, 30, 7)
 
     if model == "Linear Regression":
@@ -222,9 +221,7 @@ def run(tr):
         def build_model():
             Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25)
 
-            lr = Lasso(
-                fit_intercept=False, positive=True, max_iter=10000, tol=0.001
-            )
+            lr = Lasso(fit_intercept=False, positive=True, max_iter=10000, tol=0.001)
             lr.fit(Xtrain, ytrain)
 
             return lr
@@ -294,7 +291,7 @@ def run(tr):
         real.append(dict(day=1 + i * step_size, value=d,))
 
     real = pd.DataFrame(real)
-    last_day = real['day'].max()
+    last_day = real["day"].max()
 
     forecast = []
 
@@ -357,9 +354,7 @@ def run(tr):
             + alt.Chart(forecast)
             .mark_circle(color="red")
             .encode(
-                x="day",
-                y=alt.Y("mean", scale=alt.Scale(type=scale)),
-                tooltip="mean",
+                x="day", y=alt.Y("mean", scale=alt.Scale(type=scale)), tooltip="mean",
             )
             + prediction
             + texts
@@ -369,9 +364,7 @@ def run(tr):
             + alt.Chart(real)
             .mark_rule(color="blue")
             .encode(
-                x="day",
-                y=alt.Y("value", scale=alt.Scale(type=scale)),
-                tooltip="value",
+                x="day", y=alt.Y("value", scale=alt.Scale(type=scale)), tooltip="value",
             )
         )
         .properties(width=800, height=500,)
