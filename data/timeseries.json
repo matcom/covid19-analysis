@@ -20497,6 +20497,12 @@
       "confirmed": 726,
       "deaths": 21,
       "recovered": 121
+    },
+    {
+      "date": "2020-4-14",
+      "confirmed": 766,
+      "deaths": 21,
+      "recovered": 121
     }
   ],
   "Cyprus": [

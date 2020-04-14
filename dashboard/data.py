@@ -116,3 +116,16 @@ def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold)
         )
 
     return pd.DataFrame(measures_effects)  
+
+
+@st.cache
+def testing_data():
+    df = pd.read_csv(Path(__file__).parent.parent / "data/testing.csv")
+
+    df['country'] = df['Entity'] #.str.replace("-.*", "").str.strip()
+    df['total'] = df['Cumulative total'].fillna(0).astype(int)
+    df['date'] = pd.to_datetime(df['Date'])
+
+    df = df[df['total'] > 0].sort_values(['country', 'date'])
+
+    return df[['country', 'total', 'date']]
