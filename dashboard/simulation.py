@@ -4,9 +4,10 @@ import graphviz
 
 
 class Simulation:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.states = []
         self.transitions = collections.defaultdict(list)
+        self.kwargs = kwargs
 
     def add_state(self, state: str):
         self.states.append(state)
@@ -16,7 +17,7 @@ class Simulation:
 
     def run(self, n: int, **starting_values: dict):
         history = []
-        current_values = {state: starting_values.get(state, 0) for state in self.states}
+        current_values = dict({state: starting_values.get(state, 0) for state in self.states}, **self.kwargs)
 
         for i in range(n):
             history.append(current_values)
@@ -30,6 +31,8 @@ class Simulation:
                     for tr in self.transitions[(from_state, to_state)]:
                         if callable(tr):
                             move = tr(current_values)
+                        elif isinstance(tr, str):
+                            move = eval(tr, globals(), current_values)
                         else:
                             move = tr * current_values[from_state]
 
@@ -52,6 +55,8 @@ class Simulation:
             for k in l:
                 if isinstance(k, float):
                     graph.edge(u, v, label="%.3f" % k)
+                elif isinstance(k, str):
+                    graph.edge(u, v, label=k)
                 else:
                     graph.edge(u, v, label="f")
 

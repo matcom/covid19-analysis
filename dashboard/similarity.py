@@ -91,5 +91,3 @@ def sliding_similarity(
                 min_sample = sample
 
     return min_sim, min_sample
-
-

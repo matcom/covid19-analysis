@@ -4,20 +4,17 @@ from ..simulation import Simulation
 
 
 def run(tr):
-    simulation = Simulation()
+    starting_population = st.sidebar.number_input(
+        "Population", 0, 100, 10
+    ) * 1000000
+
+    simulation = Simulation(Population=starting_population)
 
     simulation.add_state("Susceptible")
     simulation.add_state("Asymptomatic")
     simulation.add_state("Symptomatic")
     simulation.add_state("Recovered")
     simulation.add_state("Dead")
-
-    def alive(d):
-        return starting_population - d["Dead"]
-
-    starting_population = st.sidebar.number_input(
-        "Population", 0, 100, 10
-    ) * 1000000
 
     # people getting sick
     st.sidebar.markdown("### Infection dynamics")
@@ -33,24 +30,13 @@ def run(tr):
     simulation.add_transition(
         "Susceptible",
         "Asymptomatic",
-        lambda d: (
-            d["Asymptomatic"]
-            * n_meet
-            * p_infect_asymptomatic
-            * d["Susceptible"]
-            / alive(d)
+            f"Asymptomatic * {n_meet} * {p_infect_asymptomatic} * Susceptible / (Population - Dead)"
         ),
-    )
     simulation.add_transition(
         "Susceptible",
         "Asymptomatic",
-        lambda d: (
-            d["Symptomatic"]
-            * n_meet
-            * p_infect_symptomatic
-            * d["Susceptible"]
-            / alive(d)
-        ),
+            f"Symptomatic * {n_meet} * {p_infect_symptomatic} * Susceptible /"
+            f" (Population - Dead)"
     )
 
     # people developing symptoms and disease
