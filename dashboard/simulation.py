@@ -72,7 +72,7 @@ class Simulation:
 
         return history
 
-    def graph(self):
+    def graph(self, edges=False):
         graph = graphviz.Digraph()
 
         for state in self.states:
@@ -81,11 +81,11 @@ class Simulation:
         for (u, v), l in self.transitions.items():
             for k in l:
                 if isinstance(k, float):
-                    graph.edge(u, v, label="%.3f" % k)
+                    graph.edge(u, v, label=("%.3f" % k) if edges else "")
                 elif isinstance(k, str):
-                    graph.edge(u, v, label=k)
+                    graph.edge(u, v, label=k if edges else "")
                 else:
-                    graph.edge(u, v, label="f")
+                    graph.edge(u, v, label="f" if edges else "")
 
         return graph
 
@@ -103,7 +103,7 @@ def compute_similarity(
 
 
 def optimize_similarity(
-    simulation, real, columns: list, parameter_ranges: dict, **starting_values
+    simulation, real, columns: list, parameter_ranges: dict, callback=None, **starting_values
 ):
     pass
     """
@@ -112,29 +112,34 @@ def optimize_similarity(
     from scipy.optimize import differential_evolution
 
     # poner en formato para pasarle los valores de los parámetros al optimizados de scipy
-    rranges = []
+    bounds = []
     names_parameters = []
+    types = []
+    
     for i, v in parameter_ranges.items():
         names_parameters.append(i)
-        rranges.append(v)
-    rranges = tuple(rranges)
+        bounds.append(v)
+        types.append(type(v[0]))
+
+    bounds = tuple(bounds)
 
     # función a optimizar
     def f(z):
-        for name, x in zip(names_parameters, z):
-            simulation[name] = x
+        for name, x, type_ in zip(names_parameters, z, types):
+            simulation[name] = type_(x)
 
         sim, series = compute_similarity(simulation, real, columns, **starting_values)
-        print(f"Computing similarity for {z}={sim}")
+        return sim
 
     # llamando al optimizador
-    resbrute = differential_evolution(f, rranges)
+    resbrute = differential_evolution(f, bounds, callback=callback, maxiter=10)
 
     gm = resbrute.x  # global minimum
     f_gm = resbrute.fun  # # function value at global minimum
 
     # devolviendo parametros con el mejor valor encontrado
     result = {}
+
     for i, name in enumerate(names_parameters):
         result[name] = gm[i]
 
