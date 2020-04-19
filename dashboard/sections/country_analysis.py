@@ -156,10 +156,15 @@ def run(tr):
     st.write(
         alt.Chart(df)
         .mark_line()
-        .encode(x="dia", y="casos", color="pais", tooltip="pais",)
+        .encode(
+            x="dia",
+            y=alt.Y("casos", scale=alt.Scale(type=scale)),
+            color="pais",
+            tooltip="pais",
+        )
         + alt.Chart(df[df["pais"] == country])
         .mark_circle(size=100, fill="red")
-        .encode(x="dia", y="casos",)
+        .encode(x="dia", y=alt.Y("casos", scale=alt.Scale(type=scale)))
         .properties(width=800, height=500)
         .interactive()
     )
@@ -325,8 +330,6 @@ def run(tr):
         )
 
     forecast = pd.DataFrame(forecast)
-
-    scale = st.sidebar.selectbox("Scale", ["linear", "log"])
 
     prediction = (
         alt.Chart(forecast)
