@@ -8,6 +8,7 @@ from dashboard.sections import (
     new_simulation,
     testing_analysis,
     intro,
+    curve_prediction
 )
 
 
@@ -29,6 +30,7 @@ def main():
         tr("Simulation", "Simulación"): simulation,
         tr("Testing analysis", "Análisis de las pruebas"): testing_analysis,
         tr("Simulation (new / incomplete)", "Simulación (nuevo / incompleto)"): new_simulation,
+        tr("Curve prediction", "Predicción"): curve_prediction,
     }
 
     section = st.sidebar.selectbox(
