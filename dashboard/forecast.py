@@ -53,11 +53,11 @@ def features_to_training(data: pd.DataFrame, drop=(), target="target"):
 
 
 class ForecastModel(Pipeline):
-    def __init__(self, max_iter: int = 1000, fit_intercept: bool = False):
+    def __init__(self, max_iter: int = 1000, fit_intercept: bool = False, positive: bool = False):
         super().__init__(
             steps=[
                 ("vectorizer", DictVectorizer(sparse=False)),
-                ("regressor", Lasso(max_iter=max_iter, fit_intercept=fit_intercept)),
+                ("regressor", Lasso(max_iter=max_iter, fit_intercept=fit_intercept, positive=positive)),
             ]
         )
 
@@ -65,12 +65,3 @@ class ForecastModel(Pipeline):
         return self.named_steps["vectorizer"].inverse_transform(
             self.named_steps["regressor"].coef_.reshape(1, -1)
         )[0]
-
-    def predict(self, X, steps=0):
-        ypredicted = []
-
-        for i in range(0, len(X)):
-            start = max(0, i-steps)
-
-            for j in range(steps+1):
-                pass

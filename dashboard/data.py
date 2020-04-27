@@ -18,14 +18,15 @@ def get_responses():
 
 
 @st.cache
-def demographic_data():
-    return (
-        pd.read_csv(
+def demographic_data(as_dict=True):
+    df = pd.read_csv(
             Path(__file__).parent.parent / "data/world_demographics.tsv", sep="\t"
-        )
-        .set_index("Country")
-        .to_dict("index")
-    )
+        ).set_index("Country")
+    
+    if as_dict:
+        return df.to_dict("index")
+
+    return df
 
 
 @st.cache
