@@ -3,6 +3,7 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import ShuffleSplit
 
+import scipy
 import numpy as np
 import pandas as pd
 
@@ -10,6 +11,7 @@ import pandas as pd
 def extract_features(
     df: pd.DataFrame,
     look_back: int = 1,
+    min_cases: int = 0,
     series=("active",),
     target="active",
     grouper=None,
@@ -23,6 +25,8 @@ def extract_features(
         dfs = [df]
 
     for df in dfs:
+        df = df[df[target] > min_cases]
+
         for i in range(look_back, len(df)):
             features = {}
 
@@ -61,7 +65,7 @@ class ForecastModel(Pipeline):
         fit_intercept: bool = False,
         positive: bool = False,
         compute_cross_validation: bool = False,
-        cross_validation_steps = 100,
+        cross_validation_steps=100,
     ):
         self.compute_cross_validation = compute_cross_validation
         self.cross_validation_steps = 100
@@ -90,31 +94,59 @@ class ForecastModel(Pipeline):
 
             for train, test in cv.split(X):
                 xtrain, xtest = self._index(X, train), self._index(X, test)
-                ytrain, ytest = y[train], y[test]
+                ytrain, ytest = self._index(y, train), self._index(y, test)
 
                 super().fit(xtrain, ytrain, **fit_params)
                 ypred = self.predict(xtest)
-                print(ytest, ypred)
-                self.scores_.extend(np.abs(ytest - ypred) / ytest)
+
+                for i, j in zip(ytest, ypred):
+                    self.scores_.append((i - j) / (i + 0.001))
 
             self.scores_.sort()
+            self.mean_error_ = np.mean(self.scores_)
+            self.std_error_ = np.std(self.scores_)
 
         return super().fit(X, y=y, **fit_params)
 
     @property
     def validation(self):
-        if not hasattr(self, 'scores_'):
+        if not hasattr(self, "scores_"):
             return None
-        
-        return np.mean(self.scores_)
+
+        return np.mean(np.abs(self.scores_))
 
     def confidence(self, p=0.5):
-        if not hasattr(self, 'scores_'):
+        if not hasattr(self, "scores_"):
             return None
-        
-        return self.scores_[int(p * (len(self.scores_) - 1))]
+
+        return scipy.stats.norm.interval(p, self.mean_error_, self.std_error_)[1]
+
+    def cdf(self, x=0):
+        if not hasattr(self, "scores_"):
+            return None
+
+        return scipy.stats.norm.cdf(x, self.mean_error_, self.std_error_)
+
+    def intervals(self, xs, p=0.5):
+        lower, higher = scipy.stats.norm.interval(p, self.mean_error_, self.std_error_)
+        return [xi * (1 + lower) for xi in xs], [xi * (1 + higher) for xi in xs]
 
     def feature_importance(self):
         return self.named_steps["vectorizer"].inverse_transform(
             self.named_steps["regressor"].coef_.reshape(1, -1)
         )[0]
+
+    def estimate(self, x0, n=30, **mappings):
+        y = []
+
+        for i in range(n):
+            yi = self.predict([x0])[0]
+            y.append(yi)
+            xi = dict(x0, yi=yi)
+
+            for c1,c2 in mappings.items():
+                xi[c1] = xi[c2]
+
+            x0 = xi
+
+        return y

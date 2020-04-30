@@ -6,6 +6,7 @@ import numpy as np
 from dashboard.data import raw_information
 from dashboard.forecast import extract_features, features_to_training, ForecastModel
 from dashboard.data import demographic_data, get_responses
+from dashboard.similarity import most_similar_countries, most_similar_curves
 
 
 @st.cache
@@ -159,7 +160,7 @@ def run(tr):
         columns=["country", "max_date", "max_active", "start_date", "total_days"]
     ).to_dict(orient="records")
 
-    predict_target = st.selectbox("Objetivo a predecir", ["total_days", "max_active"])
+    predict_target = "total_days"  # st.selectbox("Objetivo a predecir", ["total_days", "max_active"])
     y = max_values[predict_target].values
 
     st.write(
@@ -218,24 +219,25 @@ def run(tr):
     predicted_values = pd.DataFrame(
         [
             dict(
-                cdf=p,
-                date=data_country["start_date"].values[0]
-                + pd.Timedelta(
-                    days=int(prediction + predictor.confidence(p) * prediction)
-                ),
+                probabilidad=predictor.cdf(d),
+                fecha=data_country["start_date"].values[0]
+                + pd.Timedelta(days=int(prediction + d)),
             )
-            for p in np.arange(0, 0.95, 0.01)
+            for d in range(-5, 6)
         ]
     )
 
     st.write(predicted_values)
 
     st.altair_chart(
-        alt.Chart(predicted_values).mark_line().encode(x="date", y="cdf"),
+        alt.Chart(predicted_values)
+        .mark_line()
+        .encode(
+            x=alt.X("fecha", title="Fecha esperada del pico máximo"),
+            y=alt.Y("probabilidad", title="Probabilidad"),
+        ),
         use_container_width=True,
     )
-
-    return
 
     st.write("## Estimación de la curva")
 
@@ -245,46 +247,137 @@ def run(tr):
     st.sidebar.markdown("### Features")
     look_back = st.sidebar.slider("Look back days", 1, 15, 1)
 
-    features = extract_features(
-        data, look_back=look_back, grouper="country", keep=("country", "date")
+    country = st.selectbox("Country", countries, countries.index("Cuba"))
+
+    if st.checkbox("Preseleccionar países más similares (demográficamente)", True):
+        selected_countries = most_similar_countries(
+            country, st.slider("Cantidad", 10, 100, 20), demographic_data()
+        )
+
+    selected_countries = st.multiselect(
+        "Países para estimar la curva", countries, selected_countries
     )
 
-    if st.checkbox("Show features"):
+    if st.checkbox("Filtrar por similaridad de las curvas", True):
+        similarity_by = st.selectbox("Similar por", ["recovered", "deaths"])
+        most_similar = [
+            c
+            for c, _ in most_similar_curves(
+                country,
+                selected_countries,
+                st.slider(
+                    "Cantidad", 1, len(selected_countries), len(selected_countries) // 2
+                ),
+                similarity_by,
+            )
+        ]
+        
+        raw = raw_information()
+        
+        dfs = []
+        for c in most_similar + [country]:
+            df = raw[c].copy()
+            df['country'] = c
+            dfs.append(df)
+
+        df = pd.concat(dfs)
+
+        st.write(df)
+
+        st.write(
+            alt.Chart(df)
+            .mark_line()
+            .encode(
+                x="date",
+                y=alt.Y(similarity_by, scale=alt.Scale(type='linear')),
+                color="country",
+                tooltip="country",
+            )
+            + alt.Chart(df[df["country"] == country])
+            .mark_circle(size=100, fill="red")
+            .encode(x="date", y=alt.Y(similarity_by, scale=alt.Scale(type='linear')))
+            .properties(width=800, height=500)
+            .interactive()
+        )
+
+        selected_countries = most_similar
+
+    features = extract_features(
+        filter_data(raw, selected_countries, mode="down"),
+        look_back=look_back,
+        grouper="country",
+        keep=("country", "date"),
+        min_cases=min_cases,
+    )
+
+    if st.checkbox("Ver características"):
+        st.info(
+            f"Analizando puntos con más de {min_cases} activos y al menos {look_back} días de información."
+        )
         st.write(features)
 
     Xtrain, ytrain = features_to_training(features, drop=("country", "date"))
 
-    st.sidebar.markdown("### Model hyperparameters")
     model = ForecastModel(
-        max_iter=st.sidebar.number_input("Max iterations", 100, 10000, 1000)
+        max_iter=1000, compute_cross_validation=True, cross_validation_steps=100,
     )
 
     model.fit(Xtrain, ytrain)
-    st.write(model.score(Xtrain, ytrain))
 
+    st.write(
+        f"#### Error de ajuste (entrenamiento): `{100 - 100 * model.score(Xtrain, ytrain):.2f}%`"
+    )
+    st.write(
+        f"#### Error de validación (independiente): `{model.validation * 100:.2}%`"
+    )
     st.write(model.feature_importance())
 
-    st.write("### Predicción")
-
-    country = st.selectbox("Country", countries, countries.index("Cuba"))
-    country_data = filter_data(raw, [country])
-
-    country_features = extract_features(
-        country_data, look_back=look_back, keep=("date",)
+    country_features_up = extract_features(
+        filter_data(raw, [country], mode="up"), look_back=look_back, keep=("date",)
+    )
+    country_features_down = extract_features(
+        filter_data(raw, [country], mode="down"), look_back=look_back, keep=("date",)
     )
 
-    Xtest, ytest = features_to_training(country_features, drop=("date",))
-    ypredicted = model.predict(Xtest)
-    country_features["predicted"] = ypredicted
+    Xtest, ytest = features_to_training(country_features_down, drop=("date",))
 
-    if st.checkbox("Show prediction data"):
-        st.write(country_features)
+    country_features = country_features_up.append(country_features_down)
 
-    st.altair_chart(
-        alt.Chart(
-            country_features.melt(id_vars=["date"], value_vars=["target", "predicted"])
+    to_chart = country_features.melt(id_vars=["date"], value_vars=["target"])
+
+    if len(Xtest) == 0:
+        st.error(
+            f"Este país no tiene curva de bajada con duración mayor de {look_back} días."
         )
-        .mark_line()
-        .encode(x="date", y="value", color="variable"),
+        return
+
+    if (
+        st.selectbox(
+            "Predecir a partir de", ["Último valor real", "Máximo de la curva"]
+        )
+        == "Máximo de la curva"
+    ):
+        x0 = Xtest[0]
+        last_date = country_features_up["date"].max()
+    else:
+        x0 = Xtest[-1]
+        last_date = country_features_down["date"].max()
+
+    mappings = {f"active(n-{k})": f"active(n-{k-1})" for k in range(look_back, 1, -1)}
+    mappings["active(n-1)"] = "yi"
+    yfuture = model.estimate(
+        x0, n=st.sidebar.number_input("Días a predecir", 1, 1000, 30), **mappings
+    )
+
+    predictions = []
+    for i, yi in enumerate(yfuture):
+        predictions.append(
+            dict(date=last_date + pd.Timedelta(days=i), value=yi, variable="predicted",)
+        )
+
+    to_chart = to_chart.append(predictions)
+
+    chart = st.altair_chart(
+        alt.Chart(to_chart).mark_line().encode(x="date", y="value", color="variable"),
         use_container_width=True,
     )

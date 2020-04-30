@@ -30,7 +30,7 @@ def main():
         tr("Simulation", "Simulación"): simulation,
         tr("Testing analysis", "Análisis de las pruebas"): testing_analysis,
         tr("Simulation (new / incomplete)", "Simulación (nuevo / incompleto)"): new_simulation,
-        tr("Curve prediction", "Predicción"): curve_prediction,
+        tr("Curve prediction", "Predicción de la bajada"): curve_prediction,
     }
 
     section = st.sidebar.selectbox(
