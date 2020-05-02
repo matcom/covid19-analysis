@@ -132,7 +132,7 @@ def optimize_similarity(
         return sim
 
     # llamando al optimizador
-    resbrute = differential_evolution(f, bounds, callback=callback, maxiter=10)
+    resbrute = differential_evolution(f, bounds, callback=callback, maxiter=100)
 
     gm = resbrute.x  # global minimum
     f_gm = resbrute.fun  # # function value at global minimum

@@ -21,16 +21,16 @@ def main():
     #     st.error("Contraseña incorrecta / Wrong password")
     #     return
 
-    tr = translate(st.sidebar.selectbox("Language / Idioma", ["🇪🇸 Español", "🇬🇧 English"]))
+    tr = translate("🇪🇸 Español") #st.sidebar.selectbox("Language / Idioma", [, "🇬🇧 English"]))
 
     sections = {
         "Intro": intro,
         tr("Single country analysis", "Análsis de un país"): country_analysis,
-        tr("Global epidemic evolution", "Evolución global de la epidemia"): global_analysis,
-        tr("Simulation", "Simulación"): simulation,
-        tr("Testing analysis", "Análisis de las pruebas"): testing_analysis,
-        tr("Simulation (new / incomplete)", "Simulación (nuevo / incompleto)"): new_simulation,
         tr("Curve prediction", "Predicción de la bajada"): curve_prediction,
+        tr("Global epidemic evolution", "Evolución global de la epidemia"): global_analysis,
+        tr("Simulation", "Simulación (I)"): simulation,
+        tr("Simulation (new / incomplete)", "Simulación (II)"): new_simulation,
+        # tr("Testing analysis", "Análisis de las pruebas"): testing_analysis,
     }
 
     section = st.sidebar.selectbox(

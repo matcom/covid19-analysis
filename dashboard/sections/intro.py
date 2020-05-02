@@ -15,9 +15,9 @@ def run(tr):
         )
     )
 
-    st.info(
-        tr(
-            "🇪🇸 Puedes cambiar el idioma en el sidebar a tu izquierda.",
-            "🇬🇧 You can change the language in the sidebar to your left.",
-        )
-    )
+    # st.info(
+    #     tr(
+    #         "🇪🇸 Puedes cambiar el idioma en el sidebar a tu izquierda.",
+    #         "🇬🇧 You can change the language in the sidebar to your left.",
+    #     )
+    # )
