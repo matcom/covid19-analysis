@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 import random
+import time
+import altair as alt
 
+from typing import List
 from enum import Enum
 
 
@@ -26,9 +29,9 @@ class StatePerson:
 
 
 # método de tranmisión espacial, teniendo en cuenta la localidad
-def spacial_transmition(regions, social, status, distance, parameters):
+def spatial_transmision(regions, social, status, distance, parameters):
     """
-    Método de tranmisión espacial, teniendo en cuenta la localidad.
+    Método de transmisión espacial, teniendo en cuenta la localidad.
 
     Args:
         - regions: regiones consideradas en la simulación.
@@ -43,8 +46,16 @@ def spacial_transmition(regions, social, status, distance, parameters):
     # cantidad de días(steps) que dura la simulación
     simulation_time = 30
 
+    # estadísticas de la simulación
+    progress = st.progress(0)
+    day = st.empty()
+    sick_count = st.empty()
+
     # por cada paso de la simulación
     for i in range(simulation_time):
+
+        total_individuals = 0
+
         # por cada región
         for region in regions:
             # por cada persona
@@ -54,12 +65,20 @@ def spacial_transmition(regions, social, status, distance, parameters):
                 if ind.is_infectious:
                     compute_spread(ind, social, status)
                 
+                total_individuals += 1
+                
             interventions(status)
             # movimientos
             for n_region in regions:
                 if n_region != region:
                     # calcular personas que se mueven de una region a otras
                     transportations(n_region, region, distance)
+
+        progress.progress((i + 1) / simulation_time)
+        day.markdown(f"#### Día: {i+1}")
+        sick_count.markdown(f"#### Individuos simulados: {total_individuals}")
+        time.sleep(0.1)
+
 
 def interventions(status):
     """Modifica el estado de las medidas y como influyen estas en la población.
@@ -68,29 +87,38 @@ def interventions(status):
     """
     pass
 
+
 def transportations(n_region, region, distance):
     """Las personas que se mueven de n_region a region.
     """
     pass
 
+
 def compute_spread(ind, social, status):
     """Calcula que personas serán infectadas por 'ind' en el paso actual de la simulación.
     """
-    pass
+    connections = eval_connections(social, ind)
 
-def eval_connections(social, person):
+    for other in connections:
+        if other.is_infectious:
+            continue
+
+        if eval_infections(ind):
+            other.state = StatePerson.Lp
+
+
+def eval_connections(social, person) -> List["Person"]:
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
     pass
 
-def eval_infections(person):
+
+def eval_infections(person) -> bool:
     """Determina si una persona cualquiera se infesta o no, dado que se cruza con "person". 
 
        En general depende del estado en el que se encuentra person y las probabilidades de ese estado
     """
     pass
-
-
 
 
 class Person:
@@ -110,24 +138,21 @@ class Person:
         self.health_conditions = None
 
     def initialize_person(self):
-        self.next_state = StatePerson.Lp
+        self.next_state = StatePerson.S
         self.steps_remaining = 0
 
-    def next_step(self, region):
+    def next_step(self):
         """Ejecuta un step de tiempo para una persona.
         """
-        # actualizando la region
-        self.region = region
-
         if self.steps_remaining == 0:
             # actualizar state
             self.state = self.next_state
             # llamar al método del nuevo estado para definir tiempo y next_step
-            if self.state == StatePerson.S:
-                state, time = self.p_suseptible()
-                self.next_state = state
-                self.steps_remaining = time
-            elif self.state == StatePerson.Ls:
+            # if self.state == StatePerson.S:
+            #     state, time = self.p_suseptible()
+            #     self.next_state = state
+            #     self.steps_remaining = time
+            if self.state == StatePerson.Ls:
                 state, time = self.p_latent_sintoms()
                 self.next_state = state
                 self.steps_remaining = time
@@ -221,34 +246,40 @@ class Person:
 
 
 class Region:
-    def __init__(self, population):
-        self.recovered = 0
-        self.population = population
-        self.death = 0
-        self.simulations = 0
+    def __init__(self, population, initial_infected=1):
+        self._recovered = 0
+        self._population = population
+        self._death = 0
+        self._simulations = 0
+        self.individuals = []
+
+        for i in range(initial_infected):
+            p = Person(self, 30)
+            p.state = StatePerson.Lp
+            self.individuals.append(p)
 
     @property
     def population(self):
-        return self.population
+        return self._population
 
     @property
     def recovered(self):
-        return self.recovered
+        return self._recovered
 
-    def increse_suseptibles(self, count):
+    def increase_susceptibles(self, count):
         """Incrementa la cantidad de personas qeu pasan a formar parte de la simulación
         """
-        self.simulations += count
+        self._simulations += count
 
-    def increse_death(self, count):
+    def increase_death(self, count):
         """Incrementa la cantidad de personas qeu pasan a formar parte de los fallecidos
         """
-        self.death += count
+        self._death += count
 
-    def increse_recovered(self, count):
+    def increase_recovered(self, count):
         """Incrementa la cantidad de personas qeu pasan a formar parte de los recuperados
         """
-        self.recovered += count
+        self._recovered += count
     
 
 @st.cache
@@ -265,12 +296,12 @@ def load_interaction_estimates():
 def main():
     st.title("Simulación de la epidemia")
 
-    person = Person(None, 23)
-    
-    while person.next_step(person.region):
-        st.write(person.state)
+    region = Region(1000, 1)
 
-    st.write(person.state)
+    spatial_transmision([region], None, None, None, None)
+
+    st.write("---")
+    st.button("Ejecutar de nuevo")
 
 
 if __name__ == "__main__":
