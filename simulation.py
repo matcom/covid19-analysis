@@ -129,7 +129,7 @@ class Person:
             self.steps_remaining = self.steps_remaining - 1
 
     # Funciones de que pasa en cada estado para cada persona
-    # debe devolver el tiempo que la persona va estar en ese estado y
+    # debe devolver el tiempo que la persona va estar en ese estado y 
     # a que estado le toca pasar en el futuro.
 
     def _evaluate_transition(self):
@@ -183,6 +183,7 @@ class Region:
         self.recovered = 0
         self.population = population
         self.death = 0
+        self.simulations = 0
 
     @property
     def population(self):
@@ -192,6 +193,21 @@ class Region:
     def recovered(self):
         return self.recovered
 
+    def increse_suseptibles(self, count):
+        """Incrementa la cantidad de personas qeu pasan a formar parte de la simulación
+        """
+        self.simulations += count
+
+    def increse_death(self, count):
+        """Incrementa la cantidad de personas qeu pasan a formar parte de los fallecidos
+        """
+        self.death += count
+
+    def increse_recovered(self, count):
+        """Incrementa la cantidad de personas qeu pasan a formar parte de los recuperados
+        """
+        self.recovered += count
+    
 
 @st.cache
 def load_interaction_estimates():
