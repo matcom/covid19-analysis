@@ -154,19 +154,6 @@ class Person:
             else:
                 return False
             # en los estados restantes no hay transiciones
-            # elif self.state == StatePerson.R:
-            #     state, time = self.p_recovered()
-            #     self.next_state = state
-            #     self.steps_remaining = time
-            # elif self.state == StatePerson.H:
-            #     state, time = self.p_hospitalized()
-            #     self.next_state = state
-            #     self.steps_remaining = time
-            # elif self.state == StatePerson.D:
-            #     state, time = self.p_death()
-            #     self.next_state = state
-            #     self.steps_remaining = time
-
         else:
             # decrementar los steps que faltan para cambiar de estado
             self.steps_remaining = self.steps_remaining - 1
@@ -181,14 +168,13 @@ class Person:
         """Computa a qué estado pasar dado el estado actual y los valores de la tabla.
         """
         df = load_disease_transition()
+        # calcular el grupo de edad al que pertenece
         age_group = min(df['Age'], key=lambda age: age >= self.age)
-
+        # quedarse con los valores del estado y edad del individuo actual
         df = df[(df['Age'] == age_group) & (df["StateFrom"] == str(self.state))]
-
+        # calcular el estado de transición y el tiempo
         to_state = random.choices(df['StateTo'].values, weights=df['Chance'].values, k=1)[0]
-        
         state_data = df.set_index('StateTo').to_dict('index')[to_state]
-
         time = random.normalvariate(state_data['MeanDays'], state_data['StdDays'])
 
         return to_state, int(time)
@@ -278,8 +264,6 @@ def load_interaction_estimates():
 
 def main():
     st.title("Simulación de la epidemia")
-
-    st.write(load_disease_transition())
 
     person = Person(None, 23)
     
