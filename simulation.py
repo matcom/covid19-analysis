@@ -28,6 +28,8 @@ def spacial_transmition(regions, social, status, distance, parameters):
         - status: contiene característucas y el estado de salud en cada región.
         - distance: almacena la distancia entre cada par de regiones.
         - parameters: parameters del modelo epidemiológico para cada individuo.
+
+    Returns:
         - output: es el estado actualizado de cada persona.
     """
     # cantidad de días(steps) que dura la simulación
