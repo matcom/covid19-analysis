@@ -129,7 +129,7 @@ class Person:
         self.next_state = None
         self.steps_remaining = None
         self.is_infectious = None
-        # TODO: llamar método de estado inicial
+        # llamar método de estado inicial
         self.initialize_person()
 
         # la persona conoce la region a la que pertenece
