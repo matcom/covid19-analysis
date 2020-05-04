@@ -1,20 +1,28 @@
 import streamlit as st
 import pandas as pd
+import random
 
 from enum import Enum
 
 
-class StatePerson(Enum):
-    S = 0
-    Ls = 1
-    Lp = 2
-    Ip = 3
-    Is = 4
-    Iv = 5
-    A = 6
-    R = 7
-    H = 8
-    D = 9
+@st.cache
+def load_disease_transition() -> pd.DataFrame:
+    return pd.read_csv("./data/disease_transitions.csv")
+
+
+class StatePerson:
+    """Estados en los que puede estar una persona.
+    """
+    S = "S"
+    Ls = "Ls"
+    Lp = "Lp"
+    Ip = "Ip"
+    Is = "Is"
+    Iv = "Iv"
+    A = "A"
+    R = "R"
+    H = "H"
+    D = "D"
 
 
 # método de tranmisión espacial, teniendo en cuenta la localidad
@@ -124,35 +132,50 @@ class Person:
     # debe devolver el tiempo que la persona va estar en ese estado y
     # a que estado le toca pasar en el futuro.
 
+    def _evaluate_transition(self):
+        """Computa a qué estado pasar dado el estado actual y los valores de la tabla.
+        """
+        df = load_disease_transition()
+        age_group = min(df['Age'], key=lambda age: age >= self.age)
+
+        df = df[(df['Age'] == age_group) & (df["StateFrom"] == str(self.state))]
+
+        to_state = random.choices(df['StateTo'], weights=df['Chance'], k=1)[0]
+        state_data = df.set_index('StateTo').to_dict('index')[to_state]
+
+        time = random.normalvariate(state_data['MeanDays'], state_data['StdDays'])
+
+        return to_state, time
+
     def p_suseptible(self):
-        pass
+        return self._evaluate_transition()
 
     def p_latent_sintoms(self):
-        pass
+        return self._evaluate_transition()
 
     def p_latent(self):
-        pass
+        return self._evaluate_transition()
 
     def p_infect(self):
-        pass
+        return self._evaluate_transition()
 
     def p_infect_sitoms(self):
-        pass
+        return self._evaluate_transition()
 
     def p_infect_sintom_antiviral(self):
-        pass
+        return self._evaluate_transition()
 
     def p_asintomatic(self):
-        pass
+        return self._evaluate_transition()
 
     def p_recovered(self):
-        pass
+        return self._evaluate_transition()
 
     def p_hospitalized(self):
-        pass
+        return self._evaluate_transition()
 
     def p_death(self):
-        pass
+        return self._evaluate_transition()
 
 
 class Region:
@@ -183,6 +206,13 @@ def load_interaction_estimates():
 
 def main():
     st.title("Simulación de la epidemia")
+
+    st.write(load_disease_transition())
+
+    person = Person(None, 23)
+    person.state = StatePerson.Is
+
+    st.write(person._evaluate_transition())
 
 
 if __name__ == "__main__":
