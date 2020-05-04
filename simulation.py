@@ -40,15 +40,31 @@ def spacial_transmition(regions, social, status, distance, parameters):
         # por cada región
         for region in regions:
             # por cada persona
-            for ind in individuals:
+            for ind in region.individuals:
                 # actualizar estado de la persona
                 ind.next_step()
+                if ind.is_infectious:
+                    pass
 
             # movimientos
             for n_region in regions:
                 if n_region != region:
                     # calcular personas que se mueven de una region a otras
                     pass
+
+def eval_connections(social, person):
+    """Devuelve las conexiones que tuvo una persona en un step de la simulación.
+    """
+    pass
+
+def eval_infections(person):
+    """Determina si una persona cualquiera se infesta o no, dado que se cruza con "person". 
+
+       En general depende del estado en el que se encuentra person y las probabilidades de ese estado
+    """
+    pass
+
+
 
 
 class Person:
@@ -58,6 +74,7 @@ class Person:
         self.state = StatePerson.S
         self.next_state = None
         self.steps_remaining = None
+        self.is_infectious = None
         # TODO: llamar método de estado inicial
 
         # la persona conoce la region a la que pertenece
