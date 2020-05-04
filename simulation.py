@@ -33,7 +33,7 @@ def spacial_transmition(regions, social, status, distance, parameters):
     Args:
         - regions: regiones consideradas en la simulación.
         - social: es el conjunto de grafos que describen las redes en cada región.
-        - status: contiene característucas y el estado de salud en cada región.
+        - status: contiene característucas y el estado de salud en cada región, osea las medidas.
         - distance: almacena la distancia entre cada par de regiones.
         - parameters: parameters del modelo epidemiológico para cada individuo.
 
@@ -52,13 +52,31 @@ def spacial_transmition(regions, social, status, distance, parameters):
                 # actualizar estado de la persona
                 ind.next_step()
                 if ind.is_infectious:
-                    pass
-
+                    compute_spread(ind, social, status)
+                
+            interventions(status)
             # movimientos
             for n_region in regions:
                 if n_region != region:
                     # calcular personas que se mueven de una region a otras
-                    pass
+                    transportations(n_region, region, distance)
+
+def interventions(status):
+    """Modifica el estado de las medidas y como influyen estas en la población.
+
+       Los cambios se almacenan en status
+    """
+    pass
+
+def transportations(n_region, region, distance):
+    """Las personas que se mueven de n_region a region.
+    """
+    pass
+
+def compute_spread(ind, social, status):
+    """Calcula que personas serán infectadas por 'ind' en el paso actual de la simulación.
+    """
+    pass
 
 def eval_connections(social, person):
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
