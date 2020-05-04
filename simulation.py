@@ -159,33 +159,43 @@ class Person:
         return to_state, int(time)
 
     def p_suseptible(self):
+        self.is_infectious = False
         return self._evaluate_transition()
 
     def p_latent_sintoms(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_latent(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_infect(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_infect_sitoms(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_infect_sintom_antiviral(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_asintomatic(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_recovered(self):
+        self.is_infectious = False
         return self._evaluate_transition()
 
     def p_hospitalized(self):
+        self.is_infectious = True
         return self._evaluate_transition()
 
     def p_death(self):
+        self.is_infectious = False
         return self._evaluate_transition()
 
 
