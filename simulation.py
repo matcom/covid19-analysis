@@ -1,5 +1,8 @@
 import streamlit as st
+import pandas as pd
+
 from enum import Enum
+
 
 class StatePerson(Enum):
     S = 0
@@ -162,7 +165,6 @@ class Region:
     @property
     def recovered(self):
         return self.recovered
-import pandas as pd
 
 
 @st.cache
