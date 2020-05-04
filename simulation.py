@@ -1,20 +1,28 @@
 import streamlit as st
 import pandas as pd
+import random
 
 from enum import Enum
 
 
-class StatePerson(Enum):
-    S = 0
-    Ls = 1
-    Lp = 2
-    Ip = 3
-    Is = 4
-    Iv = 5
-    A = 6
-    R = 7
-    H = 8
-    D = 9
+@st.cache
+def load_disease_transition() -> pd.DataFrame:
+    return pd.read_csv("./data/disease_transitions.csv")
+
+
+class StatePerson:
+    """Estados en los que puede estar una persona.
+    """
+    S = "S"
+    Ls = "Ls"
+    Lp = "Lp"
+    Ip = "Ip"
+    Is = "Is"
+    Iv = "Iv"
+    A = "A"
+    R = "R"
+    H = "H"
+    D = "D"
 
 
 # método de tranmisión espacial, teniendo en cuenta la localidad
@@ -76,11 +84,16 @@ class Person:
         self.steps_remaining = None
         self.is_infectious = None
         # TODO: llamar método de estado inicial
+        self.initialize_person()
 
         # la persona conoce la region a la que pertenece
         self.region = region
         self.age = age
         self.health_conditions = None
+
+    def initialize_person(self):
+        self.next_state = StatePerson.Lp
+        self.steps_remaining = 0
 
     def next_step(self, region):
         """Ejecuta un step de tiempo para una persona.
@@ -120,56 +133,87 @@ class Person:
                 state, time = self.p_asintomatic()
                 self.next_state = state
                 self.steps_remaining = time
-            elif self.state == StatePerson.R:
-                state, time = self.p_recovered()
-                self.next_state = state
-                self.steps_remaining = time
-            elif self.state == StatePerson.H:
-                state, time = self.p_hospitalized()
-                self.next_state = state
-                self.steps_remaining = time
-            elif self.state == StatePerson.D:
-                state, time = self.p_death()
-                self.next_state = state
-                self.steps_remaining = time
+            else:
+                return False
+            # en los estados restantes no hay transiciones
+            # elif self.state == StatePerson.R:
+            #     state, time = self.p_recovered()
+            #     self.next_state = state
+            #     self.steps_remaining = time
+            # elif self.state == StatePerson.H:
+            #     state, time = self.p_hospitalized()
+            #     self.next_state = state
+            #     self.steps_remaining = time
+            # elif self.state == StatePerson.D:
+            #     state, time = self.p_death()
+            #     self.next_state = state
+            #     self.steps_remaining = time
 
         else:
             # decrementar los steps que faltan para cambiar de estado
             self.steps_remaining = self.steps_remaining - 1
+        
+        return True
 
     # Funciones de que pasa en cada estado para cada persona
     # debe devolver el tiempo que la persona va estar en ese estado y 
     # a que estado le toca pasar en el futuro.
 
+    def _evaluate_transition(self):
+        """Computa a qué estado pasar dado el estado actual y los valores de la tabla.
+        """
+        df = load_disease_transition()
+        age_group = min(df['Age'], key=lambda age: age >= self.age)
+
+        df = df[(df['Age'] == age_group) & (df["StateFrom"] == str(self.state))]
+
+        to_state = random.choices(df['StateTo'].values, weights=df['Chance'].values, k=1)[0]
+        
+        state_data = df.set_index('StateTo').to_dict('index')[to_state]
+
+        time = random.normalvariate(state_data['MeanDays'], state_data['StdDays'])
+
+        return to_state, int(time)
+
     def p_suseptible(self):
-        pass
+        self.is_infectious = False
+        return self._evaluate_transition()
 
     def p_latent_sintoms(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_latent(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_infect(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_infect_sitoms(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_infect_sintom_antiviral(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_asintomatic(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_recovered(self):
-        pass
+        self.is_infectious = False
+        return self._evaluate_transition()
 
     def p_hospitalized(self):
-        pass
+        self.is_infectious = True
+        return self._evaluate_transition()
 
     def p_death(self):
-        pass
+        self.is_infectious = False
+        return self._evaluate_transition()
 
 
 class Region:
@@ -216,6 +260,15 @@ def load_interaction_estimates():
 
 def main():
     st.title("Simulación de la epidemia")
+
+    st.write(load_disease_transition())
+
+    person = Person(None, 23)
+    
+    while person.next_step(person.region):
+        st.write(person.state)
+
+    st.write(person.state)
 
 
 if __name__ == "__main__":
