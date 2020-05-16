@@ -418,12 +418,6 @@ class Region:
 def main():
     st.title("Simulación de la epidemia")
 
-    data = load_individual_cases_data()
-
-    st.write(data)
-
-    st.write(data.aggregate('count'))
-
     if st.button("Simular"):
         region = Region(1000, 1)
         spatial_transmision([region], load_interaction_estimates(), None, None, None)
