@@ -15,6 +15,23 @@ def load_disease_transition() -> pd.DataFrame:
     return pd.read_csv("./data/disease_transitions.csv")
 
 
+@st.cache
+def load_individual_cases_data() -> pd.DataFrame:
+    data = []
+
+    with open("./data/datos varios paises covid.txt") as fp:
+        for line in fp:
+            datum = parse_data(line)    
+            if datum is not None:
+                data.append(datum)
+
+    return pd.DataFrame(data)
+
+
+def parse_data(line: str) -> dict:
+    pass
+
+
 class TransitionEstimator:
     def __init__(self):
         self.data = load_disease_transition()
