@@ -5,6 +5,7 @@ import time
 import altair as alt
 import numpy as np
 import collections
+import re
 
 from typing import List, Dict
 from enum import Enum
@@ -29,7 +30,17 @@ def load_individual_cases_data() -> pd.DataFrame:
 
 
 def parse_data(line: str) -> dict:
-    pass
+    """
+    """
+    dic = {}
+
+    match = re.search(r"symptom[s]? onset \w*\s?(?P<date>\d+/\d+(/\d+)?", line)
+
+    if match:
+        dic['symptoms_onset'] = match.group('date')
+
+    if dic:
+        return dic
 
 
 class TransitionEstimator:
