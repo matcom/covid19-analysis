@@ -21,25 +21,60 @@ def load_individual_cases_data() -> pd.DataFrame:
     data = []
 
     with open("./data/datos varios paises covid.txt") as fp:
-        for line in fp:
+        for i, line in enumerate(fp):
             datum = parse_data(line)    
             if datum is not None:
-                data.append(datum)
+                data.append(dict(datum, id=i+1))
 
     return pd.DataFrame(data)
 
 
+def _parse_date(dict, regex, line, field):
+    match = re.search(regex, line)
+    
+    if not match:
+        return
+
+    date = match.group('date')
+    
+    if date.count('/') < 2:
+            date += '/2020'
+
+    dict[field] = date
+
+
+def _parse_field(dict, regex, line, field):
+    match = re.search(regex, line)
+    
+    if not match:
+        return
+
+    value = match.group(field)
+    
+    dict[field] = value
+    
+    
 def parse_data(line: str) -> dict:
     """
     """
     dic = {}
 
-    match = re.search(r"symptom[s]? onset \w*\s?(?P<date>\d+/\d+(/\d+)?", line)
-
-    if match:
-        dic['symptoms_onset'] = match.group('date')
+    _parse_date(dic, r"symptom[s]? onset (\w+\s)*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
+    _parse_date(dic, r"develop(ed)? (\w+\s)*symptom[s]? (\w+\s)*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
+    _parse_date(dic, r"fever \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
+    _parse_date(dic, r"cough \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
+    _parse_date(dic, r"confirmed \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'confirmed')
+    _parse_date(dic, r"hospital(ized)? \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'hospitalized')
+    _parse_date(dic, r"admitted\s*(to hospital)?\s*(?P<date>\d+/\d+(/\d+)?)", line, 'hospitalized')
+    _parse_date(dic, r"(?P<date>\d+/\d+(/\d+)?) and hospitalized", line, 'hospitalized')
+    _parse_date(dic, r"death \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'death')
+    _parse_date(dic, r"died \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'death')
+    _parse_date(dic, r"visit(ed)? (\w+\s)*\s?clinic \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'clinic')
 
     if dic:
+        _parse_field(dic, r"(?P<gender>(fe)?male)", line, 'gender')
+        _parse_field(dic, r"(fe)?male, (?P<age>\d+)s?", line, 'age')
+        _parse_field(dic, r"(fe)?male, in (his|her) (?P<age>\d+)s?", line, 'age')
         return dic
 
 
@@ -386,6 +421,8 @@ def main():
     data = load_individual_cases_data()
 
     st.write(data)
+
+    st.write(data.aggregate('count'))
 
     if st.button("Simular"):
         region = Region(1000, 1)
