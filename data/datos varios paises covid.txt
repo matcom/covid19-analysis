@@ -1,0 +1,983 @@
+First confirmed imported COVID-19 pneumonia patient in Shenzhen (from Wuhan): male, 66, shenzheng residence, visited relatives in Wuhan on 12/29/2019, symptoms onset on 01/03/2020, returned to Shenzhen and seek medical care on 01/04/2020, hospitalized on 01/11/2020, sample sent to China CDC for testing on 01/18/2020, confirmed on 01/19/2020. 8 others under medical observation, contact tracing ongoing.
+First confirmed imported COVID-19 pneumonia patient in Shanghai (from Wuhan): female, 56, Wuhan residence, arrived in Shanghai from Wuhan on 01/12/2020, symptom onset and visited fever clinic on 01/15/2020, laboratory confirmed on 01/20/2020
+First confirmed imported cases in Zhejiang: patient is male, 46, lives in Wuhan, self-driving from Wuhan to Hangzhou on 01/03/2020, symptom onset 01/04/2020, hospitalized on 01/17/2020, sample deliver to China CDC for testing on 01/20/2020, test positive on 01/21/2020.
+new confirmed imported COVID-19 pneumonia in Tianjin: female, age 60, recently visited Wuhan, visited fever clinic on 01/19/2020 in Tianjin then quarantined immediately.
+new confirmed imported COVID-19 pneumonia in Tianjin: male, age 58, visited fever clinic on 01/14/2020.
+First confirmed imported COVID-19 pneumonia patient in Chongqing (from Wuhan): female, age 44, symptoms onset on 01/15/2020, laboratory confirmed on 01/21/2020.
+First confirmed imported COVID-19 pneumonia patient in Sichuan (from Wuhan): Male, 34 years old, works in Wuhan, symptoms onset on 01/11/2020 in Chengdu.
+new confirmed imported COVID-19 pneumonia patient in Beijing: male, 37, visited Wuhan on 01/10/2020, return to Beijing on 01/11/2020, symptoms onset on 01/14/2020, hospitalized on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: male, 39, visited Wuhan on 01/03/2020, return to Beijing on 01/04/2020, symptoms onset on 01/09/2020, hospitalized on 01/14/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: male, 56, visited Wuhan on 01/08/2020, return to Beijing on 01/16/2020, symptoms onset on 01/16/2020, hospitalized on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: female, 18, visited Wuhan on 01/12/2020, return to Beijing on 01/17/2020, symptoms onset on 01/19/2020, hospitalized on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: female, 32, visited Wuhan on 01/13/2020, return to Beijing on 01/17/2020, symptoms onset while in Wuhan, hospitalized on 01/20/2020.
+First confirmed imported COVID-19 pneumonia patient in Shandong: male, 37, visited clinic on 01/17/2020, travelled to Wuhan within to weeks of symptom onset.
+First confirmed imported COVID-19 pneumonia patient in Yunnan: male, 51, Wuhan resident, visited Yunan on 01/15/2020, symptom onset on 01/16/2020 and hospitalized.
+Second confirmed imported COVID-19 pneumonia patient in Sichuan: male, 57, Wuhan resident, visited Sichuan on 01/15/2020, symptom onset on 01/16/2020 and hospitalized.
+new confirmed imported COVID-19 pneumonia patient in Jiangxi: male, 56, visited Wuhan on 12/20/2019, return to Jiangxi on 01/09/2020, symptoms onset on 01/10/2020.
+new confirmed imported COVID-19 pneumonia patient in Jiangxi: male, 50, visited Wuhan for poultry trading, return to Jiangxi on 01/02/2020, symptoms onset on 01/10/2020.
+First confirmed imported COVID-19 pneumonia patient in Macau: female, 52, Wuhan resident, symptom onset one week before 01/21/2020, hospitalized on 01/22/2020
+First confirmed imported COVID-19 pneumonia patient in Liaoning: male, 33, works in Wuhan, symptom onset on 01/11/2020, visit clinic in Liaoning Dalian on 01/17/2020.
+Second confirmed imported COVID-19 pneumonia patient in Liaoning: male, 40, works in Wuhan, visit Fushun, Liaoning on 01/12/2020, symptom onset on 01/14/2020, visit clinic in Fushun Dalian on 01/19/2020.
+First confirmed imported COVID-19 pneumonia patient in Fujian: male, 70, works in Wuhan, return to Fujian on 01/17/2020, visit clinic on 01/20/2020.
+First confirmed imported COVID-19 pneumonia patient in Guizhou: male, 51, lives in Wuhan, symptom onset on 01/14/2020, visit clinic on 01/14/2020.
+First confirmed imported COVID-19 pneumonia patient in Shanxi: male, visited Wuhan from 01/12/2020 to 01/15/2020, symptom onset on 01/19/2020, visit clinic on 01/20/2020, 6 contacts traced.
+new confirmed imported COVID-19 pneumonia patient in Sichuan: female, 28, visited Chengdu from Wuhan on 01/17/2020, symptoms onset on 01/19/2020.
+new confirmed imported COVID-19 pneumonia patient in Sichuan: male, 37, visited Chengdu from Wuhan on 01/18/2020, symptoms onset on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Sichuan: male, 19, visited Chengdu from Wuhan on 01/13/2020, symptoms onset on 01/20/2020.
+First confirmed imported COVID-19 pneumonia patient in Ningxia: male, 29, works in Wuhan. Ningxia and visit clinic on 01/19/2020.
+First confirmed imported COVID-19 pneumonia patient in Guangxi: female, 66, lives in Wuhan. arrived in Beihai, Guangxi on 01/16/2020, and visited clinic on 01/17/2020 due to symptoms.
+Second confirmed imported COVID-19 pneumonia patient in Guangxi: male, 46, in contact with individuals from Wuhan before symptom onset. symptom onset on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Henan: female, 32, Wuhan resident, visited Sanmenxi, Henan on 01/18/2020.
+new confirmed imported COVID-19 pneumonia patient in Henan: male, 28, Henan resident, visited Wuhan on 01/09/2020 to treat diabetes, returned to Henan on 01/19/2020.
+new confirmed imported COVID-19 pneumonia patient in Henan: male, 55, lives in Wuhan, visited Henan on 01/11/2020, symptom onset durnig the visit.
+new confirmed imported COVID-19 pneumonia patient in Henan: male, 68, lives in Wuhan, visited Henan on 01/11/2020, went to clinic on 01/13/2020.
+new confirmed imported COVID-19 pneumonia patient in Shandong: male, 38, works in Zhejiang (not Wuhan!), have close contact with COVID-19 patients in Zhejiang, visit relative in Weihai, Shandong on 01/18/2020, symptom onset on 01/20/2020 and hospitalized.
+First confirmed imported COVID-19 pneumonia patient in Hebei: male, 72, Wuhan resident. visited relative in Shijiazhuang, Hebei on 01/18/2020, symptom onset on 01/19/2020 and hospitalized, 6 contacts traced.
+new confirmed imported COVID-19 pneumonia patient in Beijing: male, 45, visited Wuhan on 01/11/2020, returned to Beijing on 01/14/2020, symptom onset on 01/19/2020, visit clinic on 01/21/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: male, 42, visited Wuhan on 01/11/2020 and 01/18/2020 twice, returned to Beijing on 01/19/2020, symptom onset on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Beijing: female,33, Wuhan resident, visiting Beijing, seek care on 01/20/2020 after symptom onset.
+new confirmed imported COVID-19 pneumonia patient in Beijing: female,33, Wuhan resident, visiting Beijing on 01/18/2020, seek care on 01/20/2020 after symptom onset.
+First confirmed imported COVID-19 pneumonia patient in Jiangsu: male,37, returned to Jiangsu from Wuhan on 01/10/2020.
+First confirmed imported COVID-19 pneumonia patient in Heilongjiang: male, 69, returned to Mudanjiang, Heilongjiang from Wuhan on 01/12/2020, symptom onset after return and has been hospitalized.
+new confirmed imported COVID-19 pneumonia patient in Guangxi: male, 63, Wuhan resident, symptom onset on 01/14/2020, arrived in Beihai, Guangxi on 01/20/2020, hospitalized on 01/21/2020, tested postive on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Guangxi: female, 62, Wuhan resident, symptom onset on 01/09/2020, arrived in Beihai, Guangxi on 01/15/2020, hospitalized on 01/21/2020, tested postive on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Guangxi: male, 49, lives in Wuhan,arrived in Liuzhou, Guangxi on 01/20/2020, symptom onset on 01/21/2020, hospitalized on 01/21/2020, tested postive on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Chengdu, Sichuan: male, 50, return to Chengdu from Wuhan on 01/12/2020, symptom onset on 01/18/2020 and hospitalized.
+new confirmed imported COVID-19 pneumonia patient in Chengdu, Sichuan: male, 48, return to Chengdu from Wuhan on 01/10/2020, symptom onset on 01/18/2020 and hospitalized.
+new confirmed imported COVID-19 pneumonia patient in Dazhou, Sichuan: male, 36, return to Dazhou from Wuhan on 01/17/2020, symptom onset on 01/18/2020 and hospitalized.
+First confirmed imported COVID-19 pneumonia patient in Jilin: female, 36, return to Changchun, Jilin from Wuhan on 01/19/2020 and visit clinic due to symptom onset.
+Death from COVID-19 pneumonia in Wuhan: male, 61, symptom onset on 12/20/2019, hospitalized on 12/27/2019, death on 01/09/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 69, symptom onset on 12/30/2020, hospitalized on 01/03/2020, death on 01/15/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 89, pneumonia confirmed on 01/08/2020, death on 01/18/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 89, symptom onset on 01/13/2020, hospitalized on 01/13/2020, death on 01/19/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 66, symptom onset on 01/10/2020, hospitalized on 01/16/2020, death on 01/20/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 75, symptom onset on 01/06/2020, hospitalized on 01/11/2020, death on 01/20/2020.
+Death from COVID-19 pneumonia in Wuhan: female, 48, symptom onset on 12/10/2019, death on 01/20/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 82, symptom onset on 01/09/2020, hospitalized on 01/14/2020, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 66, coughing on 12/22/2019, hospitalized on 12/31/2019, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 81, symptom onset on 01/15/2020, hospitalized on 01/18/2020, death on 01/22/2020.
+Death from COVID-19 pneumonia in Wuhan: female, 82, hospitalized on 01/06/2020, death on 01/22/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 65, symptom onset on 01/05/2020, hospitalized on 01/11/2020, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: female, 80, symptom onset on 01/11/2020, hospitalized on 01/18/2020, death on 01/22/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 53, symptom onset on early January, hospitalized on 01/13/2020, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 86, symptom onset on 01/02/2020, hospitalized on 01/09/2020, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: female, 70, hospitalized on 01/13/2020, death on 01/21/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 84, symptom onset on 01/06/2020, hospitalized on 01/09/2020, death on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Liaoning: female, 50, return to Shenyang, Liaoning from Wuhan on 01/15/2020, symptom onset on 01/16/2020 and hospitalized, 37 contacts traced.
+new confirmed imported COVID-19 pneumonia patient in Hunan: male, 40, symptom onset on 01/05/2020, hospitalized on 01/20/2020, prior exposure to Wuhan.
+new confirmed imported COVID-19 pneumonia patient in Hunan: male, 45, symptom onset on 01/16/2020, hospitalized on 01/21/2020, prior exposure to Wuhan.
+new confirmed imported COVID-19 pneumonia patient in Hunan: female, 66, symptom onset on 01/17/2020, hospitalized on 01/21/2020, prior exposure to Wuhan.
+new confirmed imported COVID-19 pneumonia patient in Hunan: male, 59, symptom onset on 01/16/2020, hospitalized on 01/21/2020, prior exposure to Wuhan.
+new confirmed imported COVID-19 pneumonia patient in Hunan: female, 23, symptom onset on 01/16/2020, hospitalized on 01/21/2020, prior exposure to Wuhan.
+new confirmed imported COVID-19 pneumonia patient in Guizhou: female, 50, contact individuals from Wuhan in Changsha, hunan between 01/10/2020 and 01/12/2020, symptom onset on 01/14/2020, hospitalized on 01/22/2020.
+First confirmed COVID-19 pneumonia patient in Gansu: male, 43, lives in Lanzhou, Gansu, visited Hunan, Jiangxi since 01/11/2020, met with individual from Wuhan during the visit, return to Lanzhou Gansu on 01/17/2020, symptom onset on 01/18/2020, visit clinic on 01/21/2020, tested positive on 01/23/2020.
+new confirmed COVID-19 pneumonia patient in Heilongjiang: male, 49, lives in Heilongjiang, returned from Wuhan to Heilongjiang on 01/23/2020, symptom onset on 01/23/2020.
+new confirmed imported COVID-19 pneumonia patient 01/23-No.1 in Shanxi: male, 42, lives in Xianyang, Shanxi, visited Wuhan from 01/12/2020 to 01/15/2020, returned to Xian, Shanxi on 01/15/2020, symptom onset on 01/20/2020, visited clinic on 01/21/2020
+new confirmed imported COVID-19 pneumonia patient 01/23-No.2 in Shanxi: female, 32, resident of Xian, Shanxi, visited Wuhan from 01/12/2020 to 01/14/2020, returned to Xian, Shanxi on 01/14/2020, symptom onset on 01/16/2020, visited clinic on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient 01/23-No.3 in Shanxi: male, 22, resident of Xian, Shanxi, visited Wuhan from 01/15/2020 to 01/17/2020, returned to Xian, Shanxi on 01/17/2020, symptom onset on 01/20/2020, visited clinic on 01/21/2020.
+new confirmed imported COVID-19 pneumonia patient in Xinjiang: male, 47, visited Wuhan on 01/15/2020, returned to Xinjiang on 01/20/2020, symptom onset around return, tested positive on 01/23/2020.
+new confirmed imported COVID-19 pneumonia patient in Xinjiang: male, 52, works in Wuhan, returned to Xinjiang on 01/19/2020, symptom onset around return, tested positive on 01/23/2020.
+new confirmed imported COVID-19 pneumonia patient in Xinjiang: male, 53, Wuhan resident, visited Kunming on 01/16/2020, symptom onset after return.
+new confirmed COVID-19 pneumonia in Tianjin, male, 46.
+new death from COVID-19 pneumonia, female, 85, death on 01/21/2020
+new death from COVID-19 pneumonia, female, 69, symptom onset on 01/14/2020, hospitalized on 01/20/2020, death on 01/22/2020
+new death from COVID-19 pneumonia, male, 36, symptom onset on 01/06/2020, hospitalized on 01/09/2020, death on 01/23/2020
+new death from COVID-19 pneumonia, male, 73, symptom onset on 12/29/2019, hospitalized on 01/05/2020, death on 01/22/2020
+new death from COVID-19 pneumonia, female, 70, symptom onset on 01/15/2020, hospitalized on 01/18/2020, death on 01/22/2020
+new death from COVID-19 pneumonia, male, 81, symptom onset on 01/09/2020, hospitalized on 01/13/2020, death on 01/21/2020
+new death from COVID-19 pneumonia, female, 65, hospitalized on 01/15/2020, death on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient in Liaoning: male, 42, arrived in Liaoning from Wuhan on 01/18/2020, symptom onset on 01/19/2020, hospitalized on 01/22/2020.
+First confirmed imported COVID-19 pneumonia patient in Inner Mongolia: male, 30, Wuhan resident, arrived in Inner Mongolia from Wuhan on 01/21/2020, hospitalized on 01/20/2020.
+new confirmed imported COVID-19 pneumonia patient in Tianjin: female, 29, works in Wuhan, arrived in Tianjin from Wuhan on 01/23/2020, symptom onset on 01/24/2020 hospitalized on 01/24/2020.
+new recovered imported COVID-19 pneumonia patient in Beijing: female, returned to Beijing from Wuhan on 01/08/2020, symptom onset afterwards, recovered on 01/24/2020.
+new confirmed imported COVID-19 pneumonia patient 01/24-No.1 in Shanxi: male, 49, works in Wuhan, arrived in Ankang, Shanxi from Wuhan on 01/19/2020, symptom onset on 01/19/2020 hospitalized on 01/19/2020.
+new confirmed imported COVID-19 pneumonia patient 01/24-No.2 in Shanxi: male, 23, studied in Wuhan, arrived in Yanan, Shanxi from Wuhan on 01/22/2020, hospitalized on 01/22/2020.
+First recovered imported COVID-19 pneumonia patient in Shanghai: female, 56, lives in Wuhan, symptom onset on 01/10/2020 while in Wuhan, arrived in Shanghai on 01/12/2020, visit clinic on 01/15/2020.
+new confirmed imported COVID-19 pneumonia patient in Tianjin: male, 39, visited Wuhan recently.
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 39, visited Wuhan from 12/17/2019 to 01/15/2020, returned to Xishuangbannan, Yunnan on 01/15/2020, hospitalized on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 34, Wuhan resident, visited Lijiang, Yunnan on 01/20/2020, hospitalized on 01/23/2020.
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 49, resident of Huangshi, Hubei, arrived in Qunming, Yunnan on 01/21/2020, hospitalized on 01/23/2020.
+Death from COVID-19 pneumonia in Wuhan: male, 70, symptom onset on 01/15/2020, hospitalized on 01/19/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: female, 76, symptom onset on 01/08/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 72, symptom onset on 01/11/2020, hospitalized on 01/18/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: male, 79, symptom onset on 01/11/2020, hospitalized on 01/17/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 55, symptom onset on 01/09/2020, hospitalized on 01/19/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 87, symptom onset on 01/12/2020, hospitalized on 01/19/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: female, 66, symptom onset on 01/09/2020, hospitalized on 01/19/2020, death on 01/21/2020
+Death from COVID-19 pneumonia in Wuhan: male, 58, symptom onset on 01/03/2020, hospitalized on 01/18/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 66, hospitalized on 01/11/2020, death on 01/21/2020
+Death from COVID-19 pneumonia in Wuhan: male, 78, symptom onset on 01/13/2020, hospitalized on 01/23/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 67, symptom onset on 01/10/2020, hospitalized on 01/15/2020, death on 01/24/2020
+Death from COVID-19 pneumonia in Wuhan: male, 65, symptom onset on 01/12/2020, hospitalized on 01/16/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: male, 58, symptom onset on 12/23/2019, hospitalized on 01/01/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: female, 67, symptom onset on 01/05/2020, hospitalized on 01/12/2020, death on 01/23/2020
+Death from COVID-19 pneumonia in Wuhan: female, 82, symptom onset on 01/10/2020, hospitalized on 01/17/2020, death on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient in Wuhan: female, 49, returned to Guangxi from Wuhan on 01/15/2020, symptom onset on 01/21/2020, hospitalized on 01/22/2020.
+new confirmed imported COVID-19 pneumonia patient in Wuhan: female, 2, returned to Guangxi from Wuhan on 01/21/2020, symptom onset on 01/22/2020, hospitalized on 01/23/2020.
+new recovered imported COVID-19 pneumonia patient in Beijing: male, returned to Beijing from Wuhan on 01/08/2020, symptom onset afterwards, recovered on 01/25/2020.
+confirmed imported COVID-19 pneumonia patient No.1 in Tianjin: female, 59, travel history to Wuhan, symptom onset on 01/14/2020, confirmed on 01/21/2020
+confirmed imported COVID-19 pneumonia patient No.2 in Tianjin: male, 57, works on Tianjin high speed railroad, travel history to Wuhan, symptom onset on 01/18/2020, confirmed on 01/21/2020
+confirmed imported COVID-19 pneumonia patient No.3 in Tianjin: female, 68, works in Wuhan, symptom onset on 01/14/2020, confirmed on 01/21/2020
+confirmed imported COVID-19 pneumonia patient No.4 in Tianjin: male, 40, works in Wuhan, symptom onset on 01/14/2020, confirmed on 01/21/2020
+confirmed imported COVID-19 pneumonia patient No.5 in Tianjin: male, 46, works on Tianjin high speed railroad, symptom onset on 01/15/2020, visit clinic on 01/17/2020, confirmed on 01/23/2020
+confirmed imported COVID-19 pneumonia patient No.6 in Tianjin: male, 56, works on Tianjin high speed railroad, symptom onset on 01/19/2020, visit clinic on 01/23/2020, confirmed on 01/24/2020.
+confirmed imported COVID-19 pneumonia patient No.7 in Tianjin: female, 29, works in Wuhan, visited Tianjin on 01/23/2020, symptom onset on 01/24/2020, visit clinic on 01/24/2020, confirmed on 01/24/2020
+confirmed imported COVID-19 pneumonia patient No.8 in Tianjin: male, 29, works on Tianjin high speed railroad, visited Wuhan from 01/19/2020 to 01/22/2020. and symptom onset on 01/23/2020, hospitalized on 01/24/2020, confirmed on 01/24/2020.
+confirmed imported COVID-19 pneumonia patient No.9 in Tianjin: male, 57, return to Tianjin from Wuhan on 01/17/2020, symptom onset on 01/24/2020, visited clinic on 01/24/2020, hospitalized on 01/25/2020. Have close contact with patient No. 3, confirmed on 01/25/2020.
+confirmed imported COVID-19 pneumonia patient No.10 in Tianjin: male, 30, Beijing resident, visited Wuhan from 01/18/2020 to 01/20/2020, arrived in Tianjin on 01/24/2020, symptom onset on 01/24/2020, visited fever clinic on 01/24/2020, confirmed on 01/25/2020
+confirmed imported COVID-19 pneumonia patient in Gansu: female, 33, works in Wuhan, arrived in Gansu on 01/18/2020, symptom onset on 01/18/2020, visit clinic on 01/23/2020, hospitalized on 01/23/2020.
+confirmed imported COVID-19 pneumonia patient in Gansu: female, 20, lives in Wuhan, arrived in Gansu on 01/18/2020, symptom onset on 01/19/2020, visit clinic on 01/24/2020, hospitalized on 01/24/2020.
+new confirmed imported COVID-19 pneumonia patient 01/25-No.1 in Shaanxi: female, 24, works in Wuhan, symptom onset on 01/19/2020, returned to Shanxi from Wuhan on 01/21/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.2 in Shaanxi: male, 28, works in Wuhan, visited Shanxi from Wuhan on 01/20/2020, symptom onset on 01/21/2020, visited clinic on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.3 in Shaanxi: male, 41, resident of Ankang, Shanxi, visited Wuhan from 01/06/2020 to 01/07/2020, symptom onset on 01/14/2020, visited clinic on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.4 in Shaanxi: male, 46, Wuhan resident, arrived in Shanxi on 01/20/2020, symptom onset on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.5 in Shaanxi: female, 45, wife of patient 01/25-No.4 Wuhan resident, arrived in Shanxi on 01/20/2020, symptom onset on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.6 in Shaanxi: female, 9, daughter of patient 01/25-No.4 and 01/25-No.5, Wuhan resident, arrived in Shanxi on 01/20/2020, symptom onset on 01/21/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.7 in Shaanxi: male, 40, Xian resident, works in Wuhan, arrived in Shanxi from Wuhan on 01/23/2020, symptom onset on 01/23/2020, visit clinic on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.8 in Shaanxi: male, 28, Xian resident, visited Wuhan from 01/09/2020 to 01/22/2020, symptom onset on 01/20/2020, visit clinic on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.9 in Shaanxi: male, 27, Xianyang resident, works in Wuhan, returned to Shanxi on 01/18/2020, symptom onset on 01/21/2020, visit clinic on 01/21/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient 01/25-No.10 in Shaanxi: male, 15, Shangluo resident, symptom onset in Wuhan on 01/21/2020, returned to Shanxi and visit clinic on 01/23/2020, confirmed on 01/25/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 42, Works in Wuhan, returned to Yunnan on 01/18/2020, visited clinic on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 24, Works in Wuhan, returned to Yunnan on 01/21/2020, visited clinic on 01/22/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 32, lives in Wuhan, returned to Yunnan on 01/16/2020, visited clinic on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 34, resident of Wuhan, arrived in Yunnan on 01/20/2020, visited clinic on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 63, resident of Wuhan, arrived in Yunnan on 01/21/2020, visited clinic on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 58, resident of Guangdong, visited Wuhan from 01/09/2020 to 01/20/2020, visited clinic on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient (medical doctor No.1) in Beijing: male, traveled to Wuhan from 01/08/2020 to 01/16/2020, symptom onset on 01/16/2020, visited clinic on 01/20/2020, confirmed on 01/21/2020
+new confirmed imported COVID-19 pneumonia patient (medical doctor No.2) in Beijing: male, traveled to Wuhan from 01/10/2020 to 01/11/2020, symptom onset on 01/14/2020, visited clinic on 01/20/2020, confirmed on 01/21/2020
+new confirmed imported COVID-19 pneumonia patient (medical doctor No.3) in Beijing: male, sit next to medical doctor No.2 during a conference on 01/14/2020, symptom onset on 01/18/2020, visited clinic on 01/20/2020, confirmed on 01/25/2020
+new confirmed COVID-19 pneumonia patient in Xinjiang: male, 49, have contacted friend from Wuhan before infection, symptom onset on 01/21/2020, visit clinic on 01/21/2020, confirmed on 01/25/2020
+new confirmed COVID-19 pneumonia patient in Ningxia: male, 33, visited Wuhan from 01/11/2020 to 01/22/2020, returned to Ningxia on 01/22/2020, symptom onset on 01/22/2020, hospitalized on 01/24/2020, confirmed on 01/25/2020.
+confirmed COVID-19 pneumonia patient No.11 in Tianjin: female, 55, symptom onset on 01/23/2020, hospitalized on 01/23/2020, confirmed on 01/26/2020
+confirmed COVID-19 pneumonia patient No.12 in Tianjin: female, 79, symptom onset on 01/24/2020, hospitalized on 01/24/2020, confirmed on 01/26/2020
+confirmed COVID-19 pneumonia patient No.13 in Tianjin: female, 19, symptom onset on 01/19/2020, hospitalized on 01/20/2020, confirmed on 01/26/2020
+new confirmed COVID-19 pneumonia patient in Macau: female, 58, Wuhan resident, visited Macao on 01/23/2020, symptom onset on 01/23/2020, hospitalized on 01/23/2020, confirmed on 01/26/2020
+new confirmed COVID-19 pneumonia patient in Macau: female, 39, Wuhan resident, visited Macao on 01/22/2020, symptom onset on 01/25/2020, hospitalized on 01/25/2020, confirmed on 01/26/2020
+new confirmed COVID-19 pneumonia patient in Macau: female, 21, Wuhan resident, visited Macao on 01/23/2020, symptom onset on 01/25/2020, hospitalized on 01/25/2020, confirmed on 01/26/2020
+new confirmed imported COVID-19 pneumonia patient 01/26-No.1 in Shaanxi: female, 30, Xian resident, close contact with 01/23-No.2 symptom onset during quarantine, confirmed on 01/26/2020
+new confirmed imported COVID-19 pneumonia patient 01/26-No.2 in Shaanxi: female, 64, healthcare worker in Wuhan, symptom onset on 01/10/2020 in Wuhan, arrived in Xian on 01/14/2020, visited clinic on 01/20/2020, confirmed on 01/26/2020
+new confirmed imported COVID-19 pneumonia patient 01/26-No.3 in Shaanxi: male, 44, lives in Jingzhou, Hubei. symptom onset on 01/18/2020, visited Wuhan from 01/20/2020 to 01/21/2020, visited clinic on 01/24/2020, confirmed on 01/26/2020.
+new confirmed imported COVID-19 pneumonia patient 01/26-No.4 in Shaanxi: female, 70, Wuhan resident. have contact with 01/25-No.4, 01/25-No.5, 01/25-No.6, symptom onset on 01/23/2020, confirmed on 01/26/2020.
+new confirmed imported COVID-19 pneumonia patient 01/26-No.5 in Shaanxi: female, 52, Tongchuan, Shanxi resident. have contact with 01/26-No.4, confirmed on 01/26/2020.
+new confirmed imported COVID-19 pneumonia patient 01/26-No.6 in Shaanxi: female, 32, Xian, Shanxi resident. visited Hangzhou from 01/12/2020 to 01/14/2020, have contact with patient from Wuhan while in Hangzhou, returned to Xihan on 01/14/2020, symptom onset on 01/17/2020, visited clinic on 01/22/2020, confirmed on 01/26/2020.
+new confirmed imported COVID-19 pneumonia patient 01/26-No.7 in Shaanxi: male, 33, Xian, Shanxi resident. close contact with 01/23-No.2 symptom onset during quarantine, confirmed on 01/26/2020
+confirmed COVID-19 pneumonia patient No.14 in Tianjin: male, 71, Wuhan resident, visited Malaysia from 01/19/2020 to 01/25/2020, arrived in Tianjin on 01/25/2020, symptom onset on 01/25/2020, hospitalized on 01/25/2020, confirmed on 01/26/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: male, 31, Wuhan resident, visited Kunming, Yunnan on 01/20/2020, screened and isolated by local health authorities on 01/24/2020, hospitalized on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 48, Wuhan resident, visited Tengchong, Yunnan on 01/22/2020, screened and isolated by local health authorities on 01/23/2020, hospitalized on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 19, works in Wuhan, visited Kunming, Yunnan on 01/15/2020, hospitalized on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 68, Wuhan resident, left Wuhan on 01/20/2020, arrived in Ruili, Yunnan on 01/23/2020, hospitalized on 01/24/2020
+new confirmed imported COVID-19 pneumonia patient in Yunnan: female, 68, Wuhan resident, left Wuhan on 01/20/2020, arrived in Ruili, Yunnan on 01/23/2020, hospitalized on 01/24/2020
+new confirmed COVID-19 pneumonia patient No.15 in Tianjin: male, 50, Tianjin resident, arrived in Tianjin from Wuhan on 01/23/2020, symptom onset on 01/25/2020, visited clinic on 01/26/2020, confirmed on 01/26/2020
+new confirmed COVID-19 pneumonia patient No.16 in Tianjin: male, 78, Tianjin resident, close contact with patient No. 5, fever on 01/21/2020, visited clinic on 01/23/2020 and 01/24/2020 seperately, tested negative, fever again on 01/26/2020, visited clinic on 01/26/2020, tested positive.
+new confirmed COVID-19 pneumonia patient No.17 in Tianjin: male, 49, Tianjin resident, close contact with patient No. 5, fever on 01/26/2020, visited clinic on 01/26/2020
+new confirmed COVID-19 pneumonia patient in Guizhou: male, Guizhou resident, 34, travel history to Wuhan
+new confirmed COVID-19 pneumonia patient in Jilin: male, Jilin resident, stopped in Wuhan on 01/19/2020 (connection flight), symptom onset on 01/25/2020, visited hospital on 01/25/2020
+new confirmed COVID-19 pneumonia patient in Yunnan: female, 55, Wuhan resident, arrived in Yunnan on 01/22/2020, hospitalized on 01/24/2020.
+new confirmed COVID-19 pneumonia patient in Yunnan: female, 36, Wuhan resident, arrived in Yunnan on 01/22/2020, hospitalized on 01/24/2020.
+new confirmed COVID-19 pneumonia patient in Yunnan: male, 65, Wuhan resident, arrived in Yunnan on 01/13/2020, hospitalized on 01/21/2020.
+new recovered COVID-19 pneumonia patient in Jiangxi: male, 38, Jiangxi resident, visited Wuhan from 01/03/2020 to 01/05/2020, symptom onset afterwards, hospitalized and confirmed on 01/23/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.1 in Shaanxi: female, 36, Wuhan resident, flight to Xian, Shanxi on 01/21/2020, symptom onset on the plane, visited hospital on 01/25/2020, confirmed on 01/27/2020.
+new confirmed imported COVID-19 pneumonia patient 01/27-No.2 in Shaanxi: male, 18, student in Wuhan and resident in Yanan, Shanxi, symptom onset on 01/20/2020, flight to Xian, Shanxi on 01/22/2020 from Wuhan, visit hosipital on 01/23/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.3 in Shaanxi: male, 50, resident of Hanzhong, Wuhan, visited Wuhan from 01/13/2020 to 01/17/2020, symptom onset on 01/18/2020, visit clinic on 01/22/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.4 in Shaanxi: female, 40, wife of patient 01/27-No.3, resident of Hanzhong, Wuhan, visited Wuhan from 01/13/2020 to 01/17/2020, symptom onset on 01/18/2020, visit clinic on 01/22/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.5 in Shaanxi: female, 63, lives in Wuhan, symptom onset on 01/10/2020, visited Xian, Shanxi on 01/15/2020, visit clinic on 01/24/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.6 in Shaanxi: female, 47, Xian resident, lives in Wuhan, symptom onset on 01/21/2020 in Wuhan, visited Xian, Shanxi on 01/23/2020, visit clinic on 01/23/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.7 in Shaanxi: female, 42, Xian resident, lives in Xian, visited Wuhan on 01/19/2020, symptom onset on 01/23/2020 in Xiaogan, Hubei, visited clinic there, returned to Xian, Shanxi on 01/24/2020, visit clinic on 01/24/2020, confirmed on 01/27/2020.
+new confirmed COVID-19 pneumonia patient 01/27-No.8 in Shaanxi: male, 48, lives in Xian, symptom onset on 01/17/2020, visited clinic on 01/19/2020, confirmed on 01/27/2020
+new confirmed imported COVID-19 pneumonia patient 01/27-No.9 in Shaanxi: male, 39, return from Wuhan on 01/22/2020, lives in Xian, symptom onset on 01/23/2020, visited clinic on 01/23/2020, confirmed on 01/27/2020.
+new confirmed imported COVID-19 pneumonia patient 01/27-No.10 in Shaanxi: female, 41, return from Wuhan on 01/18/2020, lives in Xian, symptom onset on 01/22/2020, visited clinic on 01/22/2020, confirmed on 01/27/2020.
+new confirmed imported COVID-19 pneumonia patient 01/27-No.11 in Shaanxi: male, 31, lives in Hubei, symptom onset at the end of December, visited Shanxi on 01/21/2020, visited clinic on 01/21/2020, confirmed on 01/27 2020.
+new confirmed imported COVID-19 pneumonia patient 01/27-No.12 in Shaanxi: male, 27, works in Wuhan, visited Shanxi on 01/18/2020, symptom onset on 01/22/2020, visit hospital on 01/24/2020, confirmed on 01/27/2020
+new recovered COVID-19 pneumonia patient in Hubei, Huanggang: female, 28, HCW, symptom onset on 01/07/2020, hospitalized on 01/10/2020, recovered on 01/23/2020.
+new recovered COVID-19 pneumonia patient in Hubei, Huanggang: female, 51, hospitalized on 01/11/2020, recovered on 01/22/2020.
+new recovered COVID-19 pneumonia patient in Shandong, male, 37, resident of Wuhan, works in Qingdao, Shandong, symptom onset on 01/17/2020, hospitalized on 01/17/2020, recovered on 01/21/2020.
+new confirmed COVID-19 patient in Bordeaux, France: 1/25-No.1, male, 48, French citizen of Chinese origin, visited Wuhan as part of business trip, took plane from Wuhan to Netherlands to France on 1/22/2020, symptom onset on 1/23/2020, went to clinic 1/23/2020, confirmed 1/24/2020. report date 1/25/2020.
+new confirmed COVID-19 patient in Paris, France: male, 31, Wuhan resident, arrived in France 01/18/2020, symptom onset on 01/19/2020, hospitalized 01/25/2020.
+new confirmed COVID-19 patient in Paris, France: female, 30, Wuhan resident, arrived in France 01/18/2020, symptom onset on 01/23/2020, hospitalized 01/25/2020.
+new confirmed COVID-19 patient in Paris, France: 1/28-No.1, male, 80, hospitalized in Paris on 1/25/2020 for fever, ""severe"
+new confirmed COVID-19 patient in Paris, France: female, daughter of 1/28-No.1, hospitalized, arrived in Paris 1/23/2020
+new confirmed COVID-19 patient in Paris, France: doctor infected by patient 1/25-No.1, hospitalized
+new confirmed COVID-19 patient in France: 9, in contact with Briton who had been in Singapore and was positive
+new confirmed COVID-19 patient in France: female, 33, Chinese woman who recently returned from China, hospitalized in Paris
+new confirmed COVID-19 patient in France: male, 63, recently travelled to Lombardy, Italy, hospitalized in Annecy
+new confirmed COVID-19 patient in France: male, 55, hospitalized in Amiens
+new confirmed COVID-19 patient in France: male, 36, back from Lombardy, hospitalized in Strasbourg
+new confirmed COVID-19 patient in France: male, 60, hospitalized in Paris, died 2/26
+new confirmed COVID-19 patient in France: female, 60, married to case 14
+new confirmed COVID-19 patient in France: Paris, contact of case 15
+new confirmed COVID-19 patient in France: Paris, contact of case 15
+new confirmed COVID-19 patient in France: Saint-Mande, contact of case 15
+new confirmed COVID-19 patient in France: Saint-Mande, contact of case 15
+new confirmed COVID-19 patient in France: Saint-Mande, contact of case 15
+new confirmed COVID-19 patient in France: Saint-Mande, contact of case 15
+new confirmed COVID-19 patient in France: Saint-Mande, contact of case 15
+new confirmed COVID-19 patient in France: Dijon, contact of case 15
+new confirmed COVID-19 patient in France: Dijon, contact of case 15
+new confirmed COVID-19 patient in France: Dijon, contact of case 15
+new confirmed COVID-19 patient in France: Lille, male, contact of case 15
+new confirmed COVID-19 patient in France: Nantes, female, 58, doctor of case 15, hospitalized during journey that she spent in La Baule-Escoublac
+new confirmed COVID-19 patient in France: Montpellier, male, 31, recently returned from Lombardy, Italy by plane, hospitalized 2/27
+new confirmed COVID-19 patient in France: Paris, returning from Italy
+new confirmed COVID-19 patient in France: Brest, male, 72, returning from cruise in Egypt
+new confirmed COVID-19 patient in France: Dijon, male, elderly person returning from a trip from Egypt
+new confirmed COVID-19 patient in France: Lyon, male, 50, hospitalized 2/26
+new confirmed COVID-19 patient in France: Annecy, 60s, friend of case 14 and 18
+new confirmed COVID-19 patient in France: Annecy, 30s, female, daughter of case 14 and 18
+new confirmed COVID-19 patient in France: male, stayed in Munich from 2/18-2/22, in solitary confinement at home, symptom onset 2/24, Bois-Guillaume
+new confirmed COVID-19 patient in France: female, 23, Nice, from Cannes, infected after journey in Milan
+new confirmed COVID-19 patient in Japan: male, in his 30s, Kanagawa resident, symptom onset 1/3/2020 in Wuhan (fever), returned to Japan 1/6/2020 and hospitalized, went to medical institution on 1/6/2020 and hospitalized 1/10/2020, recovered and discharged on 1/15/2020, in close contact with infected people
+new confirmed COVID-19 patient in Japan: male, in his 40s, Wuhan resident, arrived in Japan 1/19/2020, symptom onset 1/14/2020 (fever, sore throat), went to medical institution on 1/15 and 1/17, hospitalized 1/22/2020, confirmed 1/24/2020
+new confirmed COVID-19 patient in Japan: female, in her 30s, Wuhan resident, arrived in Japan 01/18/2020, symptom onset on 01/21/2020 (fever, coughing), confirmed 1/23/2020 but not hospitalized (only minor symptoms), visited medical institution in Tokyo on 1/23/2020
+new confirmed COVID-19 patient in Japan: male, in his 40s, Wuhan resident, arrived in Japan 1/22/2020, symptom onset 1/23/2020 (fever), hospitalized 1/24/2020, Aichi Prefecture
+new confirmed COVID-19 patient in Japan: male, in his 40s, Wuhan resident, developed pneumonia and in hospital in Aichi, arrived 1/20/2020, symptom onset 1/22/2020 (fever), visited medical institution in Aichi Prefecture on 1/26/2020
+new confirmed COVID-19 patient in Japan: 1/28-No.1, male, in his 60s, lives in Nara Prefecture, did not travel to Wuhan but drove buses with tour groups from Wuhan from 1/8/2020-1/16/2020, first Japanese confirmed, diagnosed with pneumonia 1/25/2020 and hospitalized on 1/17/2020, symptom onset 1/14/2020 (cough, chills, joint pain)
+new confirmed COVID-19 patient in Japan: female, in her 40s, Wuhan resident, diagnosed with pneumonia at medical institution in Hokkaido on 1/27/2020, arrived in Japan 1/21/2020, developed fever, confirmed 1/28/2020, symptom onset 1/26/2020 (cough, fever)
+new confirmed COVID-19 patient in Japan: female, in her 40s, living in Osaka Prefecture, tour guide on bus driven by 1/28-No.1 full of Wuhan tourists from 1/12/2020-1/17/2020, never went to Wuhan herself, symptom onset 1/20/2020 (fever), first visited medical institution 1/20/2020
+new confirmed COVID-19 patient in Japan: male, in his 50s, arrived on first evacuation flight from China on 1/29/2020 from Wuhan, treated in special medical faculity, symptoms (throat pain, fever), Wuhan resident, symptom onset 1/29/2020
+new confirmed COVID-19 patient in Japan: male, in his 50s, foreign national, lives in Mie, stayed in Wuhan from 12/24/2020, returned to Japan 1/13/2020, symptom onset 1/25/2020 (fever), requested medical help on 1/27/2020
+new confirmed COVID-19 patient in Japan: female, in her 30s, Hunan resident, stayed in Wuhan 1/19/2020, arrived in Japan 1/20/2020, symptom onset 1/24/2020 (fever, cough), consulted medical institution on 1/24/2020, returned on 1/27/2020, hospitalized 1/30/2020
+new confirmed COVID-19 patient in Japan: female, in her 20s, Chinese student who lives in Kyoto, arrived in Japan 1/22/2020 from Wuhan, hospitalized 1/28/2020 (fever), stayed in Wuhan 1/16-1/22 and contacted person with cough on 1/17-1/18, symptom onset 1/23/2020 (cough, fever)
+new confirmed COVID-19 patient in Japan: female, in her 20s, tour guide, no symptoms, on a bus driven by 1/28-No.1, lives in Chiba Prefecture, symptom onset 1/20/2020 (cough, runny nose), went to medical instution on 1/29/2020, joined tour on 1/17-1/22 as bus guide
+new confirmed COVID-19 patient in Japan: male, in his 40s, evacuated from Wuhan 1/31/2020
+new confirmed COVID-19 patient in Japan: male, in his 40s, symptom onset 1/26/2020 (fever, coughing), evacuated from Wuhan 1/29/2020, hospitalized 1/29/2020
+new confirmed COVID-19 patient in Japan: male, 30s, returned to Wuhan on third flight 1/31/2020, no symptoms
+new confirmed COVID-19 patient in Japan: female, 30s, lives in Wuhan, symptom onset 1/30 (fever, runny nose), consulted medical instution in Chiba prefecture 1/31/2020, hospitalized
+new confirmed COVID-19 patient in Japan: female, 50s, lives in Chiba prefecture, returned to Japan on 1/30 on second charter flight, symptom onset 1/31/2020 (fever, cough) at consultation, left for Wuhan 1/10/2020, had dinner with relative with cough on 1/19/2020
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Hubei, came to Japan on 1/22/2020, symptom onset 1/25/2020 (fever), went to medical instutition on 1/26/2020, returned to China on 1/30, same bus tour as fourth confirmed case in Japan
+new confirmed COVID-19 patient in Japan: male, in his 40s, from Chiba prefecture, resident of Wuhan, wife (17th case) tested positive earlier, visited medical institution on 2/4/2020, arrived in Japan 1/21/2020 (no symptoms), symptom onset 1/24/2020 (fever, cough), went to medical institution 1/27/2020
+new confirmed COVID-19 patient in Japan: male, in his 20s, in Kyoto, hospitalized 1/31/2020 after symptom onset 1/24/2020 (fever), quarantined at hospital, had not traveled to China, went to hospital 1/27/2020 and 1/29/2020 but no symptoms of pneumonia
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wuhan
+new confirmed COVID-19 patient in Japan: male, 20s, lives in Wuhan
+new confirmed COVID-19 patient in Japan: male, 40s, lives in Saitama, returned to Japan on second charter flight 1/30, returned home 2/1, symptom onset 2/8 (fever), went to medical instutition 2/10
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wuhan, returned to Japan on first charter flight 1/30, symptom onset 2/7 (fever, cough), hospitalized 2/7
+new confirmed COVID-19 patient in Japan: female, 80s, lives in Kanagawa, symptom onset 1/22 (fatigue), visited doctor 1/28, died 2/13
+new confirmed COVID-19 patient in Japan: male, 70s, lives in Tokyo, symptom onset 1/29 (fever), went to medical instution 1/29, returned 2/3, went to other medical instutition 2/6 and hospitalized
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wakayama Prefecture, symptom onset 1/31 (fever, abdominal pain, diarrhea), visited doctor 2/8, hospitalization 2/10
+new confirmed COVID-19 patient in Japan: male, 20s, lives in Chiba Prefecture, symptom onset 2/2 (fever, cough), visited medical instutition 2/10, hospitalized for pneumonia 2/10
+new confirmed COVID-19 patient in Japan: male, 70s, symptom onset 2/1 (cold, fever), visited medical institution 2/6
+new confirmed COVID-19 patient in Japan: female, 60s, lives in Okinawa Prefecture, symptom onset 2/5 (cough, joint pain), visited medical institution 2/12
+new confirmed COVID-19 patient in Japan: female, 50s, lives in Tokyo, symptom onset 2/4 (vomiting, diarrhea, fever, cough), went to medical instutition on 2/7
+new confirmed COVID-19 patient in Japan: male, 70s, lives in Tokyo, symptom onset 1/20 (fever, loss of appetite), visited doctor on 1/21, home medical treatment 1/22-1/26, symptoms worsened 1/27, contacted tourist from Wuhan on 1/15
+new confirmed COVID-19 patient in Japan: male, 60s, Aichi Prefecture, symptoms 2/3 (fever), visited doctor 2/8, went to medical instutition 2/13, went to Hawaii 1/28-2/7
+new confirmed COVID-19 patient in Japan: male, 50s, Hokkaido, symptom onset 1/31 (fever, cough, malaise), visited medical instutition on 2/3, returned 2/4, hospitalized 2/11
+new confirmed COVID-19 patient in Japan: male, 30s, Kanagawa Prefecture, symptom onset 2/11 (fever), hospitalized 2/10,
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wakayama Prefecture, symptom onset 2/4 (fever), went to doctor 2/6, hospitalized 2/14, worked at medical instution where case 29 worked
+new confirmed COVID-19 patient in Japan: female, 50s, Wakayama, symptom onset 2/7 (fever, cough), married to case 38
+new confirmed COVID-19 patient in Japan: male, 60s, Wakayama Prefecture, contact of case 29, 50, 51
+new confirmed COVID-19 patient in Japan: female, 60s, went to Hawaii 1/28-2/7, symptom onset 2/13 (fever, headache), went to medical instutition 2/14, lives in Aichi Prefecture, contact of case 35 and 44
+new confirmed COVID-19 patient in Japan: female, 60s, Tokyo, contact of case 28
+new confirmed COVID-19 patient in Japan: male, 40s, Tokyo, contact of case 45
+new confirmed COVID-19 patient in Japan: male, 60s, symptoms (fatigue, difficulty breathing), went to party 1/18, from Tokyo
+new confirmed COVID-19 patient in Japan: male, 30s, went to party 1/18, from Tokyo, symptom onset 2/3 (fever, malaise), home medical treatment 2/4, visited again 2/5, again on 2/8,
+new confirmed COVID-19 patient in Japan: male, 60s, lives in Aichi Prefecture, symptom onset 2/15 (fever), went to get medical help 2/15, contact of case 43 and 53
+new confirmed COVID-19 patient in Japan: male, 60s, symptom onset 2/6 (fever, malaise), visited medical instutition 2/7, 2/10, 2/12, 2/13
+new confirmed COVID-19 patient in Japan: male, 60s, lives in Aichi Prefecture, symptom onset 2/17 (fever, malaise), consulted medical instutition 2/17, contact of case 44
+new confirmed COVID-19 patient in Japan: female, 80s, lives in Wakayama, contact of case 40, inspected as contact 2/16, hospitalized 2/17
+new confirmed COVID-19 patient in Japan: female, 50s, lives in Wakayama, inspected as contact 2/16, hospitalized 2/17
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wakayama, symptom onset 2/3 (fever), went to medical institution 2/4, 2/13
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wakayama, symptom onset 2/7 (fever), went to medical institution 2/7, 2/14
+new confirmed COVID-19 patient in Japan: female, 40s, lives in Kanagawa Prefecture symptom onset 2/14 (fever, vomiting, diarrhea), went to medical consultation 2/14, worked at a hospital where infected patient was from 2/1-2/5
+new confirmed COVID-19 patient in Japan: male, 60s, lives in Wakayama, hospitalized 2/11, symptom onset 2/16 (fever)
+new confirmed COVID-19 patient in Japan: male, 30s, lives in Wakayama, symptom onset 2/16 (fever), hospitalized 2/17
+new confirmed COVID-19 patient in Japan: male, 80s, lives in Tokyo, symptom onset 2/9 (fever, pneumonia)
+new confirmed COVID-19 patient in Japan: male, 20s, symptom onset 2/7 (fever), Tokyo
+new confirmed COVID-19 patient in Japan: male, 50s, symptom onset 2/5 (fever, cough, sputum, malaise), Tokyo
+new confirmed COVID-19 patient in Japan: male, 60s, lives in Aichi Prefecture, contact with case 44 and case 53
+new confirmed COVID-19 patient in Japan: male, 80s, lives in Sagamihara City
+new confirmed COVID-19 patient in Japan: male, 70s, lives in Sagamihara City, admitted to medical instutution 2/10, surgery 2/12, symptom onset 2/14 (fever, cough), infection found in same room 2/18
+new confirmed COVID-19 patient in Japan: male, 60s, lives in Kanagawa Prefecture, symptom onset 2/3 (fever), went to medical instutition 2/5, again 2/8, 2/10, hospitalized 2/13
+new confirmed COVID-19 patient in Japan: male, 40s, Sapporo, symptom onset 2/8 (fatigue, muscle pain, joint pain, fever), visited medical instutition 2/13, 2/15, 2/17, admitted 2/19
+new confirmed COVID-19 patient in Japan: male, 60s, Hokkaido, symptom onset 2/3 (fever, sore throat), visited medical instutition 2/7, 2/13, 2/14, hospitalized 2/18
+new confirmed COVID-19 patient in Japan: male, 60s, Okinawa, symptom onset 2/11 (fever, breathlessness, malaise), consultation 2/18
+new confirmed COVID-19 patient in Japan: male, 70s, Tokyo, symptom onset 2/4 (cough, malaise, shortness of breath)
+new confirmed COVID-19 patient in Japan: female, 70s, Tokyo, symptom onset 2/4 (cough, malaise, shortness of breath)
+new confirmed COVID-19 patient in Japan: female, 70s, Tokyo, symptom onset 2/3 (cough, sputum, dyspnea)
+new confirmed COVID-19 patient in Japan: female, 50s, Nagoya City, symptom onset 2/17 (fever, malaise), went to medical instutition 2/17, again 2/18 and hospitalized, has traveled to Wuhan before onset
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Wuhan, charter flight 2/17 to Japan
+new confirmed COVID-19 patient in Japan: male, 60s, Fukuoka Prefecture, symptom onset 2/13 (fever, pneumonia), went to medical institution 2/13, returned 2/19
+new confirmed COVID-19 patient in Japan: male, 40s, Hokkaido,
+new confirmed COVID-19 patient in Japan: female, 70s, Chiba, symptom onset 2/14 (fever), went to medical instutition 2/15, transferred to airport 2/16, went to tour 2/16-2/18, visited medical instution 2/18, visited other instutition 2/19, hospitalized 2/20
+new confirmed COVID-19 patient in Japan: male, 80s, Okinawa, symptom onset 2/6 (fever, malaise, diarrhea, cough), hospitalized 2/17
+new confirmed COVID-19 patient in Japan: male, 80s, Nagoya, symptom onset 2/19 (fever), medical consultation 2/19, hospitalized,
+new confirmed COVID-19 patient in Japan: male, 80s, Sagamihara, hospitalized 1/11, symptom onset 2/14 (fever)
+new confirmed COVID-19 patient in Japan: female, 60s, Fukuoka Prefecture
+new confirmed COVID-19 patient in Japan: male, under 10 years, Hokkaido, symptom onset 2/15 (fever), medical consultation 2/17, 2/18, 2/19
+new confirmed COVID-19 patient in Japan: male, 10s, Hokkaido, symptom onset 2/18, went to medical instutition 2/19,
+new confirmed COVID-19 patient in Japan: female, 40s, Hokkaido, symptom onset 2/16 (fever), went to medical instutition 2/18
+new confirmed COVID-19 patient in Japan: male, 50s, Ishikawa, symptom onset 2/16 (fever), went to medical institution 2/16, again on 2/17, 2/19, 2/20
+new confirmed COVID-19 patient in Japan: under 10 years, Saitama Prefecture, returned home with father on 2nd charter flight out of Wuhan on 1/30, negative on arrival, returned home with father 2/1, father had fever 2/8, 2/10-2/19 symptom onset (cough, fever)
+new confirmed COVID-19 patient in Japan: female, 50s, Tokyo, symptom onset 2/10 (fever, cough, sputum)
+new confirmed COVID-19 patient in Japan: female, 70s, Tokyo, symptom onset 2/1 (fever, cough, malaise)
+new confirmed COVID-19 patient in Japan: female, 50s, Tokyo, symptom onset 2/4 (fatigue)
+new confirmed COVID-19 patient in Japan: male, 60s, Chiba, symptom onset 2/6 (fatigue, loss of appetite), went to check-up on 2/9, visited another medical instutition 2/19, re-examined 2/20, admitted 2/21
+new confirmed COVID-19 patient in Japan: male, 80s, Sagamihara City, admitted to medical institution 1/27, symptoms relieved and discharged 2/5, symptom onset 2/18, transported 2/19
+new confirmed COVID-19 patient in Japan: male, 70s, Nagoya City, symptom onset 2/19 (fever, cough), went to medical consultation 2/21
+new confirmed COVID-19 patient in Japan: female, 20s, Nagoya City, symptom onset 2/20 (fever, cough, breathlessness), visited medical center 2/21
+new confirmed COVID-19 patient in Japan: female, 20s, Kumamoto city, symptom onset 2/17 (cough, fever, headache, nausea, vomiting, diarrhea), visited doctor 2/18, another doctor 2/19
+new confirmed COVID-19 patient in Japan: male, 50s, Kumamoto city, symptom onset 2/20 (cough, fever), admitted to infectious disease institution 2/21
+new confirmed COVID-19 patient in Japan: male, 60s, kumamoto prefecture, symptom onset 2/15 (fatigue, cold, fever, vomiting), visited doctor 2/19, went again 2/21, visited Hokkaido 2/2-2/10
+new confirmed COVID-19 patient in Japan: male, 40s, Wakayama, symptom onset 2/2 (fever, fatigue, cough, diarrhea), went to doctor 2/2, again 2/3, again 2/6, 2/17
+new confirmed COVID-19 patient in Japan: female, 60s, Chiba, symptom onset 2/12 (nausea), went to doctor, worked 2/13-2/19, cough appeared 2/18, went back to doctor 2/18, fever 2/21
+new confirmed COVID-19 patient in Japan: female, 50s, symptom onset 2/16 (fatigue, joint pain, fever), came home 2/18, went to doctor 2/19, moved to another hospital 2/21
+new confirmed COVID-19 patient in Japan: female, 70s, Hokkaido, symptom onset 2/6 (cough, sputum), fever 2/9, sore throat and malaise 2/10, hospitalized 2/10
+new confirmed COVID-19 patient in Japan: male, 80s, Hokkaido, symptom onset 2/3 (difficulty breathing), hospitalized 2/3
+new confirmed COVID-19 patient in Japan: male, 70s, Hokkaido, symptom onset 2/16 (fever, cough, malaise), fever 2/17, fever 2/19, went to doctor 2/20
+new confirmed COVID-19 patient in Japan: female, 50s, Hokkaido, symptom onset 2/17, went to doctor 2/19
+new confirmed COVID-19 patient in Japan: male, 60s, Hokkaido, symptom onset 2/10 (fever), went to doctor 2/10, fever 2/17, went to another doctor 2/19
+new confirmed COVID-19 patient in Japan: female, 50s, Hokkaido, symptom onset 2/15 (fatigue), visited doctor 2/16 due to malaise and headache, another doctor 2/19
+new confirmed COVID-19 patient in Japan: female, 10s, Hokkaido, symptom onset 2/6 (fever), went to doctor 2/7, another doctor 2/10, fever, sore throat, and malaise 2/18, visited another doctor 2/20, went to Tokyo 2/3-2/6
+new confirmed COVID-19 patient in Japan: female, 50s, Hokkaido, symptom onset 2/13 (sore throat), cough and fever 2/15, went to doctor 2/15, again 2/17, another doctor 2/20, a third doctor 2/21
+new confirmed COVID-19 patient in Japan: male, 60s, symptom onset 2/12 (fever, cough), Tokyo
+new confirmed COVID-19 patient in Japan: female, 60s, symptom onset 2/19 (fever, nasal discharge, headache), went to doctor 2/21, Nagoya City
+new confirmed COVID-19 patient in Japan: female, 40s, symptom onset 2/20 (fever), went to doctor 2/21, Nagoya City
+new confirmed COVID-19 patient in Japan: male, 60s, symptom onset 2/20 (fever, cough, malaise), went to doctor 2/21, Nagoya City
+new confirmed COVID-19 patient in Japan: male, 60s, symptom onset 2/20 (fever), went to doctor 2/21, Nagoya City
+new confirmed COVID-19 patient in Japan: female, 60s, returned home after disembarking from Diamond Princess 2/19, symptom onset 2/21 (fever), visited center 2/22, Tochigi prefecture
+new confirmed COVID-19 patient in Japan: male, 50s, lives in Sagamihara City, symptom onset 2/16 (fever), visited doctor 2/17 for fever and headache, fever 2/18, returned 2/19, visited another doctor 2/21 and hospitalized
+new confirmed COVID-19 patient in Japan: male, 50s, Hokkaido, symptom onset 2/17 (fever, difficulty breathing), went to doctor 2/18 and 2/19, fever 2/21 so visited second doctor, third doctor 2/21
+new confirmed COVID-19 patient in Japan: male, 70s, Sapporo City
+new confirmed COVID-19 patient in Japan: female, 70s, symptom onset 2/22 (fever), visited doctor 2/22, Nagoya City
+new confirmed COVID-19 patient in Japan: male, 70s, symptom onset 2/21 (fever, cough), visited doctor 2/22, Nagoya City
+new confirmed COVID-19 patient in Japan: male, 40s, symptom onset 2/12 (joint pain, muscle pain), business trip to Hiroshima 2/12, business trip to Gifu 2/13, cough and malaise 2/14, returned home from Gifu 2/14, worked in Tokyo 2/17-2/18, fever 2/18, visited doctor 2/18, re-examined 2/19, visited another hospital and hospitalized 2/21, Chiba
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 30s
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 60s
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 20s
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 70s
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 30s
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 80s
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 40s
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 20s
+new confirmed COVID-19 patient in Japan: Ishikawa Prefecture, female, 50s
+new confirmed COVID-19 patient in Japan: Sagamihara City, male, 50s, symptom onset 2/16, went to doctor 2/17 due to fever and headache, went to doctor again on 2/19 due to fever and malaise, went to another doctor 2/21 due to severe fever and headache
+new confirmed COVID-19 patient in Japan: Ishikawa Prefecture, male, 60s, symptom onset 2/16 (fever, sore throat), visited doctor 2/17, visited another doctor 2/19 and 2/22, visited fourth doctor 2/23
+new confirmed COVID-19 patient in Japan: Sapporo City, female, 70s, symptom onset 2/21 (fever, cough), visited medical institution 2/22, visited hospital 2/23
+new confirmed COVID-19 patient in Japan: Sapporo City, male, 50s, symptom onset 2/14 (chills), visited doctor 2/17, slight fever, runny nose, nausea 2/17, re-examined 2/19 and 2/21, went to hospital 2/23
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 20s, symptom onset 2/18 (fever), went to doctor 2/23
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 50s, symptom onset 2/17 (cough), fever 2/20, went to doctor 2/20, went to second doctor 2/23
+new confirmed COVID-19 patient in Japan: Kanagawa Prefecture, male, 50s, symptom onset 2/14 (fever), went to doctor 2/17, visited second doctor 2/19, fever, respiratory distress, and malaise increased 2/23, went to second doctor 2/23, transferred to third institution and hospitalized
+new confirmed COVID-19 patient in Japan: Tokyo, male, 40s, symptom onset 2/13 (Fever, malaise)
+new confirmed COVID-19 patient in Japan: Tokyo, male, 50s, symptom onset 2/19 (Fever, malaise)
+new confirmed COVID-19 patient in Japan: Tokyo, male, 30s, symptom onset 2/18 (fever, sore throat)
+new confirmed COVID-19 patient in Japan: Sagamihara City, female, 50s, symptom onset 2/20 (mild cough, sputum, throat discomfort), husband diagnosed 2/22
+new confirmed COVID-19 patient in Japan: Sagamihara City, female, 20s, symptom onset 2/21 (cough, sneeze), father diagnosed 2/22
+new confirmed COVID-19 patient in Japan: Sagamihara City, female, 20s, symptom onset 2/19, visited doctor 2/19, re-examined 2/20 due to fever, chills, joint pain, heavy head, throat discomfort
+new confirmed COVID-19 patient in Japan: Nagano Prefecture, male, 60s, stayed in Hokkaido 2/14-2/17, stayed in Tokyo 2/17-2/19, symptom onset 2/20 (fatigue), fever on 2/21, went to doctor on 2/21, went to health center 2/23, fever 2/24, hospitalized 2/24
+new confirmed COVID-19 patient in Japan: Kumamoto City, male, 50s, sore throat since 2/20, went to public health center 2/24
+new confirmed COVID-19 patient in Japan: Kumamoto City, female, 60s, symptom onset 2/25 (fever), went to health center 2/25
+new confirmed COVID-19 patient in Japan: Sapporo City, female, 60s, symptom onset 2/17 (fever), visited doctor 2/17, re-examined 2/18, visited again 2/21, medical examination 2/24
+new confirmed COVID-19 patient in Japan: Ishikawa Prefecture, female, 50s
+new confirmed COVID-19 patient in Japan: Nagoya City, female, 70s, fever 2/20, hospitalized 2/21
+new confirmed COVID-19 patient in Japan: Nagoya City, female, 70s, fever and cough 2/23, went to doctor 2/23
+new confirmed COVID-19 patient in Japan: Nagoya City, female, 40s, fever and runny nose 2/23, went to doctor 2/23
+new confirmed COVID-19 patient in Japan: Chiba Prefecture, male, 50s, fever 2/22, visited doctor 2/25, on Diamond Princess 2/12-2/18 as part of diaster team doctor
+new confirmed COVID-19 patient in Japan: Chiba Prefecture, male, 60s, fever 2/22, went to doctor 2/24, hospitalized 2/25, passenger on cruise ship diamond princess, tested negative 2/16, disembarked 2/20
+new confirmed COVID-19 patient in Japan: Chiba Prefecture, male, 70s, fever 2/12, on Diamond Princess and tested negative 2/14, disembarked 2/21, fever 2/21 during follow-up at health center, visited doctor 2/25 and hospitalized
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 20s, headache and fever 2/17, fever and malaise 2/18, went to doctor 2/18, again 2/20, hospitalized 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 20s, sore throat 2/19, fever 2/21, went to doctor 2/24, traveling to Osaka early February
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 70s, during hospitalization, fever 2/23
+new confirmed COVID-19 patient in Japan: Hokkaido, symptom onset 2/16 (cough), hospitalized 2/17, died 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 70s, fever and malaise 2/17, went to doctor 2/20, emergency transport to hospital 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 70s, fever and cough 2/16, went to doctor 2/16, returned 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 40s, visited doctor due to fever and cough 2/24
+new confirmed COVID-19 patient in Japan: Kanagawa, male, 60s, identified as close contact and tested 2/25, hospitalized 2/26, now has fever, cough, malaise
+new confirmed COVID-19 patient in Japan: Osaka, female, 40s, went to doctor 2/6 with cough, again 2/13, 2/19 throat discomfort and chest pain, went to doctor 2/21, 2/22, 2/25
+new confirmed COVID-19 patient in Japan: Tokyo, male, 80s, symptom onset 2/22 (fever, cough, sputum, dyspnea)
+new confirmed COVID-19 patient in Japan: Tokyo, male, 70s, symptom onset 2/12 (fever, cough, sputum, dyspnea)
+new confirmed COVID-19 patient in Japan: Tokyo, male, 70s, symptom onset 2/14 (fever, cough, sputum)
+new confirmed COVID-19 patient in Japan: Nagoya City, male, 50s, fever and thirst 2/24, went to doctor 2/25
+new confirmed COVID-19 patient in Japan: Nagoya City, male, 60s, fever and went to doctor 2/25
+new confirmed COVID-19 patient in Japan: Nagoya City, male, 70s, fever, cough, runny nose 2/24, went to doctor 2/25
+new confirmed COVID-19 patient in Japan: Nagoya City, male, 70s, fever, cough, malaise 2/23, went to doctor 2/25
+new confirmed COVID-19 patient in Japan: Nagoya City, female, 70s, fever, cough, sore throat, runny nose and went to doctor 2/24
+new confirmed COVID-19 patient in Japan: Gifu Prefecture, male, 50s, malaise and fever 2/14, went to doctor 2/15, went back to doctor due to headache 2/20, visited another doctor 2/21, visited doctor again 2/25
+new confirmed COVID-19 patient in Japan: Gifu Prefecture, female, 50s, throat pain and chills 2/23, sample collected as close contact with another patient 2/26, contact with case 168 from 2/20-2/24, on 2/24 left for Osaka by train and returned to Gifu on 2/25
+new confirmed COVID-19 patient in Japan: Ishikawa Prefecture, male, 50s, fever 2/16, visited doctor 2/17, visited another doctor 2/22
+new confirmed COVID-19 patient in Japan: Kanagawa Prefecture, male, 50s, visited doctor 2/20 with fever, headache, malaise, re-examined 2/21 and 2/25
+new confirmed COVID-19 patient in Japan: Tokyo, female, 60, fever, cough, sputum 2/10
+new confirmed COVID-19 patient in Japan: Osaka, male, 40s, fever, cough 2/20, headache 2/21, visited doctor 2/26,
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 50s, close contact of another case, detected as contact 2/24, fever 2/25, health observation started 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 50s, detected as close contact of another case 2/24, cough and malaise 2/25, health observation started 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 30s, fever 2/17, went to doctor 2/18, went to another doctor 2/20, went back to first doctor 2/22, admitted to hospital 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 70s, fatigue 2/16, fever 2/18, went to doctor 2/20, consulted second doctor 2/24, close contact with other infected patients
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 60s, fever 2/18, went to doctor 2/22, sore throat, joint pain, dyspnea 2/23, hospitalized 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 40s, vomiting 2/15, cough symptoms 2/16, fever and sore throat 2/17, went to doctor 2/17 and 2/18, consulted second and third doctors 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 40s, fever 2/21, went to doctor 2/21, consulted second doctor 2/22, third doctor 2/23 and 2/25, hospitalized 2/27
+new confirmed COVID-19 patient in Japan: Hokkaido, male, under 10, fever 2/21, cough 2/22, went to doctor 2/24 and 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 30s, fever, headache, malaise, joint pain 2/24, went to doctor 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, under 10, fever and cough 2/21, went to doctor 2/22, 2/24, 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 80s, fever and cough 2/24, went to doctor 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 30s, cough symptoms 2/20, fever and joint pain 2/23, went to doctor 2/23 and 2/25
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 80s, cough 2/22, fever 2/23, hospitalized 2/24
+new confirmed COVID-19 patient in Japan: Hokkaido, male, 60s, fever, malaise, sore throat 2/22, went to doctor 2/22 and 2/25,
+new confirmed COVID-19 patient in Japan: Hokkaido, female, 40s, cough and sore throat 2/24, close contact with another patient in Hokkaido
+new confirmed COVID-19 patient in Japan: Nagoya, female, 60s, fever and went to doctor 2/26
+new confirmed COVID-19 patient in Japan: Nagoya, male, 60s, fever, cough, headache, went to doctor 2/26
+new confirmed COVID-19 patient in Malaysia: male, 40, Wuhan resident, arrived in Johor from Singapore on 1/22/2020, symptom onset 1/23/2020 (fever and cough), hospitalized 1/23/2020
+new confirmed COVID-19 patient in Malaysia: female, 65, wife of Singapore 1/24-No.1, treated in isolation wards in Selangor, light symptoms (dry cough), took plane from Guangzhou to Singapore on 1/20/2020.
+new confirmed COVID-19 patient in Malaysia: male, 11, grandson of Singapore 1/24-No.1, treated in isolation wards in Selangor, light symptoms (dry cough), took plane from Guangzhou to Singapore on 1/20/2020.
+new confirmed COVID-19 patient in Malaysia: male, 2, grandson of Singapore 1/24-No.1, treated in isolation wards in Selangor, light symptoms (dry cough), took plane from Guangzhou to Singapore on 1/20/2020.
+new confirmed COVID-19 patient in Malaysia: female, 4, hospitalized in Langkawi, arrived on 1/20, developed fever, cough, flu, went to hospital 1/26
+new confirmed COVID-19 patient in Malaysia: female, daughter-in-law of Singapore 1/24-No.1,
+new confirmed COVID-19 patient in Malaysia: 1/29-No.1, male, 52, hospitalized in Johor
+new confirmed COVID-19 patient in Malaysia: female, 49, hospitalized in Johor, married to 1/29-No.1
+new confirmed COVID-19 patient in Malaysia: 2/4-No.1, male, 41, Malaysian citizen, travelled to Singapore from 1/16-1/23 with colleagues from China, including one from Wuhan, from Selangor, went to hospital 1/29 for fever and cough, referred to hospital on 2/2
+new confirmed COVID-19 patient in Malaysia: male, 63, Chinese national from Wuhan, been in Malaysia since 1/18, symptom onset 1/23 (fever), went to hospital, still fever on 2/2, admitted into hospital
+new confirmed COVID-19 patient in Malaysia: male, 45, flown back from Wuhan on 2/4, now in hospital
+new confirmed COVID-19 patient in Malaysia: male, 9, flown back from Wuhan on 2/4, now in hospital
+new confirmed COVID-19 patient in Malaysia: female, 40, sister of 2/4-No.1, symptom onset 2/1 (fever, sore throat, cough), visited clinic
+new confirmed COVID-19 patient in Malaysia: 2/6-No.1, female, 37, tourist from Wuhan, arrived on 1/25, visited hospital 2/1 (mild fever), went to hospital 2/5
+new confirmed COVID-19 patient in Malaysia: female, 59, from Wuhan, holidaying in Johor Baru, arrived in Singapore on 1/17, went to Johor Baru 1/21, symptom onset 1/26 (fever)
+new confirmed COVID-19 patient in Malaysia: female, 67, from Wuhan, mother of a friend of 2/6-No.1, arrived for holiday on 1/25
+new confirmed COVID-19 patient in Malaysia: female, 65, mother-in-law of 2/4-No.1, exposed 1/26-1/28
+new confirmed COVID-19 patient in Malaysia: male, 31, travelled to Macau for work then returned to Malaysia on 2/1, symptom onset 2/3 (cough), went to clinic, referred to hospital 2/7
+new confimed COVID-19 patient in Malaysia: female, 39, from Wuhan, daughter of case 16
+new confirmed COVID-19 patient in Malaysia: male, 27, Chinese national, found to have a fever on 2/13/2020, referred to hospital 2/13
+new confirmed COVID-19 patient in Malaysia: female, 32, Chinese national, went to China 1/22-1/30 to visit family, symptom onset 2/13 (sore throat), referred to hospital
+new confirmed COVID-19 patient in Malaysia: female, 83, American, passenger of cruise ship that docked in Cambodia 2/13, flew to Malaysia 2/14
+new confirmed COVID-19 patient in Malaysia: female, 53, returned to Malaysia from Japan on 2/23
+new confirmed COVID-19 patient in Nepal: male, 32, studying in Wuhan, arrived in Nepal 1/13/2020 from China, visited Kathmandu hospital (fever, breathing problems) 1/13/2020, discharged, symptom onset 1/3 (cough), discharged 1/17
+new confirmed COVID-19 patient in Singapore: 1/24-No.1, male, 66, Wuhan resident, arrived in Singapore 1/20/2020, symptom onset 1/21/2020 (fever and cough), hospitalized 1/22/2020, confirmed 1/23/2020.
+new confirmed COVID-19 patient in Singapore: female, 53, Wuhan resident, arrived in Singapore 1/21/2020, symptom onset 1/21/2020 (fever, cough, chills), hospitalized 1/22/2020, confirmed 1/23/2020.
+new confirmed COVID-19 patient in Singapore: male, 37, son of 1/24-No.1, suspected case 1/23/2020, Wuhan resident, arrived in Singapore 1/20/2020, confirmed 1/24/2020, in isolation.
+new confirmed COVID-19 patient in Singapore: 1/26-No.1, male, 36, Wuhan resident, arrived in Sentosa,Singapore 1/22/2020, symptom onset 1/23/2020 (cough), went to hospital on 1/24/2020.
+new confirmed COVID-19 patient in Singapore: female, 56, Wuhan resident, arrived in Singapore 1/18/2020 asymptomatic, symptom onset 1/24/2020, hospitalized 1/26/2020.
+new confirmed COVID-19 patient in Singapore: male, 56, Wuhan resident, arrived in Singapore 1/19/2020, symptom onset 1/25/2020 (cough), hospitalized 1/26/2020, tested positive 1/27/2020.
+new confirmed COVID-19 patient in Singapore: male, 35, Wuhan resident, arrived in Singapore 1/23/2020, symptom onset 1/24/2020, hospitalized 1/24/2020, tested positive 1/27/2020, discharged 2/4/2020
+new confirmed COVID-19 patient in Singapore: female, 56, married to 1/29-No.2, arrived in Singapore 1/19/2020, warded in isolation rooms, symptom onset 1/24/2020, went to hospital on 1/27/2020, confirmed 1/28/2020, Church cluster
+new confirmed COVID-19 patient in Singapore: male, 56, married to 1/29-No.1, arrived in Singapore 1/19/2020, warded in isolation rooms, symptom onset 1/24/2020, went to hospital 1/27/2020, confirmed 1/29/2020, church cluster
+new confirmed COVID-19 patient in Singapore: male, 56, arrived in Singapore 1/20/2020, warded, symptom onset 1/21/2020, admitted to NCID 1/28/2020, confirmed 1/29/2020.
+new confirmed COVID-19 patient in Singapore: female, 31, from Wuhan, arrived in Singapore 1/22/2020, travelling companion of 1/26-No.1, no symptoms on flight, quarantined from 1/26/2020, symptom onset 1/27/2020, confirmed 1/29/2020
+new confirmed COVID-19 patient in Singapore: female, 37, from Wuhan, arrived in Singapore 1/22/2020 with family, also asymptomatic during flight, symptom onset 1/26/2020, went to hospital on 1/29/2020
+new confirmed COVID-19 patient in Singapore: 1/30-No.1, female, 73, from Wuhan, arrived in Singapore with family 1/21/2020, tested positive on 1/30/2020, symptom onset 1/28/2020
+new confirmed COVID-19 patient in Singapore: male, 31, Chinese national, evacuated from Wuhan on 1/26/2020, asymptomatic on flight by symptom onset 1/28/2020, went to clinic on 1/30/2020
+new confirmed COVID-19 patient in Singapore: female, 47, Singaporean, evacuated from Wuhan on 1/30/2020, found to have a fever on arrival at Changi airport, tested positive 1/31/2020, now in isolation
+new confirmed COVID-19 patient in Singapore: 38, male, Chinese national, arrived in Singapore from Wuhan 1/22/2020, asymptomatic during flight, symptom onset 1/23/2020, stayed home until 1/29/2020 when he took a taxi to SGH, conformed 1/31/2020
+new confirmed COVID-19 patient in Singapore: female, 47, Singaporean, evacuated from Wuhan on 1/30/2020, found to have a fever on arrival at Changi airport, tested positive 1/31/2020, now in isolation
+new confirmed COVID-19 patient in Singapore: female, 31, Chinese national, arrived in Singapore from Wuhan 1/22/2020, tested positive 2/1/2020
+new confirmed COVID-19 patient in Singapore: 2/4-No.1, female, 28, Singaporean, symptom onset 1/29/2020 (fever, sore throat), went to clinic 1/29/2020, hospital 1/30/2020 but discharged after found to not have pneumonia, stayed at home from 1/31/2020 to 2/2/2020 before being admitted to hospital on 2/3/3030, no recent travel history to China, work at shop tour group visited, group visited store 1/23
+new confirmed COVID-19 patient in Singapore: 2/4-No.2, female, 48, Singaporean, symptom onset 1/25/2020, admitted 2/3/2020 to NCID, no recent travel history to China, work at shop tour group visited, group visited store 1/23
+new confirmed COVID-19 patient in Singapore: female, 44, Indonesian national, symptom onset 2/2/2020, did not leave house until admitted to hospital 2/3/2020, no recent travel history to China, domestic helpers of 2/4-No.1
+new confirmed COVID-19 patient in Singapore: Singaporeans, evacuated from Wuhan 1/30/2020, no symptoms on boarding, tested positive 2/3/2020 despite having no symptoms
+new confirmed COVID-19 patient in Singapore: Singaporeans, evacuated from Wuhan 1/30/2020, no symptoms on boarding, tested positive 2/3/2020 despite having no symptoms
+new confirmed COVID-19 patient in Singapore: 2/4-No.2, female, 32, no recent travel history to China, tour guide for group of Chinese tourists, in Singapore 1/22-1/23 and 1/27, asymptomatic on arrival to NCID
+new confirmed COVID-19 patient in Singapore: male, husband of 2/4-No.2, had not been to China recently, at NCID, symptom onset 1/24/2020 (fever), visited clinic with wife on 1/30/2020, went to NCID on 2/3/2020
+new confirmed COVID-19 patient in Singapore: female, 42, Chinese national, arrived in Singapore from Wuhan on 1/21/2020, daughter of 1/30-No.1,
+new confirmed COVID-19 patient in Singapore: male, 6 months, son of 2/4-No.1, now in isolation room in hospital
+new confirmed COVID-19 patient in Singapore: male, 45, married fo 2/4-No.1, warded in isolationi at NCID, symptom onset 2/1, visited clinic 2/2, isolated 2/4
+new confimed COVID-19 patient in Singapore: male, 41, Singapore citizen, no recent travel history, admitted to hospital on 2/3, symptom onset 1/28/2020 (fever), visited clinic 1/29/2020 and 1/30/2020
+new confirmed COVID-19 patient in Singapore: 2/6-No.1, male, 27, Singapore citizen, no recent travel history, attended business meeting 1/20-1/22 with people from Hubei and confirmed cases from Malaysia and South Korea, now in NCID, symptom onset 1/21, visited clinic 1/28, another clinic 2/3, admitted to NCID 2/6
+new confirmed COVID-19 patient in Singapore: male, 53, Singapore citizen, no recent travel history to China, but went to Malaysia on 1/6, 1/11, 1/17, currently in isolation roomin hospital, symptom onset 1/23, visited clinic 1/23, visited another clinic 1/28, admitted to hospital 2/1, Church cluster
+new confirmed COVID-19 patient in Singapore: female, 42, Singapore citizen, no recent travel, warded in NCID, symptom onset 2/2, admitted to hospital 2/5
+new confirmed COVID-19 patient in Singapore: female, 39, no recent travel, went to Malaysia 1/22-1/29, now in hospital, symptom onset 1/30, went to ER 2/2, church cluster
+new confirmed COVID-19 patient in Singapore: female, 40, symptom onset 1/27, visited clinic 1/27, 2/1, close contact of 2/4-No.1 and 2/4-No.2, home quarantine 2/4, admitted to NCID 2/6
+new confirmed COVID-19 patient in Singapore: male, 64, in hospital, symptom onset 1/30, visited clinic 1/31, admitted to hospital 2/6
+new confirmed COVID-19 patient in Singapore: 2/8-No.1, female, 38, in isolation, symptom onset 1/24, visited clinic 2/1, admitted to hospital 2/4, attended same private business meeting as case 30 (2/6-No.1)and 39 (2/8-No.2) from 1/20-1/22
+new confirmed COVID-19 patient in Singapore: male, 53, symptom onset 1/30, visited clinic 2/1, 2/3, admitted to hospital 2/6, transferred to NCID 2/8
+new confirmed COVID-19 patient in Singapore: female, 52, symptom onset 2/3, visited clinic 2/4, admitted to NCID 2/7
+new confirmed COVID-19 patient in Singapore: 2/8-No.2, male, 51, travelled to malaysia from 1/23 to 2/2, symptom onset 1/29, visited clinic 2/3, 2/5, admitted to NCID 2/6, attended same private business meeting as case 30 (2/6-No.1) and 36 (2/8-No.2) from 1/20 to 1/22
+new confirmed COVID-19 patient in Singapore: male, 36, symptom onset 1/30, visited clinic 1/30, close contact of case 19 and 20 (2/4-No.1 and 2), placed under home quarantine on 2/4, admitted to NCID 2/7
+new confirmed COVID-19 patient in Singapore: male, 71, symptom onset 2/1, clinic 2/1, 2/5, went to clinic 2/6, hospital 2/7
+new confirmed COVID-19 patient in Singapore: male, 39, symptom onset 2/1, clinic 2/3, hospital 2/5
+new confirmed COVID-19 patient in Singapore: male, 54, in Malaysia 1/26, symptom onset 1/30, visited clinics on 1/30, 2/5, 2/6, hospital 2/6
+new confirmed COVID-19 patient in Singapore: 37, male, symptom onset 1/31/2020, clinic 2/2, hospital 2/6
+new confirmed COVID-19 patient in Singapore: 2, female, evacuated from Wuhan on 1/30, without symptoms on board, quarantined upon landing, went to hospital on 2/7
+new confirmed COVID-19 patient in Singapore: 35, male, lives in Johor Bahru, symptom onset 2/5, went to clinic 2/9, transferred to hospital 2/9
+new confirmed COVID-19 patient in Singapore: male, 39, symptom onset 2/6, went to clinic 2/7, NCID 2/10, works at same location as case 42
+new confirmed COVID-19 patient in Singapore: male, 34, in Malaysia on 1/26, symptom onset 2/1, went to clinic on 2/2, 2/4, 2/7, 2/9, 2/10, went to NCID 2/10
+new confirmed COVID-19 patient in Singapore: male, 46, symptom onset 2/3, went to clinic 2/8, ED on 2/8, 2/10
+new confirmed COVID-19 patient in Singapore: male, 62, symptom onset 2/7, went to clinics on 2/7, 2/10, 2/11, admitted to NCID 2/11
+new confirmed COVID-19 patient in Singapore: male, 48, symptom onset 2/3, went to clinic 2/5, 2/10
+new confirmed COVID-19 patient in Singapore: male, 37, Bangladesh national, symptom onset 2/7, close contact of cases 42, 47, went to hospital on 2/11
+new confirmed COVID-19 patient in Singapore: male, 54, symptom onset 2/10, went to NCID 2/12
+new confirmed COVID-19 patient in Singapore: female, 54, linked to Grace Assembly of God, symptom onset 2/10, went to clinic 2/11, went to NCID 2/12
+new confirmed COVID-19 patient in Singapore: male, 30, family member of case 50, symptom onset 1/30, went to clinic on 1/30, 2/3, NCID on 2/12
+new confirmed COVID-19 patient in Singapore: male, 30, linked to cluster at Aerospace Heights construction site, close contact of case 47, symptom onset 2/12
+new confirmed COVID-19 patient in Singapore: male, 26, symptom onset 2/11, NCID on 2/11
+new confirmed COVID-19 patient in Singapore: male, 55, symptom onset 2/10, went to NCID 2/12, linked to cluster at Grace Assemly of God
+new confirmed COVID-19 patient in Singapore: male, 61, symptom onset 2/7, went to clinic 2/10, hospital on 2/12, NCID on 2/13
+new confirmed COVID-19 patient in Singapore: female, 51, linked to cluster at Grace Assembly of God, symptom onset 2/8, clinic on 2/8, went to NCID on 2/12
+new confirmed COVID-19 patient in Singapore: male, 57, symptom onset 2/6, went to clinic on 2/6 and 2/8, went to hospital on 2/9 and 2/11 and 2/12
+new confirmed COVID-19 patient in Singapore: female, 44, symptom onset 2/9, clinic on 2/9, went to hospital on 2/12
+new confirmed COVID-19 patient in Singapore: female, 54, linked to Grace Assembly of God, symptom onset 2/10, went to clinic on 2/13, send to NCID
+new confirmed COVID-19 patient in Singapore: male, 50, symptom onset 2/3, went to clinics on 2/5, 2/7, 2/10, 2/13, ED on 2/13
+new confirmed COVID-19 patient in Singapore: female, 61, family member of case 50 and case 55, sent to NCID on 2/12
+new confirmed COVID-19 patient in Singapore: male, 28, linked to cluster at Grace Assemly of God, symptom onset 1/29, went to clinic on 2/2, 2/5, 2/12, referred to NCID 2/12
+new confirmed COVID-19 patient in Singapore: female, 56, linked to cluster at Grace Assembly of God, family member of case 61, symptom onset 2/9, sent to NCID on 2/13
+new confirmed COVID-19 patient in Singapore: female, 79, family member of case 66, symptom onset 1/30, went to NCID 2/14
+new confirmed COVID-19 patient in Singapore: 26, male, linked to cluster at Seletar Aerospace Heights construction site, close contact of cases 42, 47, 52, 56, quarantined from 2/11, symptom onset 2/11, went to NCID 2/14
+new confirmed COVID-19 patient in Singapore: female, 27, family member of case 66, symptom onset 2/3, treatment at clinic 2/3, NCID 2/14
+new confirmed COVID-19 patient in Singapore: male, 25, contact of case 66 and 70, symptom onset 2/1, went to clinic 2/10, went to hospital 2/13, NCID 2/15
+new confirmed COVID-19 patient in Singapore: 40, male, non-medical contact of case 59, symptom onset 2/10, treatment at clinic 2/11 and 2/13, sent to NCID 2/14
+new confirmed COVID-19 patient in Singapore: 43, male, linked to cluster at Grace Assembly of God, symptom onset 2/9, went to clinic 2/10, close contact of cases 51, home quarantine order on 2/13
+new confirmed COVID-19 patient in Singapore: 29, male, linked to cluster at Grace Assembly of God, symptom onset 2/12, went to urgent care center 2/12 and 2/15
+new confirmed COVID-19 patient in Singapore: 71, female, family member of case 41, under quarantine since 2/7
+new confirmed COVID-19 patient in Singapore: 1, male, evacuated from Wuhan 2/9
+new confirmed COVID-19 patient in Singapore: 35, male, contact of case 50, symptom onset 2/10, went to clinic 2/10 and 2/11, went to hospital 2/12, transferred to NCID 2/12
+new confirmed COVID-19 patient in Singapore: 57, female, linked to cluster at Grace Assembly of God, symptom onset 2/9, went to clinics 2/10 and 2/17, went to NCID 2/17
+new confirmed COVID-19 patient in Singapore: 35, female, family member of case 72, symptom onset 2/12, home quarantine 2/15, went to NCID 2/17
+new confirmed COVID-19 patient in Singapore: 38, female, linked to case 66, symptom onset 2/4, went to clinic 2/4 and 2/10
+new confirmed COVID-19 patient in Singapore: 50, male, linked to cluster at Grace Assembly of God, symptom onset 2/16, went to NCID on 2/17
+new confirmed COVID-19 patient in Singapore: 57, female, symptom onset 2/9, went to clinic 2/10 and 2/14 and 2/12, hospital on 2/13 and 2/15, admitted 2/15
+new confirmed COVID-19 patient in Singapore: 54, male, travels frequently to Malaysia, symptom onset 1/28, went to clinic on 2/1, 2/5, 2/6, 2/10, NCID 2/18
+new confirmed COVID-19 patient in Singapore: 35, female, linked to case 66, symptom onset 2/4, went to clinic 2/4 and 2/5, referred to NCID on 2/18
+new confirmed COVID-19 patient in Singapore: 36, male, symptom onset 2/14, went to clinic 2/14, 2/16, 2/19, went to hospital 2/19
+new confirmed COVID-19 patient in Singapore: male, 24, linked to case 82, symptom onset 2/14, went to clinics 2/16, 2/18, hospital on 2/19
+new confirmed COVID-19 patient in Singapore: male, 32, evacuated from Wuhan 2/9
+new confirmed COVID-19 patient in Singapore: female, 30, symptom onset 2/16, went to clinic 2/17, identified as contact of case 66, went to NCID 2/21
+new confirmed COVID-19 patient in Singapore: male, 41, symptom onset 2/3, went to clinics 2/3, 2/7, 2/10, 2/17, 2/21
+new confirmed COVID-19 patient in Singapore: 75, female, linked to cluster at The Life Church and Missions Singapore, symptom onset 2/9, went to clinic 2/9, 2/17, 2/23, went to hospital 2/23
+new confirmed COVID-19 patient in Singapore: female, 58, linked to case 66, symptom onset 1/23, went to clinic on 2/1, 2/6, 2/10, referred to NCID on 2/18
+new confirmed COVID-19 patient in Singapore: male, 47
+new confirmed COVID-19 patient in Singapore: male, 38
+new confirmed COVID-19 patient in South Korea: female, 35, Wuhan resident, arrived in Incheon international airport on 1/19/2020, isolated on entering South Korea with symptoms, symptom onset 1/18/2020 (high fever, chills, muscle pain), discharged 2/6
+new confirmed COVID-19 patient in South Korea: male, 55, arrived at Gimpo International Airport 1/22/2020, works in Wuhan, visited Chinese clinic 1/19/2020 after suffering from sore throat and other symptoms, symptom onset 1/10/2020, confirmed 1/23/2020, recovered 2/4/2020
+new confirmed COVID-19 patient in South Korea: 1/25-No.1, male, 54, visited Wuhan, arrived on 1/20/2020, symptom onset 1/22/2020 (fever, chills, muscle cramps), contacted health authorities and placed in isolation 1/25/2020, worked at ""The Place"" clothing store
+new confirmed COVID-19 patient in South Korea: 1/27-No.1, male, 55, visited Wuhan, arrived in Korea on 1/20/2020, treated at clinic on 1/21/2020 for cold symptoms, symptom onset 1/25/2020 (high fever, aching muscles).
+new confirmed COVID-19 patient in South Korea: 1/30-No.1, male, 32, visited Wuhan and returned to 1/24/2020, no symptom on arrival
+new confirmed COVID-19 patient in South Korea: 1/30-No.2, male, 56, in contact with third confirmed patient 1/25-No.1 on 1/22/2020, did not travel to Wuhan, receiving treatment at hospital
+new confirmed COVID-19 patient in South Korea: male, 28, Korean, entered Incheon airport 1/23/2020 from Qingdao, Wuhan, symptom onset 1/26/2020 (cough), worked at ""The Place"" clothing store
+new confirmed COVID-19 patient in South Korea: female, 62, Korean, developed symptoms during stay in Wuhan on 1/21/2020
+new confirmed COVID-19 patient in South Korea: female, 28, Korean, informed as the contact of fifth patient 1/30-No.1, confirmed 1/30/2020, stayed home after onset of symptom
+new confirmed COVID-19 patient in South Korea: female, 52, Korean, confirmed on 1/31/2020, related to sixth patient 1/30-No.2, symptom onset on 1/29/2020 (headache)
+new confirmed COVID-19 patient in South Korea: male, 25, Korean, confirmed on 1/31/2020, related to sixth patient 1/30-No.2, symptom onset on 1/30/2020 (sore body)
+new confirmed COVID-19 patient in South Korea: 2/1-No.1, male, 48, male, worked as tour guide in Japan, came into contact with Japanese national also diagnosed, arrived 1/19/2020 at Gimpo airport, symptom-free upon arrival, hospitalized 2/1/2020,
+new confirmed COVID-19 patient in South Korea: male, 28, brought back from Wuhan on 1/31/2020, no symptoms upon arrival, symptom onset 2/1/2020, transported to hospital for quarantine
+new confirmed COVID-19 patient in South Korea: female, 40, married to 2/1-No.1, admitted to Seoul hospital
+new confirmed COVID-19 patient in South Korea: 2/2-No.1 male, 43, went to Wuhan, returned 1/20/2020, worked as aircraft contactor of 1/27-No.1, self-isolating since 1/29/2020
+new confirmed COVID-19 patient in South Korea: 2/4-No.1, female, 42, flew back to South Korea on 1/19/2020 after traveling for five days in Thailand, symptom onset 1/25/2020 (chills)
+new confirmed COVID-19 patient in South Korea: 2/5-No.1, male, 37, attended conference in Singapore 1/18-1/23 where contacted Malaysian man infected with virus, symptom onset 1/26/2020, went to three different hospitals, lives in Guri, quarantined on hospital, visited clinic on 2/4/2020
+new confirmed COVID-19 patient in South Korea: female, 21, daughter of 2/4-No.1
+new confirmed COVID-19 patient in South Korea: male, 36, attended conference in Singapore 1/18-1/23 with 2/5-No.1 where contacted Malaysian man infected with virus, self-quarantine 2/4/2020, now quarantined at medical center
+new confirmed COVID-19 patient in South Korea: female, 41, related to 2/2-No.1, in hospital
+new confirmed COVID-19 patient in South Korea: female, 59, aquaintance of 1/30-No.2, in hospital
+new confirmed COVID-19 patient in South Korea: male, 46, related to 2/4-No.1, in hospital
+new confirmed COVID-19 patient in South Korea: female, 58, Chinese, visited Korea from Wuhan for travel on 1/23
+new confirmed COVID-19 patient in South Korea: male, 28, evacuated from Wuhan and quarantined with sore throat
+new confirmed COVID-19 patient in South Korea: female, 73, stayed with family who visited Guangdong from November 2019 to 1/31/2020, symptom onset fever, cough, sore throat, now in hospital
+new confirmed COVID-19 patient in South Korea: male, 51, family member of 25th confirmed case, visited Guangdong from November 2019-January 31, 2020
+new confirmed COVID-19 patient in South Korea: female, 37, family member of 25th confirmed case, visited Guangdong from November 2019-January 31
+new confirmed COVID-19 patient in South Korea: female, 30, chinese, acquaintance of 3rd case
+new confirmed COVID-19 patient in South Korea: male, 82, admitted to hospital for chest discomfort, first visited local hospital on 2/15
+new confirmed COVID-19 patient in South Korea: female, 68, married to case 29, symptom onset 2/6 (cough, chill, muscle pain)
+new confirmed COVID-19 patient in South Korea: female, 61, symptom onset 2/7 (fever, chill), tested on 2/17, hospitalized 2/17
+new confirmed COVID-19 patient in South Korea: female, 11, daughter of case 15, contact of case 15 and case 20, self-quarantine since 2/2, symptom onset 2/8
+new confirmed COVID-19 patient in South Korea: female, 40, contact of case 31
+new confirmed COVID-19 patient in South Korea: male, 24, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 26, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 48, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: male, 49, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 57, linked with Shincheonji religious sect, died 2/23
+new confirmed COVID-19 patient in South Korea: female, 61, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: male, 77, symptom onset 2/11 (cough)
+new confirmed COVID-19 patient in South Korea: female, 69, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 29, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 58, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 46, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: female, 54, same cluster as case 31
+new confirmed COVID-19 patient in South Korea: male, 28
+new confirmed COVID-19 patient in South Korea: female, 63
+new confirmed COVID-19 patient in South Korea: female, 72
+new confirmed COVID-19 patient in South Korea: male, 58
+new confirmed COVID-19 patient in South Korea: male, 76
+new confirmed COVID-19 patient in South Korea: female, 61
+new confirmed COVID-19 patient in South Korea: male, 24
+new confirmed COVID-19 patient in South Korea: female, 38
+new confirmed COVID-19 patient in South Korea: male, 57, Cheongdo Daenam hospital cluster
+new confirmed COVID-19 patient in South Korea: male, 59, Cheongdo Daenam hospital cluster
+new confirmed COVID-19 patient in South Korea: male, Seoul, 75
+new confirmed COVID-19 patient in South Korea: male, 30
+new confirmed COVID-19 patient in South Korea: female, 26
+new confirmed COVID-19 patient in South Korea: female, 34
+new confirmed COVID-19 patient in South Korea: female, 59
+new confirmed COVID-19 patient in South Korea: female, 58
+new confirmed COVID-19 patient in South Korea: male, 60
+new confirmed COVID-19 patient in South Korea: female, 52
+new confirmed COVID-19 patient in South Korea: female, 59
+new confirmed COVID-19 patient in South Korea: female, 50
+new confirmed COVID-19 patient in South Korea: male, 22
+new confirmed COVID-19 patient in South Korea: female, 30
+new confirmed COVID-19 patient in South Korea: female, 56
+new confirmed COVID-19 patient in South Korea: male, 29
+new confirmed COVID-19 patient in South Korea: female, 48
+new confirmed COVID-19 patient in South Korea: female, 56
+new confirmed COVID-19 patient in South Korea: female, 39
+new confirmed COVID-19 patient in South Korea: female, 20
+new confirmed COVID-19 patient in South Korea: male, 49
+new confirmed COVID-19 patient in South Korea: female, 23
+new confirmed COVID-19 patient in South Korea: male, 36
+new confirmed COVID-19 patient in South Korea: female, 57
+new confirmed COVID-19 patient in South Korea: male, 55
+new confirmed COVID-19 patient in South Korea: female, 22
+new confirmed COVID-19 patient in South Korea: female, 34
+new confirmed COVID-19 patient in South Korea: female, 65
+new confirmed COVID-19 patient in South Korea: male, 64
+new confirmed COVID-19 patient in South Korea: male, 67, died 2/24, Cheongdo Daenam hospital cluster
+new confirmed COVID-19 patient in South Korea: male, 74, Shincheonji cluster, died 2/26/2020
+new confirmed COVID-19 patient in South Korea: male, 35, symptom onset 2/2 (cough, fever), Seoul
+new confirmed COVID-19 patient in South Korea: male, 62, died 2/23/20, Cheongdo Daenam Hospital cluster
+new confirmed COVID-19 patient in South Korea: male, 58, linked with Shincheonji religious sect, died 2/24
+new confirmed COVID-19 patient in South Korea: male, 62, symptom onset 2/2 (fever, headache), hospitalized 2/5-2/22
+new confirmed COVID-19 patient in South Korea: male, 41, died 2/22
+new confirmed COVID-19 patient in South Korea: male, 36, died 2/25/2020
+new confirmed COVID-19 patient in South Korea: female, 69, died 2/24
+new confirmed COVID-19 patient in South Korea: male, 75, died 2/27
+new confirmed COVID-19 patient in Taiwan: female, 55, works in Wuhan, arrived in Taiwan 1/20/2020, symptomatic (fever, cough, shortness of breath) on arrival, symptom onset 1/11/2020, confirmed 1/21/2020
+new confirmed COVID-19 patient in Taiwan: female, in her 50s, arrived in Taiwan 1/21/2020, came from tour in Wuhan, hospitalized due to fever 1/23/2020
+new confirmed COVID-19 patient in Taiwan: male, in his 50s, arrived in Taiwan 1/21/2020, works in Wuhan, saw doctor in Wuhan, developed influenza symptoms and hospitalized 1/23/2020
+new confirmed COVID-19 patient in Taiwan: 1/27-No.1, female, 50, arrived in Taiwan 1/25/2020, reported condition to airport officers and immediately hospitalized, visited Wuhan 1/13/2020-1/15/2020, symptom onset 1/22/2020 (no fever, mild symptoms of pneumonia, cough), confirmed 1/26/2020
+new confirmed COVID-19 patient in Taiwan: female, 50, working in Wuhan since October 2019 and returned to Taiwan 1/20/2020, hospitalized 1/25/2020 after developing a fever and muscle aches, confirmed 1/27/2020
+new confirmed COVID-19 patient in Taiwan: female, 70, Wuhan resident, arrived in Taiwan 1/22/2020, symptom onset 1/25/2020 (fever), hospitalized 1/25/2020, confirmed 1/28/2020
+new confirmed COVID-19 patient in Taiwan: female, 70, Wuhan resident, arrived in Taiwan 1/22/2020, symptom onset 1/25/2020 (fever), hospitalized 1/25/2020, confirmed 1/28/2020
+new confirmed domestic COVID-19 patient in Taiwan: man, in his 50s, contracted virus from wife 1/27-No.1, symptom onset 1/26/2020 (cough), tested positive 1/28/2020
+new confirmed COVID-19 patient in Taiwan: 1/30-No.1, male, experiencing symptoms on arrival 1/12/2020 (cough, runny nose, no fever), recently returned from business in Wuhan
+new confirmed domestic COVID-19 patient in Taiwan: female, married to 1/30-No.1, symptom onset 1/27/2020, hospitalized 1/28/2020, confirmed 1/30/2020
+new confirmed COVID-19 patient in Taiwan: male, in his 50s, evacuated from Wuhan on 2/4, hospitalized
+new confirmed COVID-19 patient in Taiwan: male, in his 40s, went to Wuhan for work in December 2019 and left for Liaoning China on 1/17, returned to Taiwan on 2/2, symptom onset 2/3 (fever, cough, headache), hospitalized on 2/4/2020
+new confirmed COVID-19 patient in Taiwan: female, in her 20s, lived in Wuhan, on 1/21/2020 left Wuhan to Taiwan, symptom onset 2/1/2020 (cough, chest pain), hospitalized 2/4/2020
+new confirmed COVID-19 patient in Taiwan: 2/7-No.1, male, in his 50s, traveled to Italy 1/22, returned 2/1, fever on arrival, went to see doctor 2/1, went again on 2/4
+new confirmed COVID-19 patient in Taiwan: 2/7-No.2, female, in her 50s, married to 2/7-No.1, traveled to Italy 1/22, returned 2/1, diagnosed with common cold 2/3
+new confirmed COVID-19 patient in Taiwan: female, in her 40s, traveled to Macau 1/21-1/24, symptom onset 2/1 (fever, chills, sore throat, runny nose, shortness of breath), medical attention on 2/3
+new confirmed COVID-19 patient in Taiwan: male, 20s, son of 2/7-No.1 and 2/7-No.2, traveled to Italy with parents from 1/22 to 1/31, transited through HK for Taiwan on 2/1, symptom onset 1/27 while in Italy
+new confirmed COVID-19 patient in Taiwan: male, 20s, son of 2/7-No.1 and 2/7-No.2, traveled to Italy with parents from 1/22 to 1/31, transited through HK for Taiwan on 2/1
+new confirmed COVID-19 patient in Taiwan: male, 60s, symptom onset 1/27 (cough, shortness of breath), went to hospital 2/3, diagnosed with pneumonia, hospitalized 2/3, died 2/15
+new confirmed COVID-19 patient in Taiwan: male, 50s, related to case 19
+new confirmed COVID-19 patient in Taiwan: female, 80s, related to case 19 and 20, symptom onset 2/6
+new confirmed COVID-19 patient in Taiwan: male, 30s, related to case 19 and 20, symptom onset 1/28-2/6 (fever, cough), attended 1/27
+new confirmed COVID-19 patient in Taiwan: female, 60, younger sister of case 19, attended event on 1/27
+new confirmed COVID-19 patient in Taiwan: female, 60, symptom onset 1/22 (fever, cough), went to doctor's four times before being diagnosed with pneumonia 1/29, hospitalized 1/30, moved to negative-pressure isolation room on 2/17, positive 2/19
+new confirmed COVID-19 patient in Taiwan: female, 20s, granddaughter of case 24, symptom onset 1/28 (cough, fever), went to doctor on 1/30, 2/4, 2/11
+new confirmed COVID-19 patient in Taiwan: female, 40s, daughter of case 24, went to doctor 2/3 and 2/6 due to reflux
+new confirmed COVID-19 patient in Taiwan: male, 80s, father of case 28
+new confirmed COVID-19 patient in Taiwan: male, 50s
+new confirmed COVID-19 patient in Taiwan: male, 40s, son of case 27, throat discomfort from 1/29-1/30 but didn't seek medical attention
+new confirmed COVID-19 patient in Taiwan: female, 70s, wife of case 27, physical discomfort on 2/6 and saw doctor on 2/6, sought medical attentio four times for respiratory symptoms from 2/10-2/19
+new confirmed COVID-19 patient in Taiwan: male, grandson of case 27 and son of case 28, visited case 27 in hospital 2/11 and 2/19
+new confirmed COVID-19 patient in Taiwan: female, 30s, caregivers who cared for case 27 in the hospital from 2/11-2/16
+new confirmed COVID-19 patient in Taiwan: male, 30s, traveled with 21 other tourists to Osaka from 2/17-2/22, after returning, developed a cough and itchy throat on 2/25
+new confirmed COVID-19 patient in Taiwan: female, 50s
+new confirmed COVID-19 patient in Thailand: female, 61, Wuhan resident, symptom onset 1/5/2020 (fever, chills, sore throat, headache), arrived 1/8/2020, hospitalized on arrival, tested positive 1/12/2020, discharged and returned to China
+new confirmed COVID-19 patient in Thailand: female, 74, Wuhan resident, quarantined since 1/13/2020 on arrival, discharged and returned to China
+new confirmed COVID-19 patient in Thailand: male, 68, tourist visiting from Wuhan, detected with a fever on 1/19/2020
+new confirmed COVID-19 patient in Thailand: female, 73, Thai citizen, visited Wuhan late 2019, arrived in Thailand 1/13/2020, quarantined on arrival with a fever, returned home to China 1/21/2020
+new confirmed COVID-19 patient in Thailand: male, Chinese tourist, screened for high fever on 1/19/2020
+new confirmed COVID-19 patient in Thailand: female, 33, arrived from Wuhan on 1/21/2020 and visited hospital for fever, coughing, and muscle aches on 1/23/2020
+new confirmed COVID-19 patient in Thailand: female, 57, Wuhan resident
+new confirmed COVID-19 patient in Thailand: female, 73, Wuhan resident
+new confirmed COVID-19 patient in Thailand: Chinese national, part of a family aged 6-60, traveling from Hubei province, one passenger taken to hospital after showing symptoms on arrival and other four members quarantined after showing symptoms following monitoring
+new confirmed COVID-19 patient in Thailand: Chinese national, part of a family aged 6-60, traveling from Hubei province, one passenger taken to hospital after showing symptoms on arrival and other four members quarantined after showing symptoms following monitoring
+new confirmed COVID-19 patient in Thailand: Chinese national, part of a family aged 6-60, traveling from Hubei province, one passenger taken to hospital after showing symptoms on arrival and other four members quarantined after showing symptoms following monitoring
+new confirmed COVID-19 patient in Thailand: Chinese national, part of a family aged 6-60, traveling from Hubei province, one passenger taken to hospital after showing symptoms on arrival and other four members quarantined after showing symptoms following monitoring
+new confirmed COVID-19 patient in Thailand: Chinese national, part of a family aged 6-60, traveling from Hubei province, one passenger taken to hospital after showing symptoms on arrival and other four members quarantined after showing symptoms following monitoring
+new confirmed COVID-19 patient in Thailand: Chinese national, from Chongqing province in China
+first confirmed human-to-human COVID-19 patient in Thailand: male, 50, taxi driver infected by traveller, no history of travel to China, discharged 2/5/2020, symptom onset 1/20 (fever, cough, myalgia), went to local pharmacy 1/20, visited clinic 1/23, hospital at 1/28
+new confirmed COVID-19 patient in Thailand: 2/5-No.1, Thai, just returned from Japan
+new confirmed COVID-19 patient in Thailand: Thai, just returned from Japan, married to 2/5-No.1
+new confirmed COVID-19 patient in Thailand: Thai, driver who had driven Chinese tourists
+new confirmed COVID-19 patient in Thailand: male, 70, moved to infectious diseases institute,Thai, driver who had driven Chinese tourists
+new confirmed COVID-19 patient in Thailand: Thai, evacuated on 2/4 from Wuhan
+new confirmed COVID-19 patient in Thailand: Thai, exposed to tourists
+new confirmed COVID-19 patient in Thailand: Thai, exposed to tourists
+new confirmed COVID-19 patient in Thailand: Chinese, related to someone who was previously confirmed
+new confirmed COVID-19 patient in Thailand: Chinese, related to someone who was previously confirmed
+new confirmed COVID-19 patient in Thailand: Chinese, related to someone who was previously confirmed
+new confirmed COVID-19 patient in Thailand: Chinese, tourist from ""risky area"" in China
+new confirmed COVID-19 patient in Thailand: female, 54, Chinese tourist from Wuhan, admitted to hospital on 2/6
+new confirmed COVID-19 patient in Thailand: female, 35, contacted patient
+new confirmed COVID-19 patient in Thailand: female, 60, family members infected,
+new confirmed COVID-19 patient in Thailand: female, 31, relative who recently returned from China
+new confirmed COVID-19 patient in Thailand: male, 29, taxi driver
+new confirmed COVID-19 patient in Thailand: male, returned from Hokkaido, contacted case 40 (grandson), came into hospital 2/23 with cough and fever
+new confirmed COVID-19 patient in Thailand: female, returned from Hokkaido, contacted case 40 (grandson)
+new confirmed COVID-19 patient in Thailand: male, 8
+new confirmed COVID-19 patient in Thailand: male, 25, tour guide who returned recently from South Korea, sought treatment for fever and cough on 2/25
+new confirmed COVID-19 patient in US: male, in his 30s, confirmed sick in Sohomish County, Washington, visited Wuhan, returned to the US on 1/15/2020, sought treatment at urgent care center 1/23/2020
+new confirmed COVID-19 patient in US: 1/24-No.1, female, 61, treated in Chicago, traveled to Wuhan in December, returned on 1/13/2020, called doctor a few days after returning to report feeling unwell, sent to hospital
+new confirmed COVID-19 patient in US: male, Wuhan resident, traveling through LAX on way to China on 1/22/2020 reported feeling unwell to airport staff, taken to hospital
+new confirmed COVID-19 patient in US: Orange County, at local hospital, recently traveled to Wuhan, confirmed 1/25/2020
+new confirmed COVID-19 patient in US: Arizona, recently traveled to Wuhan
+new confirmed COVID-19 patient in US: male, in his 60s, husband of 1/24-No.1, Chicago, admitted to hospital 1/28/2020, symptom onset 1/28/2020
+new confirmed COVID-19 patient in US: male, from Santa Clara County, traveled to Wuhan and Shanghai before returning on 1/24/2020, never sick enough to be hospitalized and ""self-isolated"" at home, left twice to seek care at local clinic and hospital
+new confirmed COVID-19 patient in US: male, in his 20s, University of Massachusetts student who recently traveled from Wuhan, returned on 1/29/2020, sought medical care afterwards, quarantined at his home
+new confirmed COVID-19 patient in US: 2/3-No.1, male, 57, San Benito County, recently traveled back from Wuhan on 1/18/2020, isolated in home, arrived in San Francisco 1/24/2020 as healthy, but symptom onset 1/25/2020 (cough, fever), hospitalized
+new confirmed COVID-19 patient in US: female, 57, married to 2/3-No.1, San Benito County, symptom onset 1/29/2020, hospitalized
+new confirmed COVID-19 patient in US: female, recently traveled to Wuhan from Santa Clara County on 1/23/2020, never sick enough to be hospitalized
+new confirmed COVID-19 patient in US: Wisconsin, came into contact with someone infected while traveling in China
+new confirmed COVID-19 patient in US: California, evacuated from Wuhan
+new confirmed COVID-19 patient in US: California, evacuated from Wuhan 2/7
+new confirmed COVID-19 patient in US: Texas, returned from Wuhan 2/7
+new confirmed COVID-19 patient in US: California, recently traveled from China, returned on 2/2
+new confirmed COVID-19 patient in US: California, first case of community transmission, went to medical center 2/19, arrived from another hospital
+new confirmed COVID-19 patient in Vietnam: male, 66, 1/23-No.1, arrived from Wuhan on 1/13/2020, symptom onset 1/17/2020 (fever), hospitalized 1/17/2020
+new confirmed COVID-19 patient in Vietnam: male, 28, son of 1/23-No.1, symptom onset 1/20/2020 (fever), contracted from father
+new confirmed COVID-19 patient in Vietnam: Hanoi, recently returned from Wuhan
+new confirmed COVID-19 patient in Vietnam: Hanoi, recently returned from Wuhan
+new confirmed COVID-19 patient in Vietnam: Thanh Hoa, recently returned from Wuhan
+new confirmed COVID-19 patient in Vietnam: male, 30, Vinh Phuc, returned from Wuhan for training, returned 1/17
+new confirmed COVID-19 patient in Vietnam: female, 42, lives in Vinh Phuc, exposed 1/22 and 1/28, symptom onset 1/31 (fever), went to clinic
+new confirmed COVID-19 patient in Vietnam: 16, Vietnamese national from Vinh Phuc
+new confirmed COVID-19 patient in Vietnam: 49, Vietnamese national from Vinh Phuc
+new confirmed COVID-19 patient in Vietnam: female, 29, in Vinh Phuc, sent to train for two months in Wuhan, returned 1/17
+new confirmed COVID-19 patient in Vietnam: 2/9-No.1, female, 55, Vinh Phuc, neighbor of a worker who went to Wuhan, ,went to worker's house on 1/28, symptom onset 2/2 (fever, headache, runny nose)
+new confirmed COVID-19 patient in Vietnam: 3 months old, infected by grandma 2/9-No.1,
+new confirmed COVID-19 patient in Vietnam: male, 50, Vinh Phuc, lives with daughter who was sent to Wuhan for training and confirmed to be infected, symptom onset 2/11 (tired)
+new confirmed COVID-19 patient in NSW, Australia: male, 35, arrived in Sydney from Shenzhen on 1/6/2020, symptom onset 1/15/2020, did not visit Wuhan but had contact with a person from Wuhan diagnosed with the coronavirus
+new confirmed COVID-19 patient in NSW, Australia: male, 43, arrived in Sydney from Wuhan on 1/18/2020, symptom onset 1/24/2020, hospitalized 1/24/2020
+new confirmed COVID-19 patient in NSW, Australia: male, 53, arrived in Sydney from Wuhan on 1/20/2020, symptom onset 1/20/2020
+new confirmed COVID-19 patient in Victoria, Australia: male, in his 50s, recently spent two weeks in Wuhan, arrived in Melbourne from Guangzhou 1/19/2020, symptom onset 1/23/2020, put in isolation 1/24/2020
+new confirmed COVID-19 patient in NSW, Australia: female, 21, recently travelled back to Sydney from Wuhan, arrived 1/23/2020, symptom onset 1/24/2020 then went to an emergency department
+new confirmed COVID-19 patient in Queensland, Australia: 1/29-No.1, 44, Chinese National, currently in hospital, travelled from Melbourne to the Gold Coast 1/27/2020, symptom onset and hospitalized 1/28/2020
+new confirmed COVID-19 patient in Victoria, Australia: male, in his 60s, unwell on 1/23/2020, travelled to Wuhan, returned from China 1/21/2020
+new confirmed COVID-19 patient in Victoria, Australia: female, in her 40s, visitor from Hubei, went to doctor's and was referred to hospital immediately, been in Australia for about a week and showed symptoms for two or three days
+new confirmed COVID-19 patient in Queensland, Australia: female, 42, Chinese national from Wuhan, member of tour group travelling with 1/29-No.1 confirmed with virus, flew into country 1/27/2020
+new confirmed COVID-19 patient in South Australia: male, 60, from Wuhan, now hospitalized, arrived on 1/21/2020
+new confirmed COVID-19 patient in South Australia: female, 60, from Wuhan, now hospitalized, arrived on 1/21/2020
+new confirmed COVID-19 patient in Victoria, Australia: female, in her 20s, resident of Melbourne, recovering at home, returned from Wuhan on 1/25/2020, symptom onset 1/27/2020, seen by doctors in hospital on 1/30/2020 but assessed as well enough to stay at home
+new confirmed COVID-19 patient in Queensland, Australia: male, 8, Chinese citizen from Wuhan, traveling with 1/29-No.1, isolated at hospital
+new confirmed COVID-19 patient in Queensland, Australia: male, 37, Chinese national from Wuhan, isolated in hospital, part of same tour group as 1/29-No.1
+new confirmed COVID-19 patient in Queensland, Australia: female, 37, hospital, same member of tour group as four other people in the state
+new confirmed COVID-19 patient in Toronto, Canada: male, 56, tested positive at provincial facility days after returning to Toronto from Wuhan via Guangzhou on 1/22/2020, mild symptoms on flight, a day after he went home a family member reported he felt ill, fever, cough, symptom onset 1/23
+new confirmed COVID-19 patient in Toronto, Canada: female, in her 50s, has been in self-isolation at home since husband confirmed, arrived on 1/22/2020 after visiting Wuhan
+new confirmed COVID-19 patient in Vancouver, Canada: male, in his 40s, home isolation and not hospitalized, was in Wuhan for work, returned to Vancouver last week, onset of symptoms after return, contacted primary care physician 1/26/2020
+new confirmed COVID-19 patient in Toronto, Canada: female, in her 20s, arrived on 1/23/2020 from Wuhan, went to hospital on 1/24/2020 but tested negative, symptom onset 1/24/2020
+new confirmed COVID-19 patient in Vancouver, Canada: female, 50s
+new confirmed COVID-19 patient in Vancouver, Canada: male, 30s, related to case 5, visitors from Wuhan
+new confirmed COVID-19 patient in Vancouver, Canada: female, 30s, related to case 5, visitors from Wuhan
+new confirmed COVID-19 patient in Vancouver, Canada: female, 30s, returned from Shanghai
+new confirmed COVID-19 patient in Vancouver, Canada: female, 30s, returned from Iran
+new confirmed COVID-19 patient in Toronto, Canada: female, 20s, travelled to Wuhan before it was quarantined, then went elsewhere before returning 2/21
+new confirmed COVID-19 patient in Vancouver, Canada: male, 40s, close contact of case 9
+new confirmed COVID-19 patient in Toronto, Canada: female, 60s, travel history to Iran, went to hospital on 2/24
+new confirmed COVID-19 patient in Cambodia: male, 60, arrived from Wuhan 1/23/2020, Chinese national, symptom onset 1/25/2020 (fever and runny nose), confirmed 1/27/2020
+new confirmed COVID-19 patient in Sri Lanka: female, 40, from Hubei, tested positive at a screening, arrived on 1/19/2020, symptom onset 1/25/2020 (fever), confirmed 1/27/2020, admitted to hospital 1/25/2020
+new confirmed COVID-19 patient in Germany: 1/28-No.1 male, 33, caught from Chinese colleague during conference in Munich from 1/20-1/21, first human-to-human transmission in Europe, confirmed 1/27/2020, isolated, contracted 1/21/2020, symptom onset on 1/24/2020 (sore throat, chills, myalgias, fever, cough)
+new confirmed COVID-19 patient in Germany: caught from same Chinese colleague as 1/28-No.1, symptom onset 1/25/2020
+new confirmed COVID-19 patient in Germany: caught from 1/28-No.1 during contacts on 1/20 and 1/21, symptom onset 1/26/2020
+new confirmed COVID-19 patient in Germany: caught from 1/28-No.1 during contacts from 1/21-1/24, symptom onset 1/27/2020
+new confirmed COVID-19 patient in Germany: male, worked at same company
+new confirmed COVID-19 patient in Germany: 52, male, works at same company as patients 1-5
+new confirmed COVID-19 patient in Germany: 33, male, works at same company
+new confirmed COVID-19 patient in Germany: evacuated from Wuhan, now in hospital in Frankfurt, arrived on 2/1/2020
+new confirmed COVID-19 patient in Germany: evacuated from Wuhan, now in hospital in Frankfurt, arrived on 2/1/2020
+new confirmed COVID-19 patient in Germany: male, 58, employee of the same company
+new confirmed COVID-19 patient in Germany: wife of a man who tested positive and worked at the company, two children also tested positive
+new confirmed COVID-19 patient in Germany: male, 49, employee of Starnberf
+new confirmed COVID-19 patient in Germany: male, 25, took trip to Milan, admitted to hospital 2/24, Baden-Wurttemberg
+new confirmed COVID-19 patient in Germany: male, 60, father of case 19, Baden-Wurttemberg
+new confirmed COVID-19 patient in Germany: female, 24, accompanied case 17 to Milan, Baden-Wurttemberg
+new confirmed COVID-19 patient in Germany: male, 32, Baden-Wurttemberg, returned on 2/23 from Codogno, Italy
+new confirmed COVID-19 patient in Germany: male, 47, North Rhine-Westphalia, isolated 2/24 with symptoms of severe pneumonia, symptom onset 2/16 (fever, cough)
+new confirmed COVID-19 patient in Germany: female, 46, wife of case 21, NRW
+new confirmed COVID-19 patient in Germany: Rhineland-Palatinate, male, 41, infected in North Rhine-Westphalia on 2/15, admitted to hospital on 2/26, symptom onset 2/20
+new confirmed COVID-19 patient in Germany: contact of cases 21 and 22, NRW, employee of case 21
+new confirmed COVID-19 patient in Germany: contact of cases 21 and 22, NRW, partner of case 24
+new confirmed COVID-19 patient in Germany: contact of cases 21 and 22, NRW
+new confirmed COVID-19 patient in Germany: Hamburg, male, employee of children's medical department, called in sick 2/26/2020, went to hospital 2/27, had been on vacation in Trentino
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, female, attended business meeting in Munich where they had contact with an Italian participant who tested positive in Italy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, female, attended business meeting in Munich where they had contact with an Italian participant who tested positive in Italy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, attended business meeting in Munich where they had contact with an Italian participant who tested positive in Italy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, directly related to case 17
+new confirmed COVID-19 patient in Germany: Rhineland-Palatinate, doctor who was infected by case 21
+new confirmed COVID-19 patient in Germany: Bavaria, male, came into contact in Germany with an Italian who tested positive on his return to Italy
+new confirmed COVID-19 patient in Germany: Hesse, male, 31, returned from a trip to Lombardy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, returned from ski holiday in Italy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, was in Karlsruhe on business, family member also sick
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, travelled to Bergamo, Italy
+new confirmed COVID-19 patient in Germany: Baden-Wuerttemberg, male, 32, was in Milan on 2/21, symptom onset 2/23
+new confirmed COVID-19 patient in Germany: NRW, female, attended carnival event in Gangelt on 2/15
+new confirmed COVID-19 patient in UAE: female, 73, 1/29-No.1 (grandmother), arrived as tourists 1/16/2020, symptom onset 1/23/2020, sought medical help
+new confirmed COVID-19 patient in UAE: female, 36, 1/29-No.2 (mother), arrived as tourists 1/16/2020, admitted into hospital
+new confirmed COVID-19 patient in UAE: male, 41, 1/29-No.3 (father), arrived as tourists 1/16/2020, admitted into hospital
+new confirmed COVID-19 patient in UAE: male, 8, 1/29-No.4 (son), arrived as tourists 1/16/2020, admitted into hospital
+new confirmed COVID-19 patient in UAE: male, 37
+new confirmed COVID-19 patient in UAE: Filipino national, 34
+new confirmed COVID-19 patient in UAE: from Bangladesh, 39
+new confirmed COVID-19 patient in UAE: male, 70
+new confirmed COVID-19 patient in UAE: female, 64
+new confirmed COVID-19 patient in UAE: Iranian, traveled from Iran
+new confirmed COVID-19 patient in UAE: Iranian, traveled from Iran
+new confirmed COVID-19 patient in UAE: Iranian, traveled from Iran
+new confirmed COVID-19 patient in UAE: Iranian, traveled from Iran
+new confirmed COVID-19 patient in UAE: Bahraini, traveled from Iran
+new confirmed COVID-19 patient in UAE: Chinese, traveled from Iran
+new confirmed COVID-19 patient in Hong Kong: male, 39, tourist from Wuhan, arrived 1/21/2020 via high-speed rail from Shenzhen and detected having fever at the border, quarantined 1/22/2020 at hospital
+new confirmed COVID-19 patient in Hong Kong: male, 56, went to Wuhan 1/10/2020-1/19/2020, visited hospital on 1/19/2020 but no fever or pneumonia, returned to hospital 1/21/2020, sent to isolation ward, symptom onset 1/18/2020 (fever)
+new confirmed COVID-19 patient in Hong Kong: 1/24-No.1, married to 1/27-No.1, female, 62, lives in Wuhan, travelled from Wuhan to Shenzhenbei and then Hong Kong by train on 1/19/2020, symptom onset 1/20/2020 (fever, cough), hospitalized 1/23/2020, admitted for isolation 1/24/2020
+new confirmed COVID-19 patient in Hong Kong: 1/24-No.2, married to 1/24-No.3, female, 62, took train from Wuhan to Hong Kong on 1/22/2020, symptom onset 1/23/2020 (fever), went to hospital 1/23/2020 and admitted for isolation
+new confirmed COVID-19 patient in Hong Kong: 1/24-No.3, married to 1/24-No.2, male, 63, took train from Wuhan to Hong Kong on 1/22/2020, symptom onset 1/23/2020 (fever and cough), went to hospital 1/23/2020 and admitted for isolation
+new confirmed COVID-19 patient in Hong Kong: male, 47, worked in Wuhan, returned to HK on 1/23/2020, symptom onset 1/20/2020 (fever), sought treatment at hospital in Wuhan on 1/21/2020, left for Hong Kong on 1/23/2020
+new confirmed COVID-19 patient in Hong Kong: female, 68, lives in Shenzhen, traveled to Hong Kong on 1/25/2020 with a fever, immediately taken to hospital for isolation, visited family members in Wuhan , symptom onset 1/21/2020 (fever, cough), had visited family member in Wuhan
+new confirmed COVID-19 patient in Hong Kong: 1/27-No.1, married to 1/24-No.1, male, 64, wife was third imported case, traveled with wife to Hong Kong by train 1/19/2020, put into quarantine 1/24/2020 due to wife, developed fever 1/25/2020 and transferred to hospital
+new confirmed COVID-19 patient in Hong Kong: 1/29-No.1, married to 1/29-No.2, female, 73, live in Wuhan, arrived by flight 1/22/2020, admitted to hospital 1/28/2020
+new confirmed COVID-19 patient in Hong Kong: 1/29-No.2, married to 1/29-No.1, male, 72, live in Wuhan, arrived by flight 1/22/2020, admitted to hospital 1/28/2020
+new confirmed COVID-19 patient in Hong Kong: female, 37, lives in Yau Ma Tei, daughter of 1/29-No.1 and 1/29-No.2, symptom onset 1/28/2020 (cough), hospitalized 1/30/2020, stayed with parents 1/22/2020-1/28/2020
+new confirmed COVID-19 patient in Hong Kong: male, 75, living in Tsing Yi, symptom onset 1/22/2020 (cough, shortness of breath), hospitalized 1/24/2020, visited Guangdong 12/30/2019-1/7/2020, day trips to Macau 1/10/2020-1/14/2020
+new confirmed COVID-19 patient in Hong Kong: 1/31-No.1, male, 39, lives in Kowloon, symptom onset 1/31/2020 (myalgia, fever), hospitalized 1/31/2020 and admitted for isolation and treatment, took train from Hong Kong to Wuhan on 1/21/2020 and from Changsha to Hong Kong on 1/23/2020, died 2/4/2020
+new confirmed COVID-19 patient in Hong Kong: male, 80, visited Shenzhen for a few hours on 1/10/2020, flight to Japan on 1/17/2020 and returned to HK on cruise on 1/25/2020, symptom onset 1/19/2020, hospitalized on 1/30/2020 for high fever
+new confirmed COVID-19 patient in Hong Kong: female, 72, no recent history of travel, caught from son 1/31-No.1, quarantined since 2/1/2020, symptom onset 2/1/2020 (fever, cough), sent to hospital
+new confirmed COVID-19 patient in Hong Kong: female, 64, worked at clothing store in Kowloon, symptom onset 1/23/2020 (cough) and consulted private doctor 1/23/2020, shortness of breath on 2/1/2020, sought treatment at hospital, no recent travel to China
+new confirmed COVID-19 patient in Hong Kong: 2/4-No.1, male, 60, visited four private clinics before taken to hospital, no recent travel to China, lives in Kwun Tong, symptom onset 1/22/2020 (fever, myalgia, shortness of breath), first went to hospital on 1/30
+new confirmed COVID-19 patient in Hong Kong: male, 25, lives in Kowloon City, now in hospital, had not travelled outside Hong Kong, symptom onset 1/28/2020 (cough, runny nose, diarrhea), went to hospital 1/29/2020
+new confirmed COVID-19 patient in Hong Kong: female, 56, married to 2/4-No.1, sent to hospital in Kwun Tong, symptom onset 2/4/2020 (fever)
+new confirmed COVID-19 patient in Hong Kong: female, 28, daughter of 2/4-No.1, sent to hospital in Kwun Tong 2/4/2020, symptom onset 1/30 (cough, sore throat, fever)
+new confirmed COVID-19 patient in Hong Kong: 2/5-No.1, male, 56, tested positive at hospital in Kwai Chung, symptom onset 1/30/2020 (fever, cough, sore throat), consulted private doctor 2/1/2020, went to hospital on 2/4/2020 when admitted, worked in Shenzhen and visited onn 1/21, visited Tokyo 1/28-2/1
+new confirmed COVID-19 patient in Hong Kong: married to 2/5-No.1, female, 55, in hospital in Kwai Chung, in Japan 1/28 and returned 2/1, symptom onset 2/1 (sore throat, fever, diarrhea), consulted private doctor on 2/2/2020, visited hospital on 2/4 with husband, admitted 2/5
+new confirmed COVID-19 patient in Hong Kong: female, 63, symptom onset 1/26/2020 (cough, malaise), went to private doctor on 2/5/2020 and sought treatment at hospital where admitted the same day
+new confirmed COVID-19 patient in Hong Kong: female, 65, symptom onset 1/28/2020 (fever, cough), went to private doctor on 1/29 and 2/1, sought treatment at hospital on 2/5
+new confirmed COVID-19 patient in Hong Kong: male, 58, lives in Zhuhai, developed fever and cough 2/4, returned to HK 2/5, consulted doctor 2/6, went to hospital 2/6, traveled from Zhuhai to Macao back and forth during incubation period
+new confirmed COVID-19 patient in Hong Kong: male, 42, lives in Fo Tan, developed fever and cough 2/3, went to hospital on 2/3, went to international airport from hong kong on 1/22 for flight to Hebei, returned from Hebei to Guangzhou 1/26, visited Macao 1/26, returned to HK 2/2
+new confirmed COVID-19 patient in Hong Kong: 2/9-No.1, male, 24, lives in Wan Chai, fever cough 1/30, doctor 1/30, 2/4, hospital 2/6, 2/8
+new confirmed COVID-19 patient in Hong Kong: male, 70, lives in Ngau Chi Wan, cough, chills, shortness of breath 1/30, diarrhea since 2/1, went to doctors 2/1-2/7, attended hospital on 2/8 for chills and shortness of breath
+new confirmed COVID-19 patient in Hong Kong: male, 68, father of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 57, mother of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 91, maternal grandmother of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 51, aunt of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 25, cousin of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: male, 22, cousin of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 50, aunt of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: male, 23, cousin of 2/9-No.1, had hot pot with him 1/26
+new confirmed COVID-19 patient in Hong Kong: female, 55, aunt of 2/9-No.1, had hot pot with him on 1/26, lives in Sha Tin, symptom onset 1/30 (fever, cough, runny nose), went to doctor 1/30, admitted to hospital 2/9
+new confirmed COVID-19 patient in Hong Kong: male, 52, uncle of 2/9-No.1, had hot pot with him on 1/26, wife and children tested positive on 2/9, lives in Wan Chai, symptom onset 2/8 (cough, sore throat, dry mouth), admitted to hospital on 2/9
+new confirmed COVID-19 patient in Hong Kong: 2/10-No.1, male, 69, lives in Sai Wan Ho, symptom onset 1/30 (cough), went to doctor's on 2/7, went to hospital on 2/9 for shortness of breath and admitted for isolation
+new confirmed COVID-19 patient in Hong Kong: female, 63, wife of 2/10-No.1, symptom onset 1/30, ,transferred to hospital 2/9, went to clinic on 1/31
+new confirmed COVID-19 patient in Hong Kong: female, 86, mother-in-law of 2/10-No.1, symptom onset 1/28, transferred to hospital 2/9
+new confirmed COVID-19 patient in Hong Kong: 2/10-No.2, female, 62, lives in same building as case 12 in Tsing Yi, symptom onset 2/3 (cough), went to doctor on 2/3, 2/5, 2/7 went to hospital 2/9, visited Macao from 1/18-1/19
+new confirmed COVID-19 patient in Hong Kong: male, 59, lives in Siu Sai Wan, symptom onset 2/2 (fever, cough, shortness of breath), went to doctor on 2/6, went to hospital on 2/9 and 2/10
+new confirmed COVID-19 patient in Hong Kong: female, 60, colleague of case 30, lives in Ap Lei Chau, symptom onset 2/1 (cough), went to doctor on 2/2, ,went to hospital on 2/10
+new confirmed COVID-19 patient in Hong Kong: male, 71, symptom onset 2/5 (fever, cough, shortness of breath), went to hospital on 2/10
+new confirmed COVID-19 patient in Hong Kong: male, 37, son of 2/10-No.2, symptom onset 1/30 (fever, cough), went to doctor 1/30, 2/3, 2/5
+new confirmed COVID-19 patient in Hong Kong: male, 66, symptom onset 1/31 (sore throat, chills, cough, fever), went to doctors on 2/1 and 2/10, went to hospital 2/10
+new confirmed COVID-19 patient in Hong Kong: 2/11-No.1, female, 37, daughter-in-law of 2/10-No.2, symptom onset 2/2 (fever, cough, sore throat), went to doctor 2/3
+new confirmed COVID-19 patient in Hong Kong: male, 75, father of 2/11-No.1, symptom onset 2/3 (fever, cough), went to doctors on 2/3, 2/7, 2/10
+new confirmed COVID-19 patient in Hong Kong: male, 51, symptom onset 2/3 (fever), hospitalized 2/10, coworker of case 37
+new confirmed COVID-19 patient in Hong Kong: male, 43, relative of case 47, symptom onset 1/29 (cough, diarrhea, vomiting), went to doctors on 1/31-2/8, went to hospital 2/12, attended banquet on 1/30 with case 47
+new confirmed COVID-19 patient in Hong Kong: female, 67, had dinner with case 46, 48, 49 on 1/26, sister in law of case 46, symptom onset 1/31 (cough, fever, chill), went to doctors on 1/31, 2/3, 2/7, went to hospital on 2/12
+new confirmed COVID-19 patient in Hong Kong: male, 37, son of case 52, had dinner with patients of case 46, 48, 49 on 1/26, symptom onset 2/8 (fever), went to doctor on 2/9, hospital on 2/12
+new confirmed COVID-19 patient in Hong Kong: female, 41, attended family dinner on 1/26 that five others confirmed were at
+new confirmed COVID-19 patient in Hong Kong: male, 70, returned from day trip to mainland China on 1/22, visited hospital on 2/12, shortness of breath for more than 10 days, symptom onset 2/2
+new confirmed COVID-19 patient in Hong Kong: female, husband had visited son in Guangdong from 1/23-1/28 but neither infected
+new confirmed COVID-19 patient in Hong kong: male, 54, went to doctor on 2/7, hospital on 2/10
+new confirmed COVID-19 patient in Hong Kong: male, 69, symptom onset 2/8 (cough, ,shortness of breath), went to doctor between 2/8-2/13, went to clinic on 2/15 and 2/16
+new confirmed COVID-19 patient in Hong Kong: male, 45, colleague of case 57, ,symptom onset 2/12 (fever, sore throat), went to doctor 2/13, went to hospital 2/16, went to Vietnam from 1/30-2/1
+new confirmed COVID-19 patient in Hong Kong: female, 46, wife of case 57, symptom onset 2/8 (runny nose, cough), went to doctor 2/10, hospital 2/16
+new confirmed COVID-19 patient in Hong Kong: female, 32, worked for case 52, symptom onset 2/2 (fever, cough)
+new confirmed COVID-19 patient in Hong Kong: male, 58, went to Zhongshan and Macau
+new confirmed COVID-19 patient in Hong Kong: female, 83, mother-in-law of engineer who contracted the disease
+new confirmed COVID-19 patient in Hong Kong: female, 83, mother-in-law of case 57, mother of case 60, symptom onset 2/14 (runny nose), suffered from fractures caused by a fall on 2/15 and admitted to hospital, surgery on 2/16
+new confirmed COVID-19 patient in Hong Kong: male, 68, symptom onset 2/12 (cough), went to doctor on 2/18, admitted to hospital
+new confirmed COVID-19 patient in Hong Kong: female, 70, symptom onset 2/12 (cough), went to doctor on 2/18, admitted to hospital, married to case 64
+new confirmed COVID-19 patient in Hong Kong: male, 75, married to case 63, symptom onset 1/25 (cough, shortness of breath), went to two doctors from 1/31-2/7, transferred to hospital on 2/18, made several day trips to Guangdong from 1/12-1/25
+new confirmed COVID-19 patient in Hong Kong: female, 38, symptom onset 2/10 (fever, cough), went to doctor on 2/10, again on 2/14 and went to hospital and admitted on 2/19
+new confirmed COVID-19 patient in Hong Kong: male, 58, symptom onset 2/8 (fever, cough), went to private doctor 2/10 and 2/17, went to hospital on 2/18 and admitted 2/19
+new confirmed COVID-19 patient in Hong Kong: male, 48, symptom onset 2/18 (fever, cough), went to health center 2/19
+new confirmed COVID-19 patient in Hong Kong: female, 96, symptom onset 2/13 (fever, cough), went to hospital 2/22 and admitted
+new confirmed COVID-19 patient in Hong Kong: male, 68, passenger of Diamond Princess cruise, stayed on cruise from 1/25-2/20, returned to Hong Kong by chartered flight on 2/20, symptom onset 2/20 (cough, fever), transferred to hospital 2/22 and admitted
+new confirmed COVID-19 patient in Hong Kong: male, 62, symptom onset 2/10 (fever, cough), went to two private doctors 2/13-2/18, went to hospital 2/22 and admitted for treatment
+new confirmed COVID-19 patient in Hong Kong: female, 80, symptom onset 2/8 (sore throat, cough), went to hospital 2/22 and admitted
+new confirmed COVID-19 patient in Hong Kong: female, 76, symptom onset 2/13 (muscle pain, fever), went to two private doctors and sought medical attention at hospital on 2/22, admitted for treatment
+new confirmed COVID-19 patient in Hong Kong: male, 35, symptom onset 2/19 (fever, cough), went to hospital 2/21, went to Shenzhen between 2/3-2/7
+new confirmed COVID-19 patient in Hong Kong: female, 57, symptom onset 2/8 (sore throat), fever on 2/10, went to hospital between 2/12-2/16 and admitted on 2/16 and 2/17, went to hospital again on 2/23 and admitted, went to Osaka in Japan 1/26-1/30, returned 1/31
+new confirmed COVID-19 patient in Hong Kong: female, 68, symptom onset 2/19 (cough), went to doctor 2/23
+new confirmed COVID-19 patient in Hong Kong: female, 59, Diamond Princess cruise from 1/25-2/21, returned by flight on 2/22, symptom onset 2/24 (fever, headache)
+new confirmed COVID-19 patient in Hong Kong: female, 58, Diamond Princess cruise from 1/25-2/21, returned by flight on 2/22, symptom onset 2/4 (throat discomfort)
+new confirmed COVID-19 patient in Hong Kong: male, 57, Diamond Princess cruise from 1/25-2/21, returned by flight on 2/22
+new confirmed COVID-19 patient in Hong Kong: female, 57, Diamond Princess cruise from 1/25-2/21, returned by flight on 2/22
+new confirmed COVID-19 patient in Hong Kong: male, 33, son of case 72, symptom onset 2/20 (fever), went to doctor on 2/22, cough on 2/24, transferred to hospital and admitted on 2/24
+new confirmed COVID-19 patient in Hong Kong: female, 55, sister of case 76, symptom onset 2/17 (cough), went to hospital and admitted 2/24
+new confirmed COVID-19 patient in Hong Kong: male, 24, son of case 83, asymptomatic
+new confirmed COVID-19 patient in Hong Kong: female, 60, symptom onset 2/12 (cough), went to doctor several times, admitted to hospital on 2/24
+new confirmed COVID-19 patient in Hong Kong: female, 49, cough and sputum and sore throat 2/18, went to hospital 2/22, admitted 2/23
+new confirmed COVID-19 patient in Hong Kong: female, 21, passengers of DP cruise 1/25-2/22, returned to HK by flight 2/23, went to hospital 2/25, fever 2/12
+new confirmed COVID-19 patient in Hong Kong: male, 16, brother of case 87, passengers of DP cruise 1/25-2/22, returned to HK by flight 2/23, went to hospital 2/25, runny nose since 2/17
+new confirmed COVID-19 patient in Hong Kong: male, 80, husband of case 74, fever and cough 2/25 and admitted to hospital 2/25
+new confirmed COVID-19 patient in Hong Kong: female, 29, domestic helper of case 85, fever 2/16, consulted same private doctor 2/20 and 2/24, admitted to hospital 2/25
+new confirmed COVID-19 patient in Hong Kong: male, 26, son of case 76, fever and cough 2/20, went to hospital 2/21, admitted 2/24
+new confirmed COVID-19 patient in Hong Kong: female, 70, cough with sputum 2/13, went to doctor 2/13, 2/23, admitted to hospital 2/26
+new confirmed COVID-19 patient in Hong Kong: female, 89, cough since 2/25, went to clinic 2/26
+new confirmed COVID-19 patient in Rome, Italy: male, Chinese tourist, arrived in Milan over a week ago
+new confirmed COVID-19 patient in Rome, Italy: female, married to 1/31-No.1, Chinese tourist, arrived in Milan over a week ago
+new confirmed COVID-19 patient in Rome, Italy: male, 30s, Italian national, evacuated from Wuhan 2/3
+new confirmed COVID-19 patient in Tyumen, Russia: Chinese citizens
+new confirmed COVID-19 patient in Zabaikalsky, Russia: Chinese citizens
+new confirmed COVID-19 patient in York, UK: 1/31-No.1, Chinese national, taken to infirmary
+new confirmed COVID-19 patient in York, UK: Chinese national, taken to infirmary, related to 1/31-No.1
+new confirmed COVID-19 patient in London, UK: 2/6-No.1, male, 53, caught in Singapore from 1/20-1/22, stayed at French resort between 1/24-1/28
+new confirmed COVID-19 patient in London, UK: infected by coming into contact with known carrier in France
+new confirmed COVID-19 patient in London, UK: male, doctor part of group skiing with 2/6-No.1 from 1/24-1/28
+new confirmed COVID-19 patient in London, UK: male, part of group skiing with 2/6-No.1 from 1/24-1/28
+new confirmed COVID-19 patient in London, UK: male, part of group skiing with 2/6-No.1 from 1/24-1/28
+new confirmed COVID-19 patient in London, UK: female, part of group skiing with 2/6-No.1 from 1/24-1/28
+new confirmed COVID-19 patient in London, UK: female, flew from China a few days ago,
+new confirmed COVID-19 patient in UK: Northern Ireland, recently traveled to northern Italy and Dublin
+new confirmed COVID-19 patient in UK: contracted in Italy, lives in Wales, female
+new confirmed COVID-19 patient in UK: male, first transmission in UK
+new confirmed COVID-19 patient in Kerala, India: female, student at Wuhan University, isolated in hospital
+new confirmed COVID-19 patient in Alappuzha, India: student from Wuhan, returned to Kerala on 1/24/2020, now in hospital
+new confirmed COVID-19 patient in Kerala, India: student who returned from Wuhan last month, in hospital
+new confirmed COVID-19 patient in Philippines: male, 44, from Wuhan, admitted to hospital on 1/25/2020 in Manila with fever, cough, and sore throat, died 2/1/2020, arrived 1/21/2020
+new confirmed COVID-19 patient in Philippines: female, 38, from Wuhan, arrived 1/21/2020, admitted to hospital in Manila, arrived 1/21/2020
+new confirmed COVID-19 patient in Philippines: female, 60, Chinese woman, arrived from Wuhan via HK on 1/20,
+new confirmed COVID-19 patient in Finland: female, 32, Chinese traveler from Wuhan, in isolation at Lapland's hospital, arrived in Finland 1/23/2020 and left Wuhan 1/22/2020, symptom onset 1/26/2020 (fever), hospitalized 1/28/2020
+new confirmed COVID-19 patient in Spain: male, German tourist diagnosed on La Gomera in Canary islands, came into contact with a man diagnosed in Germany, recovering in hospital,
+new confirmed COVID-19 patient in Spain: male, British, in Mallorca, under observation in hospital on 2/7 after came into contact with Brit holidaying in France who was then diagnosed
+new confirmed COVID-19 patient in Spain: male, Italian, on Canary Island of Tenerife, 69, from Lombardy
+new confirmed COVID-19 patient in Spain: female, on Canary Island of Tenerife
+new confirmed COVID-19 patient in Spain: female, 36, Barcelona, visited Bergamo and Milan between 2/12-2/22, contacted authorities 2/24 after experiencing flu-like symptoms
+new confirmed COVID-19 patient in Spain: Madrid, 24, also visited Italy
+new confirmed COVID-19 patient in Spain: Villarrealin, Castellon, recent trip to Milan, male, 31,
+new confirmed COVID-19 patient in Spain: Madrid, returned from trip to northern Italy
+new confirmed COVID-19 patient in Spain: Tenerife, accompanied case 3 and 4
+new confirmed COVID-19 patient in Spain: Tenerife, accompanied case 3 and 4
+new confirmed COVID-19 patient in Spain: Barcelona, male, 22, recently spent time in northern Italy, went to hospital 2/25 with sore throat and fever
+new confirmed COVID-19 patient in Spain: male, Seville (Andalusia), 62
+new confirmed COVID-19 patient in Spain: female, Tenerife, traveled to Italy between 2/4-2/8
+new confirmed COVID-19 patient in Spain: Valencia, male, 44, went to Pisa by plane and Milan by car to watch game on 2/19, sports journalist,
+new confirmed COVID-19 patient in Spain: Madrid, 77
+new confirmed COVID-19 patient in Spain: Madrid, 50
+new confirmed COVID-19 patient in Spain: Barcelona, female, 22, traveled to Italy from 2/19-2/25
+new confirmed COVID-19 patient in Spain: Castile and Leon, male, 30, Iranian, working in Spain
+new confirmed COVID-19 patient in Spain: Castile and Leon, 18, student from Italy studying in Spain
+new confirmed COVID-19 patient in Spain: Valencia, male, contact of case 14
+new confirmed COVID-19 patient in Spain: Valencia, male, contact of case 14
+new confirmed COVID-19 patient in Spain: Valencia, male, sportswriter who watched game in Milan on 2/19
+new confirmed COVID-19 patient in Spain: Valencia, male, sportswriter who watched game in Milan on 2/19
+new confirmed COVID-19 patient in Spain: Valencia, female, travelled to Milan
+new confirmed COVID-19 patient in Spain: Valencia, male, student from Italy, currently studying in Valencia
+new confirmed COVID-19 patient in Spain: Andalusia, male, 28, travelled to Milan
+new confirmed COVID-19 patient in Spain: Andalusia, male, 42, contact of case 12
+new confirmed COVID-19 patient in Spain: Andalusia, male, 53, contact of case 12
+new confirmed COVID-19 patient in Spain: Andalusia, 81, family member of previous infected case
+new confirmed COVID-19 patient in Spain: Andalusia, male, 55, recently traveled to Emilia-Romagna
+new confirmed COVID-19 patient in Spain: Andalusia, female, 25, nurse who treated a coronavirus positive patient
+new confirmed COVID-19 patient in Spain: Andalusia, Seville, 58, male, doctor who had contact with case 12
+new confirmed COVID-19 patient in Spain: Madrid, admitted to hospital 2/28, 66
+new confirmed COVID-19 patient in Spain: Zaragoza, 27 female, had traveled to Milan
+new confirmed COVID-19 patient in Sweden: female, in her 20s, in Jonkoping county who had visited Wuhan, landed in Sweden 1/24/2020, a few days later developed cough and contacted local hospital,
+new confirmed COVID-19 patient in Egypt: ""foreigner""
+new confirmed COVID-19 patient in Iran: died, in Qom
+new confirmed COVID-19 patient in Iran: died, in Qom
+new confirmed COVID-19 patient in Iran: Araq, doctor
+new confirmed COVID-19 patient in Israel: female, returned 1/21 after being quarantined on cruise ship
+new confirmed COVID-19 patient in Lebanon: female, 45, arrived from Qom, Iran 1/20
+new confirmed COVID-19 patient in Kuwait: female, returned from Iran
+new COVID-19 patient confirmed in Bahrain: male, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi Arabian, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi Arabian, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi Arabian, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi Arabian, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, returning from Iran
+new COVID-19 patient confirmed in Bahrain: male, returning from Iran
+new COVID-19 patient confirmed in Bahrain: male, returning from Iran
+new COVID-19 patient confirmed in Bahrain: male, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi national, returning from Iran
+new COVID-19 patient confirmed in Bahrain: female, Saudi national, returning from Iran
+new COVID-19 patient confirmed in Austria: 24, Innsbruck, from Lombardy
+new COVID-19 patient confirmed in Austria: 24, Innsbruck
+new COVID-19 patient confirmed in Afghanistan: 35, recently returned from Qom
+new COVID-19 patient confirmed in Algeria: male, Italian who arrived in the country on 2/17
+new COVID-19 patient confirmed in Croatia: male, recently returned from Milan, was there from 2/19-2/21
+new COVID-19 patient confirmed in Switzerland: male, 70, infected in Milan during an event 2/15, symptom onset 2/17
