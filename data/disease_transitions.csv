@@ -1,5 +1,4 @@
 Age,Sex,StateFrom,StateTo,MeanDays,StdDays,Count,Chance
-age,sex,from_state,to_state,duration_mean,duration_std,count,freq
 0,FEMALE,H,R,2.333,1.155,3,0.5
 0,FEMALE,H,U,0.0,0.0,3,0.5
 0,FEMALE,Iv,H,0.0,0.0,5,1.0

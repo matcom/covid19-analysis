@@ -16,66 +16,8 @@ def load_disease_transition() -> pd.DataFrame:
     return pd.read_csv("./data/disease_transitions.csv")
 
 
-@st.cache
-def load_individual_cases_data() -> pd.DataFrame:
-    data = []
-
-    with open("./data/datos varios paises covid.txt") as fp:
-        for i, line in enumerate(fp):
-            datum = parse_data(line)    
-            if datum is not None:
-                data.append(dict(datum, id=i+1))
-
-    return pd.DataFrame(data)
-
-
-def _parse_date(dict, regex, line, field):
-    match = re.search(regex, line)
-    
-    if not match:
-        return
-
-    date = match.group('date')
-    
-    if date.count('/') < 2:
-            date += '/2020'
-
-    dict[field] = date
-
-
-def _parse_field(dict, regex, line, field):
-    match = re.search(regex, line)
-    
-    if not match:
-        return
-
-    value = match.group(field)
-    
-    dict[field] = value
-    
-    
-def parse_data(line: str) -> dict:
-    """
-    """
-    dic = {}
-
-    _parse_date(dic, r"symptom[s]? onset (\w+\s)*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
-    _parse_date(dic, r"develop(ed)? (\w+\s)*symptom[s]? (\w+\s)*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
-    _parse_date(dic, r"fever \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
-    _parse_date(dic, r"cough \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'symptoms')
-    _parse_date(dic, r"confirmed \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'confirmed')
-    _parse_date(dic, r"hospital(ized)? \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'hospitalized')
-    _parse_date(dic, r"admitted\s*(to hospital)?\s*(?P<date>\d+/\d+(/\d+)?)", line, 'hospitalized')
-    _parse_date(dic, r"(?P<date>\d+/\d+(/\d+)?) and hospitalized", line, 'hospitalized')
-    _parse_date(dic, r"death \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'death')
-    _parse_date(dic, r"died \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'death')
-    _parse_date(dic, r"visit(ed)? (\w+\s)*\s?clinic \w*\s?(?P<date>\d+/\d+(/\d+)?)", line, 'clinic')
-
-    if dic:
-        _parse_field(dic, r"(?P<gender>(fe)?male)", line, 'gender')
-        _parse_field(dic, r"(fe)?male, (?P<age>\d+)s?", line, 'age')
-        _parse_field(dic, r"(fe)?male, in (his|her) (?P<age>\d+)s?", line, 'age')
-        return dic
+DAYS_TO_SIMULATE = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
+CHANCE_OF_INFECTION = st.sidebar.number_input("Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001)
 
 
 class TransitionEstimator:
@@ -92,15 +34,17 @@ class TransitionEstimator:
         persona con edad `age` y sexo `sex.
         """
 
-        # De todos los datos que tenemos, vamos a ordernarlos por diferencia absoluta
+        # De todos los datos que tenemos, vamos a ordenarlos por diferencia absoluta
         # con la edad deseada, y vamos cogiendo filas hasta acumular al menos 50
         # mediciones. 
-        evidence = self.data[(self.data['StateFrom'] == from_state) & (self.data['Sex'] == sex)]
+        evidence = self.data[(self.data['StateFrom'] == from_state) & (self.data['Sex'] == sex)].copy()
         evidence['AgeDiff'] = (evidence['Age'] - age).abs()
         evidence = evidence.sort_values(['AgeDiff', 'Count']).copy()
         evidence['CountCumul'] = evidence['Count'].cumsum()
-        min_required_evidence = evidence[evidence['CountCumul'] >= 50]['CountCumul'].min()
-        evidence = evidence[evidence['CountCumul'] <= min_required_evidence]
+
+        if evidence['CountCumul'].max() > 50:
+            min_required_evidence = evidence[evidence['CountCumul'] >= 50]['CountCumul'].min()
+            evidence = evidence[evidence['CountCumul'] <= min_required_evidence]
 
         # Ahora volvemos a agrupar por estado y recalculamos la media y varianza
         state_to = collections.defaultdict(lambda: dict(count=0, mean=0, std=0))
@@ -119,6 +63,9 @@ class TransitionEstimator:
         # Finalmente tenemos un dataframe con forma
         # `count | mean | std | state`
         # con una entrada por cada estado
+        if not state_to:
+            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+
         return pd.DataFrame(state_to.values()).sort_values('count')
 
 
@@ -141,12 +88,12 @@ class StatePerson:
     """Estados en los que puede estar una persona.
     """
     S = "S"
-    Ls = "Ls"
     Lp = "Lp"
-    Ip = "Ip"
     Is = "Is"
     Iv = "Iv"
+    I = "I"
     A = "A"
+    U = "U"
     R = "R"
     H = "H"
     D = "D"
@@ -168,17 +115,19 @@ def spatial_transmision(regions, social, status, distance, parameters):
         - output: es el estado actualizado de cada persona.
     """
     # cantidad de días(steps) que dura la simulación
-    simulation_time = 30
+    simulation_time = DAYS_TO_SIMULATE
 
     # estadísticas de la simulación
     progress = st.progress(0)
     day = st.empty()
     sick_count = st.empty()
+    all_count = st.empty()
 
     # por cada paso de la simulación
     for i in range(simulation_time):
 
         total_individuals = 0
+        by_state = collections.defaultdict(lambda: 0)
 
         # por cada región
         for region in regions:
@@ -190,6 +139,7 @@ def spatial_transmision(regions, social, status, distance, parameters):
                     compute_spread(ind, social, status)
                 
                 total_individuals += 1
+                by_state[ind.state] += 1
                 
             interventions(status)
             # movimientos
@@ -199,8 +149,9 @@ def spatial_transmision(regions, social, status, distance, parameters):
                     transportations(n_region, region, distance)
 
         progress.progress((i + 1) / simulation_time)
-        day.markdown(f"#### Día: {i+1}")
         sick_count.markdown(f"#### Individuos simulados: {total_individuals}")
+        all_count.code(dict(by_state))
+        day.markdown(f"#### Día: {i+1}")
         time.sleep(0.1)
 
 
@@ -248,7 +199,7 @@ def eval_infections(person) -> bool:
 
        En general depende del estado en el que se encuentra person y las probabilidades de ese estado
     """
-    return True
+    return random.uniform(0,1) < CHANCE_OF_INFECTION
 
 
 class Person:
@@ -277,16 +228,10 @@ class Person:
         if self.steps_remaining == 0:
             # actualizar state
             self.state = self.next_state
-            # llamar al método del nuevo estado para definir tiempo y next_step
-            # if self.state == StatePerson.S:
-            #     state, time = self.p_suseptible()
-            #     self.next_state = state
-            #     self.steps_remaining = time
-            if self.state == StatePerson.Ls:
-                self.p_latent_sintoms()
-            elif self.state == StatePerson.Lp:
+
+            if self.state == StatePerson.Lp:
                 self.p_latent()
-            elif self.state == StatePerson.Ip:
+            elif self.state == StatePerson.I:
                 self.p_infect()
             elif self.state == StatePerson.Is:
                 self.p_infect_sitoms()
@@ -294,6 +239,10 @@ class Person:
                 self.p_infect_sintom_antiviral()
             elif self.state == StatePerson.A:
                 self.p_asintomatic()
+            elif self.state == StatePerson.H:
+                self.p_hospitalized()
+            elif self.state == StatePerson.U:
+                self.p_uci()
             else:
                 return False
             # en los estados restantes no hay transiciones
@@ -319,7 +268,6 @@ class Person:
         """Computa a qué estado pasar dado el estado actual y los valores de la tabla.
         """
         df = TRANSITIONS.transition(self.state, self.age, self.sex)
-        st.write(df)
         # calcular el estado de transición y el tiempo
         to_state = random.choices(df['state'].values, weights=df['count'].values, k=1)[0]
         state_data = df.set_index('state').to_dict('index')[to_state]
@@ -327,17 +275,18 @@ class Person:
 
         return to_state, int(time)
 
-    def p_suseptible(self):
-        self.is_infectious = False
-        self.next_state, self.steps_remaining = self._evaluate_transition()
-
-    def p_latent_sintoms(self):
-        self.is_infectious = True
-        self.next_state, self.steps_remaining = self._evaluate_transition()
-
     def p_latent(self):
         self.is_infectious = False
-        self.next_state, self.steps_remaining = self._evaluate_transition()
+        change_to_symptoms = 0.5
+
+        if random.uniform(0,1) < change_to_symptoms:
+            self.next_state = StatePerson.A
+            self.steps_remaining = 0
+            return
+
+        # convertirse en sintomático en (2,14) dias
+        self.next_state = StatePerson.I
+        self.steps_remaining = random.randint(2, 14)
 
     def p_infect(self):
         self.is_infectious = True
@@ -353,13 +302,19 @@ class Person:
 
     def p_asintomatic(self):
         self.is_infectious = True
-        self.next_state, self.steps_remaining = self._evaluate_transition()
+        self.next_state = StatePerson.R
+        # tiempo en que un asintomático se cura
+        self.steps_remaining = random.uniform(2, 14)
 
     def p_recovered(self):
         self.is_infectious = False
         self.next_state, self.steps_remaining = self._evaluate_transition()
 
     def p_hospitalized(self):
+        self.is_infectious = False
+        self.next_state, self.steps_remaining = self._evaluate_transition()
+
+    def p_uci(self):
         self.is_infectious = False
         self.next_state, self.steps_remaining = self._evaluate_transition()
 
@@ -378,7 +333,7 @@ class Region:
 
         for i in range(initial_infected):
             p = Person(self, 30, random.choice(['MALE', 'FEMALE']))
-            p.set_state(StatePerson.S)
+            p.set_state(StatePerson.I)
             self._individuals.append(p)
 
     @property
