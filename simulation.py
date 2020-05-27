@@ -152,7 +152,6 @@ def spatial_transmision(regions, social, status, distance, parameters):
         sick_count.markdown(f"#### Individuos simulados: {total_individuals}")
         all_count.code(dict(by_state))
         day.markdown(f"#### Día: {i+1}")
-        time.sleep(0.1)
 
 
 def interventions(status):
