@@ -13,7 +13,7 @@ from enum import Enum
 
 @st.cache
 def load_disease_transition() -> pd.DataFrame:
-    return pd.read_csv("./data/disease_transitions.csv")
+    return pd.read_csv("./data/disease_transitions_cuba.csv")
 
 
 DAYS_TO_SIMULATE = st.sidebar.number_input("Dias a simular", 1, 1000, 30)

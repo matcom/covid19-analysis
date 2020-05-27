@@ -6,6 +6,24 @@ from pathlib import Path
 
 
 @st.cache
+def load_cuba_data():
+    data = pd.read_csv(
+        Path(__file__).parent.parent / "data/datos_privados_Cuba.csv"
+    ).fillna("")
+
+    data['# de contactos'] = data['# de contactos'].astype(float, errors='ignore')
+    data['Asintomatico'] = data['FIS'].str.contains('sint')
+    data.loc[data['Asintomatico'] == 1,'FIS'] = ""
+
+    for col in ["Fecha Arribo", "FIS", "FI", "F. Conf", "Fecha Alta"]:
+        data[col] = pd.to_datetime(
+            data[col], format="%m/%d/%Y", errors="ignore", exact=True
+        )
+
+    return data
+
+
+@st.cache
 def get_responses():
     responses = pd.read_csv(
         Path(__file__).parent.parent / "data/responses.tsv", sep="\t"
@@ -20,9 +38,9 @@ def get_responses():
 @st.cache
 def demographic_data(as_dict=True):
     df = pd.read_csv(
-            Path(__file__).parent.parent / "data/world_demographics.tsv", sep="\t"
-        ).set_index("Country")
-    
+        Path(__file__).parent.parent / "data/world_demographics.tsv", sep="\t"
+    ).set_index("Country")
+
     if as_dict:
         return df.to_dict("index")
 
@@ -39,13 +57,13 @@ def raw_information(rolling_window_size=1, step=1):
         df = pd.DataFrame(v)
         df = df[df["confirmed"] > 0]
         df["date"] = pd.to_datetime(df["date"])
-        df = df.set_index('date')
+        df = df.set_index("date")
         df["active"] = df["confirmed"] - df["recovered"] - df["deaths"]
         df = df.rolling(rolling_window_size).mean()
         df = df.reset_index()
 
         if step > 1:
-            df = df.iloc[(len(df)-1) % step::step, :]
+            df = df.iloc[(len(df) - 1) % step :: step, :]
 
         data[k] = df
 
@@ -116,17 +134,17 @@ def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold)
             )
         )
 
-    return pd.DataFrame(measures_effects)  
+    return pd.DataFrame(measures_effects)
 
 
 @st.cache
 def testing_data():
     df = pd.read_csv(Path(__file__).parent.parent / "data/testing.csv")
 
-    df['country'] = df['Entity'] #.str.replace("-.*", "").str.strip()
-    df['total'] = df['Cumulative total'].fillna(0).astype(int)
-    df['date'] = pd.to_datetime(df['Date'])
+    df["country"] = df["Entity"]  # .str.replace("-.*", "").str.strip()
+    df["total"] = df["Cumulative total"].fillna(0).astype(int)
+    df["date"] = pd.to_datetime(df["Date"])
 
-    df = df[df['total'] > 0].sort_values(['country', 'date'])
+    df = df[df["total"] > 0].sort_values(["country", "date"])
 
-    return df[['country', 'total', 'date']]
+    return df[["country", "total", "date"]]

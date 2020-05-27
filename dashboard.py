@@ -8,7 +8,8 @@ from dashboard.sections import (
     new_simulation,
     testing_analysis,
     intro,
-    curve_prediction
+    curve_prediction,
+    cubadata,
 )
 
 
@@ -30,6 +31,7 @@ def main():
         tr("Global epidemic evolution", "Evolución global de la epidemia"): global_analysis,
         tr("Simulation", "Simulación (I)"): simulation,
         tr("Simulation (new / incomplete)", "Simulación (II)"): new_simulation,
+        "Cuba Data": cubadata,
         # tr("Testing analysis", "Análisis de las pruebas"): testing_analysis,
     }
 
