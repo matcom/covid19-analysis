@@ -16,6 +16,7 @@ class InterventionsManager:
         self._closed_borders = []
         self._testing = []
         self._school_open = []
+        self._workforce = []
         self.day = 0
 
     def close_borders(self, start, end):
@@ -62,8 +63,22 @@ class InterventionsManager:
 
         return True
 
-    def workforce(self):
-        return 1.0
+    def activate_workforce(self, start, end, percent):
+        """ Activa la medida de activar el teletrabajo en un % de la población
+        """
+        self._workforce.append((start, end, percent))
+
+    def is_workforce(self):
+        """ Informa si la medida de activar el teletrabajo en un % de la población
+        """
+       
+        for start, end, percent in self._workforce:
+            if self.day >= start and self.day <= end:
+                return percent
+
+        return 0.0
+
+    
 
 
 Interventions = InterventionsManager()
