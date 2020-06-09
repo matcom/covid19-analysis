@@ -102,6 +102,7 @@ class StatePerson:
     R = "R"
     H = "H"
     D = "D"
+    F = "F"
 
 
 # método de tranmisión espacial, teniendo en cuenta la localidad
@@ -143,6 +144,8 @@ def spatial_transmision(regions, social, status, distance, parameters):
 
         # por cada región
         for region in regions:
+            # llegadas del estranjero
+            arrivals(region) 
             # por cada persona
             for ind in region:
                 # actualizar estado de la persona
@@ -169,6 +172,15 @@ def spatial_transmision(regions, social, status, distance, parameters):
             [dict(day=i + 1, value=v, variable=k) for k, v in by_state.items()]
         )
 
+def arrivals(region):
+    
+    if Interventions.aeroport_open:
+        l = PARAMETERS["arrivalmean"]
+        people = np.random.poisson(lam)
+
+        for i in range(people):
+            p = region.spawn(age)
+            p.set_state(StatePerson.F)
 
 def interventions(status):
     """Modifica el estado de las medidas y como influyen estas en la población.
@@ -260,6 +272,8 @@ class Person:
                 self.p_hospitalized()
             elif self.state == StatePerson.U:
                 self.p_uci()
+            elif self.state == StatePerson.F:
+                self.p_forenger()
             else:
                 return False
             # en los estados restantes no hay transiciones
@@ -306,6 +320,10 @@ class Person:
         # convertirse en sintomático en (2,14) dias
         self.next_state = StatePerson.I
         self.steps_remaining = random.randint(2, 14)
+
+    def p_forenger(self):
+        self.is_infectious = True
+        self.next_state, self.steps_remaining = self._evaluate_transition()
 
     def p_infect(self):
         self.is_infectious = True
