@@ -14,17 +14,37 @@ PARAMETERS = dict()
 class InterventionsManager:
     def __init__(self):
         self._closed_borders = []
+        self._testing = []
         self.day = 0
 
     def close_borders(self, start, end):
+        """ Activa la medida de cerrar los aeropuertos
+        """
         self._closed_borders.append((start, end))
 
     def is_airport_open(self):
+        """ Informa si los aeropuertos están cerrados
+        """
         for start, end in self._closed_borders:
             if self.day >= start and self.day <= end:
                 return False
 
         return True
+
+    def activate_testing(self, start, end, percent):
+        """ Activa la medida de testiar un % de la población
+        """
+        self._closed_borders.append((start, end, percent))
+
+    def is_testing_active(self):
+        """ Informa si una medida está activa
+        """
+       
+        for start, end, percent in self._testing:
+            if self.day >= start and self.day <= end:
+                return percent
+
+        return 0.0
 
     def is_school_open(self):
         return True
