@@ -212,16 +212,27 @@ def run():
     data = load_cuba_data()
 
     asympt_length = st.sidebar.number_input("Días promedio de desarrollar síntomas", 0, 100, 5)
-    day_states = get_daily_values(data, asympt_length)
 
     if st.checkbox("Ver datos raw"):
         st.write(data)  
-        st.write(day_states.head(100))
 
     transitions(data)
+
+    day_states = get_daily_values(data, asympt_length)
+    foreigners = day_states[day_states['status'] == 'nuevo-extranjero']
+
+    st.write("### Rate de llegada de extranjeros diaria")
+
+    st.altair_chart(
+        alt.Chart(foreigners).mark_bar().encode(
+            x='day',
+            y='sum(value)'
+        ),
+        use_container_width=True,
+    )
+
     return
 
-    st.write("### Nuevos casos diarios")
 
     st.altair_chart(
         alt.Chart(
