@@ -17,13 +17,15 @@ def load_disease_transition() -> pd.DataFrame:
 
 
 DAYS_TO_SIMULATE = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
-CHANCE_OF_INFECTION = st.sidebar.number_input("Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001)
+CHANCE_OF_INFECTION = st.sidebar.number_input(
+    "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
+)
 
 
 class TransitionEstimator:
     def __init__(self):
         self.data = load_disease_transition()
-        self.states = list(set(self.data['StateFrom']))
+        self.states = list(set(self.data["StateFrom"]))
         self._state_data = {}
 
         for s in self.states:
@@ -36,29 +38,33 @@ class TransitionEstimator:
 
         # De todos los datos que tenemos, vamos a ordenarlos por diferencia absoluta
         # con la edad deseada, y vamos cogiendo filas hasta acumular al menos 50
-        # mediciones. 
-        evidence = self.data[(self.data['StateFrom'] == from_state) & (self.data['Sex'] == sex)].copy()
-        evidence['AgeDiff'] = (evidence['Age'] - age).abs()
-        evidence = evidence.sort_values(['AgeDiff', 'Count']).copy()
-        evidence['CountCumul'] = evidence['Count'].cumsum()
+        # mediciones.
+        evidence = self.data[
+            (self.data["StateFrom"] == from_state) & (self.data["Sex"] == sex)
+        ].copy()
+        evidence["AgeDiff"] = (evidence["Age"] - age).abs()
+        evidence = evidence.sort_values(["AgeDiff", "Count"]).copy()
+        evidence["CountCumul"] = evidence["Count"].cumsum()
 
-        if evidence['CountCumul'].max() > 50:
-            min_required_evidence = evidence[evidence['CountCumul'] >= 50]['CountCumul'].min()
-            evidence = evidence[evidence['CountCumul'] <= min_required_evidence]
+        if evidence["CountCumul"].max() > 50:
+            min_required_evidence = evidence[evidence["CountCumul"] >= 50][
+                "CountCumul"
+            ].min()
+            evidence = evidence[evidence["CountCumul"] <= min_required_evidence]
 
         # Ahora volvemos a agrupar por estado y recalculamos la media y varianza
         state_to = collections.defaultdict(lambda: dict(count=0, mean=0, std=0))
 
         for i, row in evidence.iterrows():
-            d = state_to[row['StateTo']]
-            d['count'] += row['Count']
-            d['mean'] += row['Count'] * row['MeanDays']
-            d['std'] += row['Count'] * row['StdDays']
-            d['state'] = row['StateTo']
+            d = state_to[row["StateTo"]]
+            d["count"] += row["Count"]
+            d["mean"] += row["Count"] * row["MeanDays"]
+            d["std"] += row["Count"] * row["StdDays"]
+            d["state"] = row["StateTo"]
 
         for v in state_to.values():
-            v['mean'] /= v['count']
-            v['std'] /= v['count']
+            v["mean"] /= v["count"]
+            v["std"] /= v["count"]
 
         # Finalmente tenemos un dataframe con forma
         # `count | mean | std | state`
@@ -66,7 +72,7 @@ class TransitionEstimator:
         if not state_to:
             raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
 
-        return pd.DataFrame(state_to.values()).sort_values('count')
+        return pd.DataFrame(state_to.values()).sort_values("count")
 
 
 TRANSITIONS = TransitionEstimator()
@@ -77,9 +83,9 @@ def load_interaction_estimates():
     df: pd.DataFrame = pd.read_csv(
         "./data/contact_matrices_152_countries/nicaragua.csv",
         header=None,
-        names=[i for i in range(5, 85, 5)]
+        names=[i for i in range(5, 85, 5)],
     )
-    df['age'] = [i for i in range(5, 85, 5)]
+    df["age"] = [i for i in range(5, 85, 5)]
 
     return df.set_index("age").to_dict()
 
@@ -87,6 +93,7 @@ def load_interaction_estimates():
 class StatePerson:
     """Estados en los que puede estar una persona.
     """
+
     S = "S"
     Lp = "Lp"
     Is = "Is"
@@ -123,6 +130,13 @@ def spatial_transmision(regions, social, status, distance, parameters):
     sick_count = st.empty()
     all_count = st.empty()
 
+    chart = st.altair_chart(
+        alt.Chart(pd.DataFrame(columns=["value", "day", "variable"]))
+        .mark_line()
+        .encode(y="value:Q", x="day:Q", color="variable:N",),
+        use_container_width=True,
+    )
+
     # por cada paso de la simulación
     for i in range(simulation_time):
 
@@ -137,10 +151,10 @@ def spatial_transmision(regions, social, status, distance, parameters):
                 ind.next_step()
                 if ind.is_infectious:
                     compute_spread(ind, social, status)
-                
+
                 total_individuals += 1
                 by_state[ind.state] += 1
-                
+
             interventions(status)
             # movimientos
             for n_region in regions:
@@ -152,6 +166,10 @@ def spatial_transmision(regions, social, status, distance, parameters):
         sick_count.markdown(f"#### Individuos simulados: {total_individuals}")
         all_count.code(dict(by_state))
         day.markdown(f"#### Día: {i+1}")
+
+        chart.add_rows(
+            [dict(day=i + 1, value=v, variable=k) for k, v in by_state.items()]
+        )
 
 
 def interventions(status):
@@ -181,7 +199,9 @@ def compute_spread(ind, social, status):
             other.set_state(StatePerson.Lp)
 
 
-def eval_connections(social: Dict[int, Dict[int, float]], person: "Person") -> List["Person"]:
+def eval_connections(
+    social: Dict[int, Dict[int, float]], person: "Person"
+) -> List["Person"]:
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
     other_ages = social[person.age]
@@ -198,7 +218,7 @@ def eval_infections(person) -> bool:
 
        En general depende del estado en el que se encuentra person y las probabilidades de ese estado
     """
-    return random.uniform(0,1) < CHANCE_OF_INFECTION
+    return random.uniform(0, 1) < CHANCE_OF_INFECTION
 
 
 class Person:
@@ -248,14 +268,14 @@ class Person:
         else:
             # decrementar los steps que faltan para cambiar de estado
             self.steps_remaining = self.steps_remaining - 1
-        
+
         return True
 
     def __repr__(self):
         return f"Person(age={self.age}, sex={self.sex}, state={self.state}, steps_remaining={self.steps_remaining})"
 
     # Funciones de que pasa en cada estado para cada persona
-    # debe devolver el tiempo que la persona va estar en ese estado y 
+    # debe devolver el tiempo que la persona va estar en ese estado y
     # a que estado le toca pasar en el futuro.
 
     def set_state(self, state):
@@ -268,9 +288,11 @@ class Person:
         """
         df = TRANSITIONS.transition(self.state, self.age, self.sex)
         # calcular el estado de transición y el tiempo
-        to_state = random.choices(df['state'].values, weights=df['count'].values, k=1)[0]
-        state_data = df.set_index('state').to_dict('index')[to_state]
-        time = random.normalvariate(state_data['mean'], state_data['std'])
+        to_state = random.choices(df["state"].values, weights=df["count"].values, k=1)[
+            0
+        ]
+        state_data = df.set_index("state").to_dict("index")[to_state]
+        time = random.normalvariate(state_data["mean"], state_data["std"])
 
         return to_state, int(time)
 
@@ -278,7 +300,7 @@ class Person:
         self.is_infectious = False
         change_to_symptoms = 0.5
 
-        if random.uniform(0,1) < change_to_symptoms:
+        if random.uniform(0, 1) < change_to_symptoms:
             self.next_state = StatePerson.A
             self.steps_remaining = 0
             return
@@ -303,7 +325,7 @@ class Person:
         self.is_infectious = True
         self.next_state = StatePerson.R
         # tiempo en que un asintomático se cura
-        self.steps_remaining = random.uniform(2, 14)
+        self.steps_remaining = random.randint(2, 14)
 
     def p_recovered(self):
         self.is_infectious = False
@@ -331,7 +353,7 @@ class Region:
         self._individuals = []
 
         for i in range(initial_infected):
-            p = Person(self, 30, random.choice(['MALE', 'FEMALE']))
+            p = Person(self, 30, random.choice(["MALE", "FEMALE"]))
             p.set_state(StatePerson.I)
             self._individuals.append(p)
 
@@ -349,7 +371,7 @@ class Region:
                 yield i
 
     def spawn(self, age) -> Person:
-        p = Person(self, age, random.choice(['MALE', 'FEMALE']))
+        p = Person(self, age, random.choice(["MALE", "FEMALE"]))
         self._individuals.append(p)
         return p
 
@@ -367,7 +389,7 @@ class Region:
         """Incrementa la cantidad de personas qeu pasan a formar parte de los recuperados
         """
         self._recovered += count
-    
+
 
 def main():
     st.title("Simulación de la epidemia")

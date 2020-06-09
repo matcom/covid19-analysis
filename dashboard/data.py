@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import json
+import datetime
 
 from pathlib import Path
 
@@ -9,16 +10,17 @@ from pathlib import Path
 def load_cuba_data():
     data = pd.read_csv(
         Path(__file__).parent.parent / "data/datos_privados_Cuba.csv"
-    ).fillna("")
+    )#.fillna(None)
 
-    data['# de contactos'] = data['# de contactos'].astype(float, errors='ignore')
+    data['# de contactos'] = data['# de contactos'].astype(int, errors='ignore')
     data['Asintomatico'] = data['FIS'].str.contains('sint')
     data.loc[data['Asintomatico'] == 1,'FIS'] = ""
 
     for col in ["Fecha Arribo", "FIS", "FI", "F. Conf", "Fecha Alta"]:
         data[col] = pd.to_datetime(
-            data[col], format="%m/%d/%Y", errors="ignore", exact=True
+            data[col], format="%m/%d/%Y", errors="coerce", exact=True
         )
+        data.loc[data[col] < datetime.datetime(2020,1,1), col] = None
 
     return data
 

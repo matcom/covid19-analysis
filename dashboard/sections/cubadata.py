@@ -1,26 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import altair as alt
+import random
 
 from ..data import load_cuba_data
 
 
-def run(tr):
-    data = load_cuba_data().copy()
-
-    def compute_days(d1, d2):
-        try:
-            return (pd.to_datetime(d2) - pd.to_datetime(d1)).days
-        except:
-            return np.nan
-
-    # data['T(FI-FIS)'] = data.apply(lambda row: compute_days(row['FIS'], row['FI']), axis=1)
-    # data['T(FConf-FI)'] = data.apply(lambda row: compute_days(row['FI'], row['F. Conf']), axis=1)
-    # data['T(Alta-FI)'] = data.apply(lambda row: compute_days(row['FI'], row['Fecha Alta']), axis=1)
-    # data['T(Alta-FConf)'] = data.apply(lambda row: compute_days(row['F. Conf'], row['Fecha Alta']), axis=1)
-
-    st.write(data)
-
+@st.cache
+def get_events(data):
     events = []
 
     for i, d in data.iterrows():
@@ -130,7 +118,159 @@ def run(tr):
                 )
             )
 
-    df = pd.DataFrame(events)
+    return pd.DataFrame(events)
+
+
+@st.cache
+def get_daily_values(data, asympt_length):
+    day_states = []
+    fend = data["Fecha Alta"].max() + pd.Timedelta(days=1)
+
+    for i, row in data.iterrows():
+        fs: pd.Timestamp = row["FIS"]
+        fi: pd.Timestamp = row["FI"]
+        fc: pd.Timestamp = row["F. Conf"]
+        fa: pd.Timestamp = row["Fecha Alta"]
+
+        contacts = row['# de contactos']
+
+        if pd.isna(contacts):
+            contacts = 0
+
+        if pd.isna(fa):
+            fa = fend
+
+        if pd.isna(fc):
+            continue
+
+        day_states.append(dict(day=fc, id=row["Cons"], status="nuevo-confirmado"))
+
+        if fa < fend:
+            day_states.append(dict(day=fa, id=row["Cons"], status="nuevo-alta"))
+
+        for day in range((fa - fc).days):
+            day_states.append(
+                dict(
+                    day=fc + pd.Timedelta(days=day), id=row["Cons"], status="activo"
+                )
+            )
+        
+        if not pd.isna(fi):
+            day_states.append(dict(day=fi, id=row["Cons"], status="nuevo-ingreso"))
+        
+            for day in range((fa - fi).days):
+                day_states.append(
+                    dict(
+                        day=fi + pd.Timedelta(days=day), id=row["Cons"], status="ingresado"
+                    )
+                )
+                
+        if not pd.isna(fs):
+            day_states.append(dict(day=fs, id=row["Cons"], status="nuevo-síntoma"))
+            day_states.append(dict(day=fs - pd.Timedelta(days=random.randint(0, asympt_length)), id=row["Cons"], status="infectado"))
+
+            for day in range((fc - fs).days):
+                day_states.append(
+                    dict(
+                        day=fs + pd.Timedelta(days=day),
+                        id=row["Cons"],
+                        status="infeccioso",
+                    )
+                )
+        else:
+            day_states.append(dict(day=fc - pd.Timedelta(days=random.randint(0, asympt_length)), id=row["Cons"], status="infectado"))
+
+        if contacts == 0:
+            continue
+
+        if row['Asintomatico']:
+            for day in range(asympt_length):
+                day_states.append(
+                    dict(
+                        day=fc - pd.Timedelta(days=day),
+                        id=row["Cons"],
+                        status="contacto",
+                        value=contacts / asympt_length
+                    )
+                )
+        else:
+            if pd.isna(fi) or pd.isna(fs):
+                continue
+            
+            total_days = asympt_length + (fi - fs).days
+
+            for day in range(total_days):
+                day_states.append(
+                    dict(
+                        day=fi - pd.Timedelta(days=day),
+                        id=row["Cons"],
+                        status="contacto",
+                        value=contacts / total_days
+                    )
+                )
+
+    return pd.DataFrame(day_states).fillna(1)
+
+
+def run(tr):
+    data = load_cuba_data()
+
+    asympt_length = st.sidebar.number_input("Días promedio de desarrollar síntomas", 0, 100, 5)
+    day_states = get_daily_values(data, asympt_length)
+
+    if st.checkbox("Ver datos raw"):
+        st.write(data)  
+        st.write(day_states)
+
+    st.write("### Nuevos casos diarios")
+
+    st.altair_chart(
+        alt.Chart(
+            day_states[
+                day_states["status"].isin(["nuevo-síntoma", "nuevo-confirmado", "nuevo-ingreso", "nuevo-alta"])
+            ]
+        )
+        .mark_bar(opacity=0.75, size=3)
+        .encode(
+            x=alt.X("monthdate(day)"),
+            y=alt.Y("count(id)", stack=True),
+            color="status",
+        ),
+        use_container_width=True,
+    )
+
+    st.altair_chart(
+        alt.Chart(day_states[day_states["status"].isin(["ingresado", "infeccioso", "activo"])])
+        .mark_line()
+        .encode(x="monthdate(day)", y="count(id)", color="status"),
+        use_container_width=True,
+    )
+
+    st.altair_chart(
+        alt.Chart(day_states[day_states["status"].isin(["contacto", "infectado"])])
+        .mark_bar()
+        .encode(x="monthdate(day)", y="sum(value)", color="status"),
+        use_container_width=True,
+    )
+
+    df = day_states[day_states['status'].isin(['contacto', 'infectado'])].groupby(['day', 'status']).agg(value=('value', 'sum')).reset_index()
+    df = df.pivot(index='day', columns='status', values='value').fillna(0).reset_index()
+    df['rate'] = df['infectado'] / df['contacto']
+
+    st.altair_chart(
+        alt.Chart(df[df['contacto'] > 30])
+        .mark_bar()
+        .encode(x="monthdate(day)", y="rate"),
+        use_container_width=True,
+    )
+
+    transitions(data)
+
+
+def transitions(data: pd.DataFrame):
+    st.write("## Estimación de transiciones para simulación")
+
+    df = get_events(data)
 
     if st.checkbox("Ver todos los eventos"):
         st.write(df)
@@ -160,19 +300,18 @@ def run(tr):
     states = compute_transitions(df)
     st.write(states)
 
-    st.write("### Transiciones por edad y género")
+    if st.checkbox("Ver transiciones por edad y género"):
+        for age1, age2 in [(0, 18), (18, 30), (30, 50), (50, 80), (80, 120)]:
+            for sex in ["FEMALE", "MALE"]:
+                df_filter = df[
+                    (df["age"] >= age1) & (df["age"] < age2) & (df["sex"] == sex)
+                ]
+                states = compute_transitions(df_filter)
 
-    for age1, age2 in [(0, 18), (18, 30), (30, 50), (50, 80), (80, 120)]:
-        for sex in ["FEMALE", "MALE"]:
-            df_filter = df[
-                (df["age"] >= age1) & (df["age"] < age2) & (df["sex"] == sex)
-            ]
-            states = compute_transitions(df_filter)
+                st.write(f"#### {sex} {age1}-{age2} años")
+                st.write(states)
 
-            st.write(f"#### {sex} {age1}-{age2} años")
-            st.write(states)
-
-    if st.checkbox("Ver en CSV"):
+    if st.checkbox("Ver transiciones en CSV"):
         csv = []
 
         for age in set(df["age"]):
