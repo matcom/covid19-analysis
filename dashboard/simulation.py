@@ -22,9 +22,9 @@ class InterventionsManager:
     def is_airport_open(self):
         for start, end in self._closed_borders:
             if self.day >= start and self.day <= end:
-                return True
+                return False
 
-        return False
+        return True
 
     def is_school_open(self):
         return True
@@ -163,6 +163,7 @@ def spatial_transmision(regions, social, status, distance, parameters):
 
         total_individuals = 0
         by_state = collections.defaultdict(lambda: 0)
+        Interventions.day = i+1
 
         # por cada región
         for region in regions:
@@ -427,6 +428,7 @@ def run():
     st.title("Simulación de la epidemia")
 
     PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 365, 60)
+    PARAMETERS['START_INFECTED'] = st.sidebar.number_input("Cantidad inicial de infectados", 0, 100, 0)
     PARAMETERS['CHANCE_OF_INFECTION'] = st.sidebar.number_input(
         "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
     )
@@ -441,5 +443,5 @@ def run():
         Interventions.close_borders(start, end)
 
     if st.button("Simular"):
-        region = Region(1000, 1)
+        region = Region(1000, PARAMETERS['START_INFECTED'])
         spatial_transmision([region], load_interaction_estimates(), None, None, None)
