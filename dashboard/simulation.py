@@ -12,8 +12,19 @@ PARAMETERS = dict()
 
 
 class InterventionsManager:
+    def __init__(self):
+        self._closed_borders = []
+        self.day = 0
+
+    def close_borders(self, start, end):
+        self._closed_borders.append((start, end))
+
     def is_airport_open(self):
-        return True
+        for start, end in self._closed_borders:
+            if self.day >= start and self.day <= end:
+                return True
+
+        return False
 
     def is_school_open(self):
         return True
@@ -415,13 +426,19 @@ class Region:
 def run():
     st.title("Simulación de la epidemia")
 
-    PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
+    PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 365, 60)
     PARAMETERS['CHANCE_OF_INFECTION'] = st.sidebar.number_input(
         "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
     )
     PARAMETERS['FOREIGNER_ARRIVALS'] = st.sidebar.number_input(
-        "Llegada diaria de extranjeros", 0.0, 100.0, 0.1, step=0.001
+        "Llegada diaria de extranjeros", 0.0, 100.0, 10.0, step=0.01
     )
+
+    st.write("### Medidas")
+
+    if st.checkbox("Cerrar fronteras"):
+        start, end = st.slider("Rango de fechas de cierre de fronteras", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        Interventions.close_borders(start, end)
 
     if st.button("Simular"):
         region = Region(1000, 1)
