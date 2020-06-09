@@ -179,7 +179,7 @@ def spatial_transmision(regions, social, status, distance, parameters):
                 total_individuals += 1
                 by_state[ind.state] += 1
 
-            interventions(status)
+            interventions(region, status)
             # movimientos
             for n_region in regions:
                 if n_region != region:
@@ -205,12 +205,18 @@ def arrivals(region):
             p.set_state(StatePerson.F)
 
 
-def interventions(status):
+def interventions(region, status):
     """Modifica el estado de las medidas y como influyen estas en la población.
 
        Los cambios se almacenan en status
     """
-    pass
+    # si se está testeando activamente
+    p = Interventions.is_testing_active()
+
+    if p > 0:
+        for ind in region:
+            if ind.state == StatePerson.L and random.uniform(0, 1) < p:
+                ind.set_state(StatePerson.H)
 
 
 def transportations(n_region, region, distance):
@@ -441,6 +447,11 @@ def run():
     if st.checkbox("Cerrar fronteras"):
         start, end = st.slider("Rango de fechas de cierre de fronteras", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
         Interventions.close_borders(start, end)
+
+    if st.checkbox("Testing activo de contactos"):
+        start, end = st.slider("Rango de fechas de testing activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        percent = st.slider("Porciento de contactos a testear", 0.0, 1.0, 0.1)
+        Interventions.activate_testing(start, end, percent)
 
     if st.button("Simular"):
         region = Region(1000, PARAMETERS['START_INFECTED'])
