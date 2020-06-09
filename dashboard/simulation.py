@@ -15,6 +15,7 @@ class InterventionsManager:
     def __init__(self):
         self._closed_borders = []
         self._testing = []
+        self._school_open = []
         self.day = 0
 
     def close_borders(self, start, end):
@@ -37,7 +38,7 @@ class InterventionsManager:
         self._closed_borders.append((start, end, percent))
 
     def is_testing_active(self):
-        """ Informa si una medida está activa
+        """ Informa si la medida de testeo de personas está activa
         """
        
         for start, end, percent in self._testing:
@@ -46,7 +47,19 @@ class InterventionsManager:
 
         return 0.0
 
+    def school_close(self, start, end):
+        """ Activa la medida de cerrar las escuelas
+        """
+        self._school_open.append((start, end))
+
     def is_school_open(self):
+        """ Informa si la medida de cerrar escuelasestá activa
+        """
+       
+        for start, end in self._testing:
+            if self.day >= start and self.day <= end:
+                return False
+
         return True
 
     def workforce(self):
