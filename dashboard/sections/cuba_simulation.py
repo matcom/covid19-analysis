@@ -11,15 +11,12 @@ from typing import List, Dict
 from enum import Enum
 
 
+PARAMETERS = dict()
+
+
 @st.cache
 def load_disease_transition() -> pd.DataFrame:
     return pd.read_csv("./data/disease_transitions_cuba.csv")
-
-
-DAYS_TO_SIMULATE = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
-CHANCE_OF_INFECTION = st.sidebar.number_input(
-    "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
-)
 
 
 class TransitionEstimator:
@@ -121,8 +118,8 @@ def spatial_transmision(regions, social, status, distance, parameters):
     Returns:
         - output: es el estado actualizado de cada persona.
     """
-    # cantidad de días(steps) que dura la simulación
-    simulation_time = DAYS_TO_SIMULATE
+
+    simulation_time = PARAMETERS['DAYS_TO_SIMULATE']
 
     # estadísticas de la simulación
     progress = st.progress(0)
@@ -218,7 +215,7 @@ def eval_infections(person) -> bool:
 
        En general depende del estado en el que se encuentra person y las probabilidades de ese estado
     """
-    return random.uniform(0, 1) < CHANCE_OF_INFECTION
+    return random.uniform(0, 1) < PARAMETERS['CHANCE_OF_INFECTION']
 
 
 class Person:
@@ -391,13 +388,14 @@ class Region:
         self._recovered += count
 
 
-def main():
+def run():
     st.title("Simulación de la epidemia")
+
+    PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
+    PARAMETERS['CHANCE_OF_INFECTION'] = st.sidebar.number_input(
+        "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
+    )
 
     if st.button("Simular"):
         region = Region(1000, 1)
         spatial_transmision([region], load_interaction_estimates(), None, None, None)
-
-
-if __name__ == "__main__":
-    main()

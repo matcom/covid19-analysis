@@ -212,7 +212,7 @@ def get_daily_values(data, asympt_length):
     return pd.DataFrame(day_states).fillna(1)
 
 
-def run(tr):
+def run():
     data = load_cuba_data()
 
     asympt_length = st.sidebar.number_input("Días promedio de desarrollar síntomas", 0, 100, 5)
