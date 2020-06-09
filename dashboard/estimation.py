@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import random
+import networkx as nx
 
 from .data import load_cuba_data
 
@@ -20,12 +21,14 @@ def get_events(data):
         except ValueError:
             continue
 
-        state = "L"
+        farr = d['Fecha Arribo']
+
+        state = "L" if pd.isna(farr) else "E"
 
         if d["Asintomatico"]:
             events.append(
                 dict(
-                    from_state="L",
+                    from_state=state,
                     to_state="A",
                     duration=0,
                     age=age,
@@ -51,11 +54,17 @@ def get_events(data):
 
             continue
 
+        try:
+            symptoms_start = pd.to_datetime(d["FIS"], format="%m/%d/%Y", errors="raise")
+            admission_start = pd.to_datetime(d["FI"], format="%m/%d/%Y", errors="raise")
+        except:
+            continue
+
         events.append(
             dict(
-                from_state="L",
+                from_state=state,
                 to_state="I",
-                duration=0,
+                duration=0 if state == "L" else (symptoms_start - farr).days,
                 age=age,
                 sex=sex,
                 id=person_id,
@@ -65,23 +74,6 @@ def get_events(data):
         events.append(
             dict(
                 from_state="I",
-                to_state="Is",
-                duration=0,
-                age=age,
-                sex=sex,
-                id=person_id,
-            )
-        )
-
-        try:
-            symptoms_start = pd.to_datetime(d["FIS"], format="%m/%d/%Y", errors="raise")
-            admission_start = pd.to_datetime(d["FI"], format="%m/%d/%Y", errors="raise")
-        except:
-            continue
-
-        events.append(
-            dict(
-                from_state="Is",
                 to_state="H",
                 duration=(admission_start - symptoms_start).days,
                 age=age,
@@ -127,6 +119,7 @@ def get_daily_values(data, asympt_length):
     fend = data["Fecha Alta"].max() + pd.Timedelta(days=1)
 
     for i, row in data.iterrows():
+        fe: pd.Timestamp = row["Fecha Arribo"]
         fs: pd.Timestamp = row["FIS"]
         fi: pd.Timestamp = row["FI"]
         fc: pd.Timestamp = row["F. Conf"]
@@ -142,6 +135,9 @@ def get_daily_values(data, asympt_length):
 
         if pd.isna(fc):
             continue
+
+        if not pd.isna(fe):
+            day_states.append(dict(day=fe, id=row["Cons"], status="nuevo-extranjero"))
 
         day_states.append(dict(day=fc, id=row["Cons"], status="nuevo-confirmado"))
 
@@ -220,7 +216,10 @@ def run():
 
     if st.checkbox("Ver datos raw"):
         st.write(data)  
-        st.write(day_states)
+        st.write(day_states.head(100))
+
+    transitions(data)
+    return
 
     st.write("### Nuevos casos diarios")
 
@@ -264,7 +263,6 @@ def run():
         use_container_width=True,
     )
 
-    transitions(data)
 
 
 def transitions(data: pd.DataFrame):
@@ -300,16 +298,12 @@ def transitions(data: pd.DataFrame):
     states = compute_transitions(df)
     st.write(states)
 
-    if st.checkbox("Ver transiciones por edad y género"):
-        for age1, age2 in [(0, 18), (18, 30), (30, 50), (50, 80), (80, 120)]:
-            for sex in ["FEMALE", "MALE"]:
-                df_filter = df[
-                    (df["age"] >= age1) & (df["age"] < age2) & (df["sex"] == sex)
-                ]
-                states = compute_transitions(df_filter)
+    graph = nx.DiGraph()
 
-                st.write(f"#### {sex} {age1}-{age2} años")
-                st.write(states)
+    for _, row in states.iterrows():
+        graph.add_edge(row['from_state'], row['to_state'], frequency=row['freq'])
+
+    st.graphviz_chart(str(nx.nx_pydot.to_pydot(graph)))
 
     if st.checkbox("Ver transiciones en CSV"):
         csv = []

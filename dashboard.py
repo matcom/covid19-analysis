@@ -8,7 +8,7 @@ from dashboard import (
 
 def main():
     sections = {
-        "Entrada de datos": estimation,
+        "Estimación": estimation,
         "Simulación": simulation,
     }
 

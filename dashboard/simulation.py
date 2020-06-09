@@ -262,10 +262,6 @@ class Person:
                 self.p_latent()
             elif self.state == StatePerson.I:
                 self.p_infect()
-            elif self.state == StatePerson.Is:
-                self.p_infect_sitoms()
-            elif self.state == StatePerson.Iv:
-                self.p_infect_sintom_antiviral()
             elif self.state == StatePerson.A:
                 self.p_asintomatic()
             elif self.state == StatePerson.H:
@@ -326,14 +322,6 @@ class Person:
         self.next_state, self.steps_remaining = self._evaluate_transition()
 
     def p_infect(self):
-        self.is_infectious = True
-        self.next_state, self.steps_remaining = self._evaluate_transition()
-
-    def p_infect_sitoms(self):
-        self.is_infectious = True
-        self.next_state, self.steps_remaining = self._evaluate_transition()
-
-    def p_infect_sintom_antiviral(self):
         self.is_infectious = True
         self.next_state, self.steps_remaining = self._evaluate_transition()
 
