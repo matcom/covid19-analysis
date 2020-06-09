@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  code:
+    image: matcom/covid19-analysis:latest
+    build:
+      context: "../"
+      dockerfile: "build/dockerfile"
+    container_name: "covid19-code"
+    volumes:
+      - "../:/home/coder/covid19-analysis"
+      - "~/.ssh:/home/coder/.ssh"
+    ports:
+      - "8443:8443"
+      - "8501:8501"
+
+  app:
+    image: matcom/covid19-analysis:latest
+    container_name: "covid19-app"
+    volumes:
+      - "../:/home/coder/covid19-analysis"
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "dashboard.py"]
+    entrypoint: ""

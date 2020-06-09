@@ -1,0 +1,5 @@
+eamodio.gitlens
+ms-python.python
+ms-vscode.sublime-keybindings
+PKief.material-icon-theme
+/tmp/extensions/ms-pyright.pyright-1.1.35.vsix
