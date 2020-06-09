@@ -125,3 +125,4 @@ dmypy.json
 .ipynb_checkpoints
 data/datos_privados_Cuba.ods
 data/datos_privados_Cuba.csv
+data/movilidad.zip
