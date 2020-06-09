@@ -76,9 +76,7 @@ class InterventionsManager:
             if self.day >= start and self.day <= end:
                 return percent
 
-        return 0.0
-
-    
+        return 1.0 
 
 
 Interventions = InterventionsManager()
@@ -292,13 +290,13 @@ def eval_connections(
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
  
-    age = person.age
+    the_age = person.age
 
-    if age % 5 != 0:
-        age = (age // 5 * 5)
+    if the_age % 5 != 0:
+        the_age = (the_age // 5 * 5)
 
     # contactos en la calle
-    other_ages = social['other'][age]
+    other_ages = social['other'][the_age]
 
     for age, lam in other_ages.items():
         people = np.random.poisson(lam)
@@ -308,7 +306,7 @@ def eval_connections(
 
     # contactos en la escuela
     if Interventions.is_school_open():
-        other_ages = social['schools'][age]
+        other_ages = social['schools'][the_age]
 
         for age, lam in other_ages.items():
             people = np.random.poisson(lam)
@@ -323,7 +321,7 @@ def eval_connections(
     p_work = Interventions.is_workforce()
 
     if random.uniform(0, 1) < p_work:
-        other_ages = social['work'][age]
+        other_ages = social['work'][the_age]
 
         for age, lam in other_ages.items():
             people = np.random.poisson(lam * p_work)
@@ -529,8 +527,13 @@ def run():
 
     if st.checkbox("Testing activo de contactos"):
         start, end = st.slider("Rango de fechas de testing activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
-        percent = st.slider("Porciento de contactos a testear", 0.0, 1.0, 0.1)
+        percent = st.slider("Porciento de contactos a testear", 0.0, 1.0, 0.5)
         Interventions.activate_testing(start, end, percent)
+
+    if st.checkbox("Disminuir trabajo / trabajar desde la casa"):
+        start, end = st.slider("Rango de fechas activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        percent = st.slider("Porciento de personas que dejan de trabajar", 0.0, 1.0, 0.5)
+        Interventions.activate_workforce(start, end, percent)
 
     connections = dict(
         work=load_interaction_estimates("work"),
