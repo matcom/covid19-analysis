@@ -4,7 +4,7 @@ import numpy as np
 import altair as alt
 import random
 
-from ..data import load_cuba_data
+from .data import load_cuba_data
 
 
 @st.cache
