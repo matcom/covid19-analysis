@@ -1,4 +1,5 @@
 eamodio.gitlens
-ms-python.python
 ms-vscode.sublime-keybindings
 PKief.material-icon-theme
+/tmp/build/ms-pyright.pyright-1.1.35.vsix
+/tmp/build/ms-python.python-2020.5.86398.vsix

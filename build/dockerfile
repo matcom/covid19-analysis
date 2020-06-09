@@ -33,10 +33,7 @@ RUN curl -SsL https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.
     printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
 
 
-RUN curl -SsL https://github.com/cdr/code-server/releases/download/3.4.1/code-server-3.4.1-linux-x86_64.tar.gz > /tmp/code-server.tar.gz && \
-  cd /tmp && tar -xzf code-server*.tar.gz && rm code-server*.tar.gz && \
-  mv code-server* /usr/local/lib/code-server && \
-  ln -s /usr/local/lib/code-server/bin/code-server /usr/local/bin/code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 COPY requirements.txt /home/coder/covid19-analysis/requirements.txt
 RUN pip install --upgrade pip pipreqs
@@ -46,5 +43,8 @@ EXPOSE 8443
 EXPOSE 8501
 
 USER coder
+COPY build/ /tmp/build
+RUN for extension in `cat /tmp/build/extensions.txt`; do code-server --install-extension ${extension}; done
+
 WORKDIR /home/coder/covid19-analysis
 ENTRYPOINT ["dumb-init", "fixuid", "-q", "code-server", "--bind-addr", "0.0.0.0:8443", "--auth", "none", "/home/coder/covid19-analysis"]
