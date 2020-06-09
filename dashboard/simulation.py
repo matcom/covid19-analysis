@@ -15,6 +15,14 @@ from enum import Enum
 PARAMETERS = dict()
 
 
+class InterventionsManager:
+    def is_airport_open(self):
+        return True
+
+
+Interventions = InterventionsManager()
+
+
 @st.cache
 def load_disease_transition() -> pd.DataFrame:
     return pd.read_csv("./data/disease_transitions_cuba.csv")
@@ -53,6 +61,9 @@ class TransitionEstimator:
         # Ahora volvemos a agrupar por estado y recalculamos la media y varianza
         state_to = collections.defaultdict(lambda: dict(count=0, mean=0, std=0))
 
+        if len(evidence) == 0:
+            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+
         for i, row in evidence.iterrows():
             d = state_to[row["StateTo"]]
             d["count"] += row["Count"]
@@ -67,8 +78,8 @@ class TransitionEstimator:
         # Finalmente tenemos un dataframe con forma
         # `count | mean | std | state`
         # con una entrada por cada estado
-        if not state_to:
-            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+        # if not state_to:
+        #     raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
 
         return pd.DataFrame(state_to.values()).sort_values("count")
 
@@ -172,15 +183,15 @@ def spatial_transmision(regions, social, status, distance, parameters):
             [dict(day=i + 1, value=v, variable=k) for k, v in by_state.items()]
         )
 
+
 def arrivals(region):
-    
-    if Interventions.aeroport_open:
-        l = PARAMETERS["arrivalmean"]
-        people = np.random.poisson(lam)
+    if Interventions.is_airport_open():
+        people = np.random.poisson(PARAMETERS['FOREIGNER_ARRIVALS'])
 
         for i in range(people):
-            p = region.spawn(age)
+            p = region.spawn(random.randint(20, 80))
             p.set_state(StatePerson.F)
+
 
 def interventions(status):
     """Modifica el estado de las medidas y como influyen estas en la población.
@@ -214,7 +225,13 @@ def eval_connections(
 ) -> List["Person"]:
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
-    other_ages = social[person.age]
+ 
+    age = person.age
+
+    if age % 5 != 0:
+        age = (age // 5 * 5)
+
+    other_ages = social[age]
 
     for age, lam in other_ages.items():
         people = np.random.poisson(lam)
@@ -401,6 +418,9 @@ def run():
     PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
     PARAMETERS['CHANCE_OF_INFECTION'] = st.sidebar.number_input(
         "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
+    )
+    PARAMETERS['FOREIGNER_ARRIVALS'] = st.sidebar.number_input(
+        "Llegada diaria de extranjeros", 0.0, 100.0, 0.1, step=0.001
     )
 
     if st.button("Simular"):

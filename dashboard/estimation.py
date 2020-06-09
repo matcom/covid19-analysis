@@ -23,7 +23,7 @@ def get_events(data):
 
         farr = d['Fecha Arribo']
 
-        state = "L" if pd.isna(farr) else "E"
+        state = "L" if pd.isna(farr) else "F"
 
         if d["Asintomatico"]:
             events.append(
