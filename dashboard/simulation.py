@@ -34,7 +34,7 @@ class InterventionsManager:
     def activate_testing(self, start, end, percent):
         """ Activa la medida de testiar un % de la población
         """
-        self._closed_borders.append((start, end, percent))
+        self._testing.append((start, end, percent))
 
     def is_testing_active(self):
         """ Informa si una medida está activa
