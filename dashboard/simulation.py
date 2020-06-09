@@ -1,15 +1,11 @@
-import streamlit as st
-import pandas as pd
+import collections
 import random
-import time
+from typing import Dict, List
+
 import altair as alt
 import numpy as np
-import collections
-import re
-
-
-from typing import List, Dict
-from enum import Enum
+import pandas as pd
+import streamlit as st
 
 
 PARAMETERS = dict()
@@ -18,6 +14,12 @@ PARAMETERS = dict()
 class InterventionsManager:
     def is_airport_open(self):
         return True
+
+    def is_school_open(self):
+        return True
+
+    def workforce(self):
+        return 1.0
 
 
 Interventions = InterventionsManager()
@@ -104,9 +106,7 @@ class StatePerson:
     """
 
     S = "S"
-    Lp = "Lp"
-    Is = "Is"
-    Iv = "Iv"
+    L = "L"
     I = "I"
     A = "A"
     U = "U"
@@ -217,7 +217,7 @@ def compute_spread(ind, social, status):
             continue
 
         if eval_infections(ind):
-            other.set_state(StatePerson.Lp)
+            other.set_state(StatePerson.L)
 
 
 def eval_connections(
@@ -275,7 +275,7 @@ class Person:
             # actualizar state
             self.state = self.next_state
 
-            if self.state == StatePerson.Lp:
+            if self.state == StatePerson.L:
                 self.p_latent()
             elif self.state == StatePerson.I:
                 self.p_infect()
@@ -286,7 +286,7 @@ class Person:
             elif self.state == StatePerson.U:
                 self.p_uci()
             elif self.state == StatePerson.F:
-                self.p_forenger()
+                self.p_foreigner()
             else:
                 return False
             # en los estados restantes no hay transiciones
@@ -334,7 +334,7 @@ class Person:
         self.next_state = StatePerson.I
         self.steps_remaining = random.randint(2, 14)
 
-    def p_forenger(self):
+    def p_foreigner(self):
         self.is_infectious = True
         self.next_state, self.steps_remaining = self._evaluate_transition()
 
