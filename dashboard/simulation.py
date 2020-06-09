@@ -56,7 +56,7 @@ class InterventionsManager:
         """ Informa si la medida de cerrar escuelasestá activa
         """
        
-        for start, end in self._testing:
+        for start, end in self._school_open:
             if self.day >= start and self.day <= end:
                 return False
 
@@ -134,9 +134,9 @@ TRANSITIONS = TransitionEstimator()
 
 
 @st.cache
-def load_interaction_estimates():
+def load_interaction_estimates(location):
     df: pd.DataFrame = pd.read_csv(
-        "./data/contact_matrices_152_countries/nicaragua.csv",
+        "./data/contact_matrices_152_countries/nicaragua_%s.csv" % location,
         header=None,
         names=[i for i in range(5, 85, 5)],
     )
@@ -272,7 +272,7 @@ def compute_spread(ind, social, status):
 
 
 def eval_connections(
-    social: Dict[int, Dict[int, float]], person: "Person"
+    social: Dict[str, Dict[int, Dict[int, float]]], person: "Person"
 ) -> List["Person"]:
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
@@ -282,13 +282,40 @@ def eval_connections(
     if age % 5 != 0:
         age = (age // 5 * 5)
 
-    other_ages = social[age]
+    # contactos en la calle
+    other_ages = social['other'][age]
 
     for age, lam in other_ages.items():
         people = np.random.poisson(lam)
 
         for i in range(people):
             yield person.region.spawn(age)
+
+    # contactos en la escuela
+    if Interventions.is_school_open():
+        other_ages = social['schools'][age]
+
+        for age, lam in other_ages.items():
+            people = np.random.poisson(lam)
+
+            for i in range(people):
+                yield person.region.spawn(age)
+
+    # contactos en el trabajo
+    if age < 18:
+        return
+
+    p_work = Interventions.is_workforce()
+
+    if random.uniform(0, 1) < p_work:
+        other_ages = social['work'][age]
+
+        for age, lam in other_ages.items():
+            people = np.random.poisson(lam * p_work)
+
+            for i in range(people):
+                yield person.region.spawn(age)
+
 
 
 def eval_infections(person) -> bool:
@@ -481,11 +508,21 @@ def run():
         start, end = st.slider("Rango de fechas de cierre de fronteras", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
         Interventions.close_borders(start, end)
 
+    if st.checkbox("Cerrar escuelas"):
+        start, end = st.slider("Rango de fechas de cierre de escuelas", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        Interventions.school_close(start, end)
+
     if st.checkbox("Testing activo de contactos"):
         start, end = st.slider("Rango de fechas de testing activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
         percent = st.slider("Porciento de contactos a testear", 0.0, 1.0, 0.1)
         Interventions.activate_testing(start, end, percent)
 
+    connections = dict(
+        work=load_interaction_estimates("work"),
+        schools=load_interaction_estimates("schools"),
+        other=load_interaction_estimates("other_locations"),
+    )
+
     if st.button("Simular"):
         region = Region(1000, PARAMETERS['START_INFECTED'])
-        spatial_transmision([region], load_interaction_estimates(), None, None, None)
+        spatial_transmision([region], connections, None, None, None)
