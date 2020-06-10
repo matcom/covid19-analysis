@@ -83,20 +83,43 @@ Interventions = InterventionsManager()
 
 
 @st.cache
-def load_disease_transition() -> pd.DataFrame:
-    return pd.read_csv("./data/disease_transitions_cuba.csv")
+def load_disease_transition():
+    df = pd.read_csv("./data/disease_transitions_cuba.csv")
+    data = collections.defaultdict(lambda: [])
+
+    for i, row in df.iterrows():
+        age = row['Age']
+        sex = row['Sex']
+        state_from = row['StateFrom']
+        state_to = row['StateTo']
+
+        data[(age, sex, state_from)].append(dict(
+            state=state_to,
+            count=row['Count'],
+            mean=row['MeanDays'],
+            std=row['StdDays'],
+        ))
+
+    return dict(data)
 
 
 class TransitionEstimator:
     def __init__(self):
         self.data = load_disease_transition()
-        self.states = list(set(self.data["StateFrom"]))
-        self._state_data = {}
-
-        for s in self.states:
-            self._state_data[s] = self.data[self.data["StateFrom"] == s]
 
     def transition(self, from_state, age, sex):
+        age = (age // 5)  * 5
+
+        if (age, sex, from_state) not in self.data:
+            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+
+        df = self.data[(age, sex, from_state)]
+        return pd.DataFrame(df).sort_values("count")
+
+
+    def _transition(self, from_state, age, sex):
+        raise Exception("Old method. Do not use.")
+
         """Computa las probabilidades de transición del estado `from_state` para una 
         persona con edad `age` y sexo `sex.
         """
