@@ -45,7 +45,7 @@ class InterventionsManager:
     def is_testing_active(self):
         """ Informa si la medida de testeo de personas está activa
         """
-       
+
         for start, end, percent in self._testing:
             if self.day >= start and self.day <= end:
                 return percent
@@ -60,7 +60,7 @@ class InterventionsManager:
     def is_school_open(self):
         """ Informa si la medida de cerrar escuelasestá activa
         """
-       
+
         for start, end in self._school_open:
             if self.day >= start and self.day <= end:
                 return False
@@ -75,12 +75,12 @@ class InterventionsManager:
     def is_workforce(self):
         """ Informa si la medida de activar el teletrabajo en un % de la población
         """
-       
+
         for start, end, percent in self._workforce:
             if self.day >= start and self.day <= end:
                 return percent
 
-        return 1.0 
+        return 1.0
 
     def activate_social_distance(self, start, end, percent):
         """ Activa la medida de activar el distanciamiento social
@@ -90,12 +90,12 @@ class InterventionsManager:
     def is_social_distance(self):
         """ Informa si la medida de activar el distanciamiento social
         """
-       
+
         for start, end, percent in self._social_distance:
             if self.day >= start and self.day <= end:
-                return percent
+                return 1 - percent
 
-        return 1.0 
+        return 1.0
 
     def activate_use_masks(self, start, end):
         """ Activa la medida de utilizar mascarillas
@@ -105,7 +105,7 @@ class InterventionsManager:
     def is_use_masks(self):
         """ Informa si la medida de utilizar mascarillas
         """
-       
+
         for start, end in self._use_masks:
             if self.day >= start and self.day <= end:
                 return True
@@ -120,7 +120,7 @@ class InterventionsManager:
     def is_reduce_aglomeration(self):
         """ Informa si la medida de no participar en aglomeraciones públicas
         """
-       
+
         for start, end, percent in self._reduce_aglomeration:
             if self.day >= start and self.day <= end:
                 return percent
@@ -135,12 +135,13 @@ class InterventionsManager:
     def is_restriction_internal_movement(self):
         """ Informa si la medida de restricciones en el transporte interno
         """
-       
+
         for start, end, percent in self._restriction_internal_movement:
             if self.day >= start and self.day <= end:
                 return percent
 
         return 1.0
+
 
 Interventions = InterventionsManager()
 
@@ -151,17 +152,19 @@ def load_disease_transition():
     data = collections.defaultdict(lambda: [])
 
     for i, row in df.iterrows():
-        age = row['Age']
-        sex = row['Sex']
-        state_from = row['StateFrom']
-        state_to = row['StateTo']
+        age = row["Age"]
+        sex = row["Sex"]
+        state_from = row["StateFrom"]
+        state_to = row["StateTo"]
 
-        data[(age, sex, state_from)].append(dict(
-            state=state_to,
-            count=row['Count'],
-            mean=row['MeanDays'],
-            std=row['StdDays'],
-        ))
+        data[(age, sex, state_from)].append(
+            dict(
+                state=state_to,
+                count=row["Count"],
+                mean=row["MeanDays"],
+                std=row["StdDays"],
+            )
+        )
 
     return dict(data)
 
@@ -171,62 +174,13 @@ class TransitionEstimator:
         self.data = load_disease_transition()
 
     def transition(self, from_state, age, sex):
-        age = (age // 5)  * 5
+        age = (age // 5) * 5
 
         if (age, sex, from_state) not in self.data:
             raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
 
         df = self.data[(age, sex, from_state)]
         return pd.DataFrame(df).sort_values("count")
-
-
-    def _transition(self, from_state, age, sex):
-        raise Exception("Old method. Do not use.")
-
-        """Computa las probabilidades de transición del estado `from_state` para una 
-        persona con edad `age` y sexo `sex.
-        """
-
-        # De todos los datos que tenemos, vamos a ordenarlos por diferencia absoluta
-        # con la edad deseada, y vamos cogiendo filas hasta acumular al menos 50
-        # mediciones.
-        evidence = self.data[
-            (self.data["StateFrom"] == from_state) & (self.data["Sex"] == sex)
-        ].copy()
-        evidence["AgeDiff"] = (evidence["Age"] - age).abs()
-        evidence = evidence.sort_values(["AgeDiff", "Count"]).copy()
-        evidence["CountCumul"] = evidence["Count"].cumsum()
-
-        if evidence["CountCumul"].max() > 50:
-            min_required_evidence = evidence[evidence["CountCumul"] >= 50][
-                "CountCumul"
-            ].min()
-            evidence = evidence[evidence["CountCumul"] <= min_required_evidence]
-
-        # Ahora volvemos a agrupar por estado y recalculamos la media y varianza
-        state_to = collections.defaultdict(lambda: dict(count=0, mean=0, std=0))
-
-        if len(evidence) == 0:
-            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
-
-        for i, row in evidence.iterrows():
-            d = state_to[row["StateTo"]]
-            d["count"] += row["Count"]
-            d["mean"] += row["Count"] * row["MeanDays"]
-            d["std"] += row["Count"] * row["StdDays"]
-            d["state"] = row["StateTo"]
-
-        for v in state_to.values():
-            v["mean"] /= v["count"]
-            v["std"] /= v["count"]
-
-        # Finalmente tenemos un dataframe con forma
-        # `count | mean | std | state`
-        # con una entrada por cada estado
-        # if not state_to:
-        #     raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
-
-        return pd.DataFrame(state_to.values()).sort_values("count")
 
 
 TRANSITIONS = TransitionEstimator()
@@ -275,7 +229,7 @@ def spatial_transmision(regions, social, status, distance, parameters):
         - output: es el estado actualizado de cada persona.
     """
 
-    simulation_time = PARAMETERS['DAYS_TO_SIMULATE']
+    simulation_time = PARAMETERS["DAYS_TO_SIMULATE"]
 
     # estadísticas de la simulación
     progress = st.progress(0)
@@ -295,12 +249,12 @@ def spatial_transmision(regions, social, status, distance, parameters):
 
         total_individuals = 0
         by_state = collections.defaultdict(lambda: 0)
-        Interventions.day = i+1
+        Interventions.day = i + 1
 
         # por cada región
         for region in regions:
             # llegadas del estranjero
-            arrivals(region) 
+            arrivals(region)
             # por cada persona
             for ind in region:
                 # actualizar estado de la persona
@@ -330,9 +284,9 @@ def spatial_transmision(regions, social, status, distance, parameters):
 
 def arrivals(region):
     if Interventions.is_airport_open():
-        people = np.random.poisson(PARAMETERS['FOREIGNER_ARRIVALS'])
+        people = np.random.poisson(PARAMETERS["FOREIGNER_ARRIVALS"])
 
-        for i in range(people):
+        for _ in range(people):
             p = region.spawn(random.randint(20, 80))
             p.set_state(StatePerson.F)
 
@@ -375,27 +329,34 @@ def eval_connections(
 ) -> List["Person"]:
     """Devuelve las conexiones que tuvo una persona en un step de la simulación.
     """
- 
+
     the_age = person.age
 
     if the_age % 5 != 0:
-        the_age = (the_age // 5 * 5)
+        the_age = the_age // 5 * 5
+
+    p_social = Interventions.is_social_distance()
+
+    if random.uniform(0, 1) < Interventions.is_reduce_aglomeration():
+        p_social *= (
+            2  # Cada cierta cantidad de días, un día te toca ver el doble de personas
+        )
 
     # contactos en la calle
-    other_ages = social['other'][the_age]
+    other_ages = social["other"][the_age]
 
     for age, lam in other_ages.items():
-        people = np.random.poisson(lam)
+        people = np.random.poisson(lam * p_social)
 
         for i in range(people):
             yield person.region.spawn(age)
 
     # contactos en la escuela
     if Interventions.is_school_open():
-        other_ages = social['schools'][the_age]
+        other_ages = social["schools"][the_age]
 
         for age, lam in other_ages.items():
-            people = np.random.poisson(lam)
+            people = np.random.poisson(lam * p_social)
 
             for i in range(people):
                 yield person.region.spawn(age)
@@ -407,14 +368,13 @@ def eval_connections(
     p_work = Interventions.is_workforce()
 
     if random.uniform(0, 1) < p_work:
-        other_ages = social['work'][the_age]
+        other_ages = social["work"][the_age]
 
         for age, lam in other_ages.items():
-            people = np.random.poisson(lam * p_work)
+            people = np.random.poisson(lam * p_work * p_social)
 
             for i in range(people):
                 yield person.region.spawn(age)
-
 
 
 def eval_infections(person) -> bool:
@@ -422,7 +382,14 @@ def eval_infections(person) -> bool:
 
        En general depende del estado en el que se encuentra person y las probabilidades de ese estado
     """
-    return random.uniform(0, 1) < PARAMETERS['CHANCE_OF_INFECTION']
+
+    p = PARAMETERS["CHANCE_OF_INFECTION"]
+
+    if Interventions.is_use_masks():
+        # usar mascarillas reduce en un 50% la probabilidad de infección
+        p *= 0.5
+
+    return random.uniform(0, 1) < p
 
 
 class Person:
@@ -551,7 +518,7 @@ class Region:
         self._individuals = []
 
         for i in range(initial_infected):
-            p = Person(self, 30, random.choice(["MALE", "FEMALE"]))
+            p = Person(self, random.randint(20, 80), random.choice(["MALE", "FEMALE"]))
             p.set_state(StatePerson.I)
             self._individuals.append(p)
 
@@ -592,34 +559,106 @@ class Region:
 def run():
     st.title("Simulación de la epidemia")
 
-    PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 365, 60)
-    PARAMETERS['START_INFECTED'] = st.sidebar.number_input("Cantidad inicial de infectados", 0, 100, 0)
-    PARAMETERS['CHANCE_OF_INFECTION'] = st.sidebar.number_input(
+    PARAMETERS["DAYS_TO_SIMULATE"] = st.sidebar.number_input(
+        "Dias a simular", 1, 365, 60
+    )
+    PARAMETERS["START_INFECTED"] = st.sidebar.number_input(
+        "Cantidad inicial de infectados", 0, 100, 0
+    )
+    PARAMETERS["CHANCE_OF_INFECTION"] = st.sidebar.number_input(
         "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
     )
-    PARAMETERS['FOREIGNER_ARRIVALS'] = st.sidebar.number_input(
+    PARAMETERS["FOREIGNER_ARRIVALS"] = st.sidebar.number_input(
         "Llegada diaria de extranjeros", 0.0, 100.0, 10.0, step=0.01
     )
 
     st.write("### Medidas")
 
     if st.checkbox("Cerrar fronteras"):
-        start, end = st.slider("Rango de fechas de cierre de fronteras", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        start, end = st.slider(
+            "Rango de fechas de cierre de fronteras",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
         Interventions.close_borders(start, end)
 
     if st.checkbox("Cerrar escuelas"):
-        start, end = st.slider("Rango de fechas de cierre de escuelas", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+        start, end = st.slider(
+            "Rango de fechas de cierre de escuelas",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
         Interventions.school_close(start, end)
 
-    if st.checkbox("Testing activo de contactos"):
-        start, end = st.slider("Rango de fechas de testing activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
+    if st.checkbox("Obligatorio usar máscaras"):
+        start, end = st.slider(
+            "Rango de fechas de obligatoriedad de máscaras",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
+        Interventions.activate_use_masks(start, end)
+
+    if st.checkbox("Rastreo activo de contactos"):
+        start, end = st.slider(
+            "Rango de fechas de testing activo",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
         percent = st.slider("Porciento de contactos a testear", 0.0, 1.0, 0.5)
         Interventions.activate_testing(start, end, percent)
 
     if st.checkbox("Disminuir trabajo / trabajar desde la casa"):
-        start, end = st.slider("Rango de fechas activo", 0, PARAMETERS['DAYS_TO_SIMULATE'], (10, PARAMETERS['DAYS_TO_SIMULATE']))
-        percent = st.slider("Porciento de personas que dejan de trabajar", 0.0, 1.0, 0.5)
+        start, end = st.slider(
+            "Rango de fechas de trabajo reducido",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
+        percent = st.slider(
+            "Porciento de personas que dejan de trabajar", 0.0, 1.0, 0.5
+        )
         Interventions.activate_workforce(start, end, percent)
+
+    if st.checkbox("Reducir aglomeraciones"):
+        start, end = st.slider(
+            "Rango de fechas de reducción de aglomeraciones",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
+        percent = st.slider(
+            "Porciento de personas que participan en aglomeraciones cada día (doble de contactos)",
+            0.0,
+            1.0,
+            0.5,
+        )
+        Interventions.activate_reduce_aglomeration(start, end, percent)
+
+    if st.checkbox("Distanciamiento social"):
+        start, end = st.slider(
+            "Rango de fechas de distanciamiento social",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
+        percent = st.slider("Porciento de reducción de contactos", 0.0, 1.0, 0.5)
+        Interventions.activate_social_distance(start, end, percent)
+
+    if st.checkbox("Restricciones de movimiento interno"):
+        start, end = st.slider(
+            "Rango de fechas de restricción de movimiento",
+            0,
+            PARAMETERS["DAYS_TO_SIMULATE"],
+            (10, PARAMETERS["DAYS_TO_SIMULATE"]),
+        )
+        percent = st.slider(
+            "Porciento de reducción de movimiento interno", 0.0, 1.0, 0.5
+        )
+        Interventions.activate_restriction_internal_movement(start, end, percent)
 
     connections = dict(
         work=load_interaction_estimates("work"),
@@ -628,5 +667,5 @@ def run():
     )
 
     if st.button("Simular"):
-        region = Region(1000, PARAMETERS['START_INFECTED'])
+        region = Region(1000, PARAMETERS["START_INFECTED"])
         spatial_transmision([region], connections, None, None, None)
