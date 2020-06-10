@@ -17,6 +17,7 @@ class InterventionsManager:
         self._testing = []
         self._school_open = []
         self._workforce = []
+        self._social_distance = []
         self.day = 0
 
     def close_borders(self, start, end):
@@ -73,6 +74,21 @@ class InterventionsManager:
         """
        
         for start, end, percent in self._workforce:
+            if self.day >= start and self.day <= end:
+                return percent
+
+        return 1.0 
+
+    def activate_social_distance(self, start, end, percent):
+        """ Activa la medida de activar el distanciamiento social
+        """
+        self._social_distance.append((start, end, percent))
+
+    def social_distance(self):
+        """ Informa si la medida de activar el distanciamiento social
+        """
+       
+        for start, end, percent in self._social_distance:
             if self.day >= start and self.day <= end:
                 return percent
 
