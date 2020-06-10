@@ -18,6 +18,9 @@ class InterventionsManager:
         self._school_open = []
         self._workforce = []
         self._social_distance = []
+        self._use_masks = []
+        self._reduce_aglomeration = []
+        self._restriction_internal_movement = []
         self.day = 0
 
     def close_borders(self, start, end):
@@ -84,7 +87,7 @@ class InterventionsManager:
         """
         self._social_distance.append((start, end, percent))
 
-    def social_distance(self):
+    def is_social_distance(self):
         """ Informa si la medida de activar el distanciamiento social
         """
        
@@ -94,6 +97,50 @@ class InterventionsManager:
 
         return 1.0 
 
+    def activate_use_masks(self, start, end):
+        """ Activa la medida de utilizar mascarillas
+        """
+        self._use_masks.append((start, end))
+
+    def is_use_masks(self):
+        """ Informa si la medida de utilizar mascarillas
+        """
+       
+        for start, end in self._use_masks:
+            if self.day >= start and self.day <= end:
+                return True
+
+        return False
+
+    def activate_reduce_aglomeration(self, start, end, percent):
+        """ Activa la medida de no participar en aglomeraciones públicas
+        """
+        self._reduce_aglomeration.append((start, end, percent))
+
+    def is_reduce_aglomeration(self):
+        """ Informa si la medida de no participar en aglomeraciones públicas
+        """
+       
+        for start, end, percent in self._reduce_aglomeration:
+            if self.day >= start and self.day <= end:
+                return percent
+
+        return 1.0
+
+    def activate_restriction_internal_movement(self, start, end, percent):
+        """ Activa la medida de restricciones en el transporte interno
+        """
+        self._restriction_internal_movement.append((start, end, percent))
+
+    def is_restriction_internal_movement(self):
+        """ Informa si la medida de restricciones en el transporte interno
+        """
+       
+        for start, end, percent in self._restriction_internal_movement:
+            if self.day >= start and self.day <= end:
+                return percent
+
+        return 1.0
 
 Interventions = InterventionsManager()
 
