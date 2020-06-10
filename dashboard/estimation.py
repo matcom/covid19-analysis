@@ -4,6 +4,7 @@ import numpy as np
 import altair as alt
 import random
 import networkx as nx
+import collections
 
 from .data import load_cuba_data
 
@@ -319,14 +320,71 @@ def transitions(data: pd.DataFrame):
     if st.checkbox("Ver transiciones en CSV"):
         csv = []
 
-        for age in set(df["age"]):
+        for age in range(0, 85, 5):
             for sex in ["FEMALE", "MALE"]:
-                df_filter = df[(df["age"] == age) & (df["sex"] == sex)]
+                df_filter = df[(df["age"] >= age) & (df["age"] <= age * 5) & (df["sex"] == sex)]
 
                 if len(df_filter) > 0:
                     states = compute_transitions(df_filter)
                     states["age"] = age
                     states["sex"] = sex
-                    csv.append(states.set_index(["age", "sex"]).round(3))
+                    csv.append(states.set_index(["age", "sex", "from_state"]).round(3))
 
-        st.code(pd.concat(csv).to_csv())
+        df = pd.concat(csv)
+        st.code(df.to_csv())
+
+
+class TransitionEstimator:
+    def __init__(self, data):
+        self.data = data
+        self.states = list(set(self.data["from_state"]))
+        self._state_data = {}
+
+        for s in self.states:
+            self._state_data[s] = self.data[self.data["from_state"] == s]
+
+    def transition(self, from_state, age, sex):
+        """Computa las probabilidades de transición del estado `from_state` para una 
+        persona con edad `age` y sexo `sex.
+        """
+
+        # De todos los datos que tenemos, vamos a ordenarlos por diferencia absoluta
+        # con la edad deseada, y vamos cogiendo filas hasta acumular al menos 50
+        # mediciones.
+        evidence = self.data[
+            (self.data["from_state"] == from_state) & (self.data["sex"] == sex)
+        ].copy()
+        evidence["AgeDiff"] = (evidence["age"] - age).abs()
+        evidence = evidence.sort_values(["AgeDiff", "count"]).copy()
+        evidence["CountCumul"] = evidence["count"].cumsum()
+
+        if evidence["CountCumul"].max() > 50:
+            min_required_evidence = evidence[evidence["CountCumul"] >= 50][
+                "CountCumul"
+            ].min()
+            evidence = evidence[evidence["CountCumul"] <= min_required_evidence]
+
+        # Ahora volvemos a agrupar por estado y recalculamos la media y varianza
+        state_to = collections.defaultdict(lambda: dict(count=0, mean=0, std=0))
+
+        if len(evidence) == 0:
+            raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+
+        for i, row in evidence.iterrows():
+            d = state_to[row["to_state"]]
+            d["count"] += row["count"]
+            d["mean"] += row["count"] * row["duration_mean"]
+            d["std"] += row["count"] * row["duration_std"]
+            d["state"] = row["to_state"]
+
+        for v in state_to.values():
+            v["mean"] /= v["count"]
+            v["std"] /= v["count"]
+
+        # Finalmente tenemos un dataframe con forma
+        # `count | mean | std | state`
+        # con una entrada por cada estado
+        # if not state_to:
+        #     raise ValueError(f"No transitions for {from_state}, age={age}, sex={sex}.")
+
+        return state_to
