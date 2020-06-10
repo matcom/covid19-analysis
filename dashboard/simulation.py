@@ -261,7 +261,7 @@ def interventions(region, status):
 
     if p > 0:
         for ind in region:
-            if ind.state == StatePerson.L and random.uniform(0, 1) < p:
+            if ind.state in [StatePerson.L, StatePerson.A] and random.uniform(0, 1) < p:
                 ind.set_state(StatePerson.H)
 
 
