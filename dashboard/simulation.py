@@ -566,10 +566,10 @@ def run():
         "Cantidad inicial de infectados", 0, 100, 0
     )
     PARAMETERS["CHANCE_OF_INFECTION"] = st.sidebar.number_input(
-        "Posibilidad de infectar", 0.0, 1.0, 0.1, step=0.001
+        "Posibilidad de infectar", 0.0, 1.0, 0.01, step=0.001
     )
     PARAMETERS["FOREIGNER_ARRIVALS"] = st.sidebar.number_input(
-        "Llegada diaria de extranjeros", 0.0, 100.0, 10.0, step=0.01
+        "Llegada diaria de extranjeros", 0.0, 100.0, 8.0, step=0.01
     )
 
     st.write("### Medidas")

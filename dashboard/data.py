@@ -140,6 +140,18 @@ def get_measures_effects(responses: pd.DataFrame, data: pd.DataFrame, threshold)
 
 
 @st.cache
+def load_interaction_estimates(location):
+    df: pd.DataFrame = pd.read_csv(
+        "./data/contact_matrices_152_countries/nicaragua_%s.csv" % location,
+        header=None,
+        names=[i for i in range(5, 85, 5)],
+    )
+    df["age"] = [i for i in range(5, 85, 5)]
+
+    return df.set_index("age").to_dict()
+    
+
+@st.cache
 def testing_data():
     df = pd.read_csv(Path(__file__).parent.parent / "data/testing.csv")
 

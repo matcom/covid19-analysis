@@ -7,7 +7,7 @@ import networkx as nx
 import collections
 import pydot
 
-from .data import load_cuba_data
+from .data import load_cuba_data, load_interaction_estimates
 
 
 @st.cache
@@ -120,6 +120,9 @@ def get_daily_values(data, asympt_length):
     day_states = []
     fend = data["Fecha Alta"].max() + pd.Timedelta(days=1)
 
+    interactions = load_interaction_estimates("general")
+    print(interactions)
+
     for i, row in data.iterrows():
         fe: pd.Timestamp = row["Fecha Arribo"]
         fs: pd.Timestamp = row["FIS"]
@@ -127,10 +130,11 @@ def get_daily_values(data, asympt_length):
         fc: pd.Timestamp = row["F. Conf"]
         fa: pd.Timestamp = row["Fecha Alta"]
 
-        contacts = row["# de contactos"]
-
-        if pd.isna(contacts):
-            contacts = 0
+        try:
+            age = max(5, min(80, (int(row['Edad']) // 5)  * 5))
+            contacts = sum(interactions[age].values())
+        except ValueError:
+            continue
 
         if pd.isna(fa):
             fa = fend
@@ -165,13 +169,15 @@ def get_daily_values(data, asympt_length):
 
         if not pd.isna(fs):
             day_states.append(dict(day=fs, id=row["Cons"], status="nuevo-síntoma"))
-            day_states.append(
-                dict(
-                    day=fs - pd.Timedelta(days=random.randint(0, asympt_length)),
-                    id=row["Cons"],
-                    status="infectado",
+
+            if pd.isna(fe):
+                day_states.append(
+                    dict(
+                        day=fs - pd.Timedelta(days=random.randint(0, asympt_length)),
+                        id=row["Cons"],
+                        status="infectado",
+                    )
                 )
-            )
 
             for day in range((fc - fs).days):
                 day_states.append(
@@ -179,6 +185,14 @@ def get_daily_values(data, asympt_length):
                         day=fs + pd.Timedelta(days=day),
                         id=row["Cons"],
                         status="infeccioso",
+                    )
+                )
+                day_states.append(
+                    dict(
+                        day=fs + pd.Timedelta(days=day),
+                        id=row["Cons"],
+                        status="contacto",
+                        value=contacts
                     )
                 )
         else:
@@ -190,34 +204,34 @@ def get_daily_values(data, asympt_length):
                 )
             )
 
-        if contacts == 0:
-            continue
+        # if contacts == 0:
+        #     continue
 
-        if row["Asintomatico"]:
-            for day in range(asympt_length):
-                day_states.append(
-                    dict(
-                        day=fc - pd.Timedelta(days=day),
-                        id=row["Cons"],
-                        status="contacto",
-                        value=contacts / asympt_length,
-                    )
-                )
-        else:
-            if pd.isna(fi) or pd.isna(fs):
-                continue
+        # if row["Asintomatico"]:
+        #     for day in range(asympt_length):
+        #         day_states.append(
+        #             dict(
+        #                 day=fc - pd.Timedelta(days=day),
+        #                 id=row["Cons"],
+        #                 status="contacto",
+        #                 value=contacts / asympt_length,
+        #             )
+        #         )
+        # else:
+        #     if pd.isna(fi) or pd.isna(fs):
+        #         continue
 
-            total_days = asympt_length + (fi - fs).days
+        #     total_days = asympt_length + (fi - fs).days
 
-            for day in range(total_days):
-                day_states.append(
-                    dict(
-                        day=fi - pd.Timedelta(days=day),
-                        id=row["Cons"],
-                        status="contacto",
-                        value=contacts / total_days,
-                    )
-                )
+        #     for day in range(total_days):
+        #         day_states.append(
+        #             dict(
+        #                 day=fi - pd.Timedelta(days=day),
+        #                 id=row["Cons"],
+        #                 status="contacto",
+        #                 value=contacts / total_days,
+        #             )
+        #         )
 
     return pd.DataFrame(day_states).fillna(1)
 
@@ -235,12 +249,32 @@ def run():
     transitions(data)
 
     day_states = get_daily_values(data, asympt_length)
+
+    if st.checkbox("Ver eventos"):
+        st.write(day_states)
+
+    st.write("### Infecciosos vs. infectados diarios")
+
+    infected = day_states[day_states['status'].isin(['infectado', 'infeccioso', 'contacto'])]
+    infected = infected.groupby(['day', 'status']).agg(count=('value', 'sum')).reset_index()
+    infected = infected.pivot(index='day', columns='status', values='count').reset_index().fillna(0)
+    infected = infected.loc[infected['infeccioso'] > 0]
+    infected['rate'] = infected['infectado'] / infected['contacto']
+    st.write(infected)
+
+    infected = infected.loc[infected['rate'] < 1.0]
+
+    st.altair_chart(
+        alt.Chart(infected).mark_line().encode(x="day", y="rate"),
+        use_container_width=True,
+    )
+
     foreigners = day_states[day_states["status"] == "nuevo-extranjero"]
 
     st.write("### Rate de llegada de extranjeros diaria")
 
     st.altair_chart(
-        alt.Chart(foreigners).mark_bar().encode(x="day", y="sum(value)"),
+        alt.Chart(foreigners).mark_bar().encode(x="day", y="count()"),
         use_container_width=True,
     )
 
