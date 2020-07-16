@@ -388,7 +388,7 @@ class Region:
         self._recovered += count
 
 
-def run():
+def run(*args):
     st.title("Simulación de la epidemia")
 
     PARAMETERS['DAYS_TO_SIMULATE'] = st.sidebar.number_input("Dias a simular", 1, 1000, 30)
