@@ -238,9 +238,9 @@ def spatial_transmision(regions, social, status, distance, parameters):
     all_count = st.empty()
 
     chart = st.altair_chart(
-        alt.Chart(pd.DataFrame(columns=["value", "day", "variable"]))
+        alt.Chart(pd.DataFrame(columns=["personas", "dia", "estado"]))
         .mark_line()
-        .encode(y="value:Q", x="day:Q", color="variable:N",),
+        .encode(y="personas:Q", x="dia:Q", color="estado:N",),
         use_container_width=True,
     )
 
@@ -278,7 +278,7 @@ def spatial_transmision(regions, social, status, distance, parameters):
         day.markdown(f"#### Día: {i+1}")
 
         chart.add_rows(
-            [dict(day=i + 1, value=v, variable=k) for k, v in by_state.items()]
+            [dict(dia=i + 1, personas=v, estado=k) for k, v in by_state.items()]
         )
 
 
