@@ -8,8 +8,8 @@ from dashboard import (
 
 def main():
     sections = {
-        "Estimación": estimation,
         "Simulación": simulation,
+        "Estimación": estimation,
     }
 
     section = st.sidebar.selectbox(
